@@ -1,0 +1,2891 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BHRATHA | Brotherhood Platform</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Combined styles */
+        :root {
+            --primary: #050505;
+            --secondary: #ffffff;
+            --accent-green: #00ff88;
+            --accent-orange: #ff6900;
+            --accent-blue: #0095ff;
+            --accent-purple: #8a2be2;
+            --accent-gold: #B89B5E;
+            --muted: #8A8A8A;
+            --dark-bg: #0A0A0A;
+            --danger: #8B0000;
+        }
+        
+        body {
+            background-color: var(--primary);
+            color: var(--secondary);
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+        
+        /* New Brotherhood Calculator styles */
+        .calculator-1 {
+            font-family: 'Space Grotesk', sans-serif;
+        }
+        
+        .logo-rupee {
+            font-weight: 700;
+            color: #00ff88;
+            display: inline-block;
+            text-shadow: 0 0 10px rgba(0, 255, 136, 0.5);
+        }
+        
+        .logo-fullstop {
+            color: #0095ff;
+            display: inline-block;
+            font-size: 0.8em;
+            vertical-align: super;
+            margin-left: 2px;
+        }
+        
+        .glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .glass-card:hover {
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        .progress-bar {
+            height: 6px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            position: absolute;
+            left: 0;
+            top: 0;
+            background: linear-gradient(90deg, var(--accent-green), var(--accent-blue));
+            border-radius: 3px;
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { opacity: 0.7; }
+            50% { opacity: 1; }
+            100% { opacity: 0.7; }
+        }
+        
+        input:focus, select:focus {
+            outline: none;
+            border-color: var(--accent-green) !important;
+            box-shadow: 0 0 0 1px rgba(0, 255, 136, 0.2);
+        }
+        
+        input[type=number]::-webkit-inner-spin-button, 
+        input[type=number]::-webkit-outer-spin-button { 
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 3px;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: var(--accent-green);
+            border-radius: 3px;
+        }
+        
+        .btn-success {
+            background: linear-gradient(135deg, #00ff88, #00cc6d);
+            color: #050505;
+        }
+        
+        .btn-warning {
+            background: linear-gradient(135deg, #ff6900, #cc5500);
+            color: white;
+        }
+        
+        .btn-danger {
+            background: linear-gradient(135deg, #ff4444, #cc0000);
+            color: white;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #0095ff, #0066cc);
+            color: white;
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .highlight {
+            background: rgba(0, 255, 136, 0.1);
+            border-left: 3px solid #00ff88;
+            padding: 10px;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        /* Project investment styles */
+        .project-card {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 15px;
+            transition: all 0.3s ease;
+        }
+        
+        .project-card:hover {
+            border-color: rgba(0, 255, 136, 0.3);
+        }
+        
+        .project-tag {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-right: 8px;
+            margin-bottom: 8px;
+        }
+        
+        .project-a { background: rgba(0, 255, 136, 0.1); color: var(--accent-green); }
+        .project-b { background: rgba(0, 149, 255, 0.1); color: var(--accent-blue); }
+        .project-c { background: rgba(138, 43, 226, 0.1); color: var(--accent-purple); }
+        
+        /* Assessment styles */
+        .assessment-container {
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .section {
+            display: none;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .section.active {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .dark-card {
+            background: rgba(10, 10, 10, 0.8);
+            border: 1px solid rgba(184, 155, 94, 0.1);
+            border-radius: 4px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .btn-primary-assessment {
+            background: transparent;
+            border: 1px solid var(--accent-gold);
+            color: var(--accent-gold);
+            padding: 12px 30px;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+        
+        .btn-primary-assessment:hover:not(:disabled) {
+            background: rgba(184, 155, 94, 0.1);
+        }
+        
+        .btn-primary-assessment:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+        
+        .question-card {
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 4px;
+            padding: 20px;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .question-card:hover {
+            border-color: rgba(184, 155, 94, 0.2);
+            background: rgba(184, 155, 94, 0.02);
+        }
+        
+        .question-card.selected {
+            border-color: var(--accent-gold);
+            background: rgba(184, 155, 94, 0.05);
+        }
+        
+        .progress-container {
+            height: 2px;
+            background: rgba(255, 255, 255, 0.05);
+            margin: 40px 0;
+            position: relative;
+        }
+        
+        .progress-bar-assessment {
+            height: 100%;
+            background: var(--accent-gold);
+            position: absolute;
+            left: 0;
+            top: 0;
+            transition: width 0.5s ease;
+        }
+        
+        .checkbox-custom {
+            width: 20px;
+            height: 20px;
+            border: 1px solid rgba(184, 155, 94, 0.5);
+            border-radius: 3px;
+            display: inline-block;
+            margin-right: 10px;
+            position: relative;
+            cursor: pointer;
+        }
+        
+        .checkbox-custom.checked::after {
+            content: '✓';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: var(--accent-gold);
+            font-size: 14px;
+            font-weight: bold;
+        }
+        
+        .warning-text {
+            color: var(--danger);
+            border-left: 3px solid var(--danger);
+            padding-left: 15px;
+            margin: 20px 0;
+        }
+        
+        .result-metric {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 20px 0;
+        }
+        
+        .result-metric:last-child {
+            border-bottom: none;
+        }
+        
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+        
+        .modal.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+        
+        .modal-content {
+            max-width: 800px;
+            max-height: 80vh;
+            overflow-y: auto;
+            background: var(--dark-bg);
+            border: 1px solid rgba(184, 155, 94, 0.2);
+            border-radius: 4px;
+            padding: 40px;
+            position: relative;
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            color: var(--muted);
+            cursor: pointer;
+            font-size: 24px;
+        }
+        
+        .close-modal:hover {
+            color: var(--secondary);
+        }
+        
+        .text-input {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            padding: 15px;
+            color: var(--secondary);
+            width: 100%;
+            font-family: 'Inter', sans-serif;
+            resize: vertical;
+            min-height: 100px;
+        }
+        
+        .text-input:focus {
+            outline: none;
+            border-color: var(--accent-gold);
+        }
+        
+        .section-title {
+            font-size: 28px;
+            font-weight: 300;
+            margin-bottom: 10px;
+            color: var(--accent-gold);
+        }
+        
+        .section-subtitle {
+            color: var(--muted);
+            margin-bottom: 40px;
+            font-size: 16px;
+        }
+        
+        .multi-select-counter {
+            font-size: 12px;
+            color: var(--muted);
+            margin-top: 10px;
+        }
+        
+        /* Navigation tabs */
+        .nav-tab {
+            padding: 15px 30px;
+            border-bottom: 2px solid transparent;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+        
+        .nav-tab.active {
+            border-bottom-color: var(--accent-green);
+            color: var(--accent-green);
+        }
+        
+        .nav-tab:hover:not(.active) {
+            border-bottom-color: var(--muted);
+            color: var(--muted);
+        }
+        
+        /* WhatsApp button */
+        .whatsapp-btn {
+            background: linear-gradient(135deg, #25D366, #128C7E);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 4px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .whatsapp-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3);
+        }
+        
+        /* Exit/Submit Modal */
+        .exit-modal {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 9999;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .exit-modal.active {
+            display: flex;
+        }
+        
+        .exit-modal-content {
+            background: var(--dark-bg);
+            border: 1px solid var(--accent-gold);
+            border-radius: 4px;
+            padding: 40px;
+            max-width: 600px;
+            width: 100%;
+            position: relative;
+        }
+        
+        .modal-section {
+            margin-bottom: 30px;
+        }
+        
+        .modal-section-title {
+            color: var(--accent-gold);
+            font-size: 20px;
+            margin-bottom: 15px;
+            border-bottom: 1px solid rgba(184, 155, 94, 0.2);
+            padding-bottom: 10px;
+        }
+        
+        /* New badge styles */
+        .membership-badge {
+            background: rgba(0, 149, 255, 0.2);
+            color: var(--accent-blue);
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+        }
+        
+        .platform-fee-badge {
+            background: rgba(0, 255, 136, 0.2);
+            color: var(--accent-green);
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+        }
+    </style>
+</head>
+<body class="antialiased">
+    <!-- Navigation -->
+    <div class="flex justify-center border-b border-gray-900">
+        <div class="flex space-x-1">
+            <div class="nav-tab active" data-tab="brotherhood-calculator">
+                <i class="fas fa-calculator mr-2"></i>
+                Brotherhood Model
+            </div>
+            <div class="nav-tab" data-tab="assessment">
+                <i class="fas fa-user-shield mr-2"></i>
+                Private Assessment
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content Container -->
+    <div id="content-container" class="min-h-screen">
+        <!-- New Brotherhood Calculator -->
+        <div id="brotherhood-calculator" class="calculator-1">
+            <!-- Header -->
+            <header class="p-6 md:p-8">
+                <div class="flex justify-between items-center">
+                    <div class="text-2xl font-bold tracking-wider">
+                        BH<span class="logo-rupee">₹</span>ATHA<span class="logo-fullstop">.</span>
+                    </div>
+                    <div class="text-xs text-gray-500 uppercase tracking-widest pulse">Premium Brotherhood Investment Model</div>
+                </div>
+            </header>
+
+            <main class="max-w-6xl mx-auto px-4 md:px-8 pb-20">
+                <!-- Hero Section -->
+                <section class="text-center mb-16 mt-8">
+                    <h1 class="text-4xl md:text-6xl font-bold mb-6">
+                        Brotherhood <span class="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-500">Investment</span> Model
+                    </h1>
+                    <p class="text-gray-400 max-w-2xl mx-auto text-lg">
+                        Access-driven membership with project-based investments and transparent platform fees.
+                    </p>
+                </section>
+
+                <!-- Principles Grid -->
+                <section class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+                    <div class="glass-card p-6 rounded-xl">
+                        <div class="text-green-400 text-2xl mb-4">01</div>
+                        <h3 class="text-xl font-medium mb-3">Membership Access</h3>
+                        <p class="text-gray-400">One-time <span class="text-orange-400 font-bold">₹1.08 Cr</span> fee for Premium & Elite brotherhood access.</p>
+                        <div class="mt-3">
+                            <span class="membership-badge"><i class="fas fa-crown mr-1"></i> Non-refundable</span>
+                        </div>
+                    </div>
+                    
+                    <div class="glass-card p-6 rounded-xl">
+                        <div class="text-blue-400 text-2xl mb-4">02</div>
+                        <h3 class="text-xl font-medium mb-3">Project Investments</h3>
+                        <p class="text-gray-400">Invest separately in <span class="text-green-400 font-bold">Project A, B, C</span> with proportional ownership.</p>
+                        <div class="mt-3">
+                            <span class="project-tag project-a">Project A</span>
+                            <span class="project-tag project-b">Project B</span>
+                            <span class="project-tag project-c">Project C</span>
+                        </div>
+                    </div>
+                    
+                    <div class="glass-card p-6 rounded-xl">
+                        <div class="text-purple-400 text-2xl mb-4">03</div>
+                        <h3 class="text-xl font-medium mb-3">Platform Fee</h3>
+                        <p class="text-gray-400"><span class="text-green-400 font-bold">1.08%</span> annual fee on payouts for platform maintenance.</p>
+                        <div class="mt-3">
+                            <span class="platform-fee-badge"><i class="fas fa-percentage mr-1"></i> Yearly deduction</span>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Calculator -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <!-- Input Section -->
+                    <div class="glass-card p-6 rounded-2xl">
+                        <h2 class="text-2xl font-bold mb-6 flex items-center">
+                            <i class="fas fa-users mr-3 text-blue-400"></i>
+                            Add BROs & Investments
+                        </h2>
+                        
+                        <!-- Membership Info -->
+                        <div class="mb-6 p-4 bg-black/30 rounded-lg">
+                            <div class="flex items-center">
+                                <div class="w-10 h-10 rounded-full bg-orange-500 flex items-center justify-center text-black text-lg font-bold mr-4">₹</div>
+                                <div>
+                                    <div class="font-bold text-lg">Membership Fee</div>
+                                    <div class="text-gray-400 text-sm">Fixed <span class="text-orange-400 font-bold">₹1.08 Cr</span> • One-time • Non-refundable</div>
+                                    <div class="text-xs text-gray-500 mt-1">Grants access to Premium & Elite brotherhood tiers</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- BRO Inputs Container -->
+                        <div id="broInputsContainer" class="mb-6 space-y-4 max-h-[400px] overflow-y-auto p-2">
+                            <!-- BRO inputs will be dynamically added here -->
+                            <div class="bro-input-item fade-in">
+                                <div class="flex items-center mb-4">
+                                    <div class="w-10 h-10 rounded-full bg-green-500 flex items-center justify-center text-black font-bold mr-3">BRO 1</div>
+                                    <div>
+                                        <div class="font-bold">BRO 1</div>
+                                        <div class="text-xs text-gray-400">Membership: <span class="text-orange-400">₹1.08 Cr</span></div>
+                                    </div>
+                                </div>
+                                
+                                <div class="grid grid-cols-1 md:grid-cols-3 gap-3 mb-4">
+                                    <div class="project-card">
+                                        <div class="text-sm text-gray-400 mb-2 flex items-center">
+                                            <i class="fas fa-chart-line mr-2 text-green-400"></i>
+                                            Project A
+                                        </div>
+                                        <input 
+                                            type="number" 
+                                            class="project-a-investment bg-black border border-gray-700 rounded-lg px-3 py-2 text-sm w-full" 
+                                            placeholder="₹ Amount"
+                                            value="5000000"
+                                            min="0"
+                                            step="100000"
+                                            data-bro="1"
+                                            data-project="A"
+                                        >
+                                    </div>
+                                    
+                                    <div class="project-card">
+                                        <div class="text-sm text-gray-400 mb-2 flex items-center">
+                                            <i class="fas fa-chart-line mr-2 text-blue-400"></i>
+                                            Project B
+                                        </div>
+                                        <input 
+                                            type="number" 
+                                            class="project-b-investment bg-black border border-gray-700 rounded-lg px-3 py-2 text-sm w-full" 
+                                            placeholder="₹ Amount"
+                                            value="3000000"
+                                            min="0"
+                                            step="100000"
+                                            data-bro="1"
+                                            data-project="B"
+                                        >
+                                    </div>
+                                    
+                                    <div class="project-card">
+                                        <div class="text-sm text-gray-400 mb-2 flex items-center">
+                                            <i class="fas fa-chart-line mr-2 text-purple-400"></i>
+                                            Project C
+                                        </div>
+                                        <input 
+                                            type="number" 
+                                            class="project-c-investment bg-black border border-gray-700 rounded-lg px-3 py-2 text-sm w-full" 
+                                            placeholder="₹ Amount"
+                                            value="2000000"
+                                            min="0"
+                                            step="100000"
+                                            data-bro="1"
+                                            data-project="C"
+                                        >
+                                    </div>
+                                </div>
+                                
+                                <div class="flex justify-between items-center">
+                                    <div class="text-xs text-gray-500">
+                                        Total Investment: <span class="text-green-400 font-bold" id="bro-1-total">₹1,00,00,000</span>
+                                    </div>
+                                    <button class="remove-bro-btn p-2 text-red-400 hover:text-red-300 opacity-70 hover:opacity-100">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <div class="bro-input-item fade-in">
+                                <div class="flex items-center mb-4">
+                                    <div class="w-10 h-10 rounded-full bg-blue-500 flex items-center justify-center text-black font-bold mr-3">BRO 2</div>
+                                    <div>
+                                        <div class="font-bold">BRO 2</div>
+                                        <div class="text-xs text-gray-400">Membership: <span class="text-orange-400">₹1.08 Cr</span></div>
+                                    </div>
+                                </div>
+                                
+                                <div class="grid grid-cols-1 md:grid-cols-3 gap-3 mb-4">
+                                    <div class="project-card">
+                                        <div class="text-sm text-gray-400 mb-2 flex items-center">
+                                            <i class="fas fa-chart-line mr-2 text-green-400"></i>
+                                            Project A
+                                        </div>
+                                        <input 
+                                            type="number" 
+                                            class="project-a-investment bg-black border border-gray-700 rounded-lg px-3 py-2 text-sm w-full" 
+                                            placeholder="₹ Amount"
+                                            value="3000000"
+                                            min="0"
+                                            step="100000"
+                                            data-bro="2"
+                                            data-project="A"
+                                        >
+                                    </div>
+                                    
+                                    <div class="project-card">
+                                        <div class="text-sm text-gray-400 mb-2 flex items-center">
+                                            <i class="fas fa-chart-line mr-2 text-blue-400"></i>
+                                            Project B
+                                        </div>
+                                        <input 
+                                            type="number" 
+                                            class="project-b-investment bg-black border border-gray-700 rounded-lg px-3 py-2 text-sm w-full" 
+                                            placeholder="₹ Amount"
+                                            value="2000000"
+                                            min="0"
+                                            step="100000"
+                                            data-bro="2"
+                                            data-project="B"
+                                        >
+                                    </div>
+                                    
+                                    <div class="project-card">
+                                        <div class="text-sm text-gray-400 mb-2 flex items-center">
+                                            <i class="fas fa-chart-line mr-2 text-purple-400"></i>
+                                            Project C
+                                        </div>
+                                        <input 
+                                            type="number" 
+                                            class="project-c-investment bg-black border border-gray-700 rounded-lg px-3 py-2 text-sm w-full" 
+                                            placeholder="₹ Amount"
+                                            value="1000000"
+                                            min="0"
+                                            step="100000"
+                                            data-bro="2"
+                                            data-project="C"
+                                        >
+                                    </div>
+                                </div>
+                                
+                                <div class="flex justify-between items-center">
+                                    <div class="text-xs text-gray-500">
+                                        Total Investment: <span class="text-green-400 font-bold" id="bro-2-total">₹60,00,000</span>
+                                    </div>
+                                    <button class="remove-bro-btn p-2 text-red-400 hover:text-red-300 opacity-70 hover:opacity-100">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <div class="bro-input-item fade-in">
+                                <div class="flex items-center mb-4">
+                                    <div class="w-10 h-10 rounded-full bg-purple-500 flex items-center justify-center text-black font-bold mr-3">BRO 3</div>
+                                    <div>
+                                        <div class="font-bold">BRO 3</div>
+                                        <div class="text-xs text-gray-400">Membership: <span class="text-orange-400">₹1.08 Cr</span></div>
+                                    </div>
+                                </div>
+                                
+                                <div class="grid grid-cols-1 md:grid-cols-3 gap-3 mb-4">
+                                    <div class="project-card">
+                                        <div class="text-sm text-gray-400 mb-2 flex items-center">
+                                            <i class="fas fa-chart-line mr-2 text-green-400"></i>
+                                            Project A
+                                        </div>
+                                        <input 
+                                            type="number" 
+                                            class="project-a-investment bg-black border border-gray-700 rounded-lg px-3 py-2 text-sm w-full" 
+                                            placeholder="₹ Amount"
+                                            value="2000000"
+                                            min="0"
+                                            step="100000"
+                                            data-bro="3"
+                                            data-project="A"
+                                        >
+                                    </div>
+                                    
+                                    <div class="project-card">
+                                        <div class="text-sm text-gray-400 mb-2 flex items-center">
+                                            <i class="fas fa-chart-line mr-2 text-blue-400"></i>
+                                            Project B
+                                        </div>
+                                        <input 
+                                            type="number" 
+                                            class="project-b-investment bg-black border border-gray-700 rounded-lg px-3 py-2 text-sm w-full" 
+                                            placeholder="₹ Amount"
+                                            value="1000000"
+                                            min="0"
+                                            step="100000"
+                                            data-bro="3"
+                                            data-project="B"
+                                        >
+                                    </div>
+                                    
+                                    <div class="project-card">
+                                        <div class="text-sm text-gray-400 mb-2 flex items-center">
+                                            <i class="fas fa-chart-line mr-2 text-purple-400"></i>
+                                            Project C
+                                        </div>
+                                        <input 
+                                            type="number" 
+                                            class="project-c-investment bg-black border border-gray-700 rounded-lg px-3 py-2 text-sm w-full" 
+                                            placeholder="₹ Amount"
+                                            value="1000000"
+                                            min="0"
+                                            step="100000"
+                                            data-bro="3"
+                                            data-project="C"
+                                        >
+                                    </div>
+                                </div>
+                                
+                                <div class="flex justify-between items-center">
+                                    <div class="text-xs text-gray-500">
+                                        Total Investment: <span class="text-green-400 font-bold" id="bro-3-total">₹40,00,000</span>
+                                    </div>
+                                    <button class="remove-bro-btn p-2 text-red-400 hover:text-red-300 opacity-70 hover:opacity-100">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Action Buttons -->
+                        <div class="grid grid-cols-2 gap-4 mb-6">
+                            <button 
+                                id="addBroBtn" 
+                                class="px-4 py-3 btn-primary font-semibold rounded-lg flex items-center justify-center"
+                            >
+                                <i class="fas fa-user-plus mr-2"></i>
+                                Add BRO
+                            </button>
+                            
+                            <button 
+                                id="calculateBtn" 
+                                class="px-4 py-3 btn-success font-bold rounded-lg flex items-center justify-center"
+                            >
+                                <i class="fas fa-calculator mr-2"></i>
+                                Calculate
+                            </button>
+                        </div>
+                        
+                        <!-- Control Buttons -->
+                        <div class="grid grid-cols-2 gap-4 mb-8">
+                            <button 
+                                id="resetBtn" 
+                                class="px-4 py-3 bg-gray-800 hover:bg-gray-700 font-semibold rounded-lg flex items-center justify-center"
+                            >
+                                <i class="fas fa-redo mr-2"></i>
+                                Reset All
+                            </button>
+                            
+                            <button 
+                                id="saveBtn" 
+                                class="px-4 py-3 btn-warning font-bold rounded-lg flex items-center justify-center"
+                            >
+                                <i class="fas fa-save mr-2"></i>
+                                Save & Download
+                            </button>
+                        </div>
+                        
+                        <!-- Fee Structure -->
+                        <div class="mt-8 p-4 bg-black rounded-lg border border-gray-800">
+                            <div class="text-sm text-gray-400 mb-2">Fee Structure</div>
+                            <div class="text-sm space-y-2">
+                                <div class="flex justify-between">
+                                    <span>Membership Fee:</span>
+                                    <span class="text-orange-400">₹1.08 Cr (one-time)</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span>Platform Fee:</span>
+                                    <span class="text-green-400">1.08% (annual on payouts)</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span>Project Ownership:</span>
+                                    <span>Proportional to investment</span>
+                                </div>
+                                <div class="text-xs text-gray-500 mt-2">
+                                    Platform fee deducted before profit distribution to BROs
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Results Section -->
+                    <div class="glass-card p-6 rounded-2xl">
+                        <h2 class="text-2xl font-bold mb-6 flex items-center">
+                            <i class="fas fa-chart-pie mr-3 text-green-400"></i>
+                            Investment Distribution
+                        </h2>
+                        
+                        <!-- Project Selector -->
+                        <div class="mb-8">
+                            <div class="text-lg font-medium mb-4">Select Project to View</div>
+                            <div class="grid grid-cols-3 gap-2">
+                                <button class="project-selector active px-4 py-3 rounded-lg bg-green-900/20 border border-green-700 text-green-400 font-medium" data-project="A">
+                                    Project A
+                                </button>
+                                <button class="project-selector px-4 py-3 rounded-lg bg-blue-900/20 border border-blue-700 text-blue-400 font-medium" data-project="B">
+                                    Project B
+                                </button>
+                                <button class="project-selector px-4 py-3 rounded-lg bg-purple-900/20 border border-purple-700 text-purple-400 font-medium" data-project="C">
+                                    Project C
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- Summary Stats -->
+                        <div id="summaryStats" class="grid grid-cols-2 gap-4 mb-8">
+                            <div class="bg-black p-4 rounded-lg">
+                                <div class="text-sm text-gray-400">Total Membership Fees</div>
+                                <div id="totalMembership" class="text-2xl font-bold text-orange-400">₹3.24 Cr</div>
+                            </div>
+                            <div class="bg-black p-4 rounded-lg">
+                                <div class="text-sm text-gray-400">Active BROs</div>
+                                <div id="totalBros" class="text-2xl font-bold text-blue-400">3 BROs</div>
+                            </div>
+                        </div>
+                        
+                        <!-- Project Stats -->
+                        <div class="mb-6">
+                            <div class="text-lg font-medium mb-3" id="projectTitle">Project A Statistics</div>
+                            <div class="grid grid-cols-3 gap-3 text-center">
+                                <div class="p-3 bg-black/30 rounded-lg">
+                                    <div class="text-2xl font-bold text-green-400" id="projectTotalInvestment">₹1,00,00,000</div>
+                                    <div class="text-xs text-gray-400">Total Investment</div>
+                                </div>
+                                <div class="p-3 bg-black/30 rounded-lg">
+                                    <div class="text-2xl font-bold text-blue-400" id="projectInvestors">3 BROs</div>
+                                    <div class="text-xs text-gray-400">Investors</div>
+                                </div>
+                                <div class="p-3 bg-black/30 rounded-lg">
+                                    <div class="text-2xl font-bold text-purple-400" id="highestPercentage">50.00%</div>
+                                    <div class="text-xs text-gray-400">Highest Stake</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Ownership Chart -->
+                        <div class="mb-8">
+                            <div class="flex justify-between items-center mb-3">
+                                <div class="text-lg font-medium" id="projectBreakdownTitle">Project A Breakdown</div>
+                                <div class="text-sm text-gray-400" id="calculationTime">Calculated just now</div>
+                            </div>
+                            
+                            <div id="ownershipChart" class="space-y-4 max-h-[300px] overflow-y-auto p-2">
+                                <!-- BRO rows will be dynamically added here -->
+                                <div class="owner-row investor">
+                                    <div class="flex justify-between items-center mb-1">
+                                        <div class="flex items-center">
+                                            <div class="w-10 h-10 rounded-full bg-green-500 flex items-center justify-center text-black font-bold mr-3">BRO 1</div>
+                                            <div>
+                                                <div class="font-bold">BRO 1</div>
+                                                <div class="text-xs text-gray-400">₹50,00,000 • Highest Investor</div>
+                                            </div>
+                                        </div>
+                                        <div class="text-right">
+                                            <div class="text-xl font-bold text-green-400">50.000%</div>
+                                            <div class="text-xs text-gray-400">After 1.08% fee: 49.460%</div>
+                                        </div>
+                                    </div>
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 50%"></div>
+                                    </div>
+                                </div>
+                                
+                                <div class="owner-row investor">
+                                    <div class="flex justify-between items-center mb-1">
+                                        <div class="flex items-center">
+                                            <div class="w-10 h-10 rounded-full bg-blue-500 flex items-center justify-center text-black font-bold mr-3">BRO 2</div>
+                                            <div>
+                                                <div class="font-bold">BRO 2</div>
+                                                <div class="text-xs text-gray-400">₹30,00,000</div>
+                                            </div>
+                                        </div>
+                                        <div class="text-right">
+                                            <div class="text-xl font-bold text-blue-400">30.000%</div>
+                                            <div class="text-xs text-gray-400">After 1.08% fee: 29.676%</div>
+                                        </div>
+                                    </div>
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 30%"></div>
+                                    </div>
+                                </div>
+                                
+                                <div class="owner-row investor">
+                                    <div class="flex justify-between items-center mb-1">
+                                        <div class="flex items-center">
+                                            <div class="w-10 h-10 rounded-full bg-purple-500 flex items-center justify-center text-black font-bold mr-3">BRO 3</div>
+                                            <div>
+                                                <div class="font-bold">BRO 3</div>
+                                                <div class="text-xs text-gray-400">₹20,00,000</div>
+                                            </div>
+                                        </div>
+                                        <div class="text-right">
+                                            <div class="text-xl font-bold text-purple-400">20.000%</div>
+                                            <div class="text-xs text-gray-400">After 1.08% fee: 19.784%</div>
+                                        </div>
+                                    </div>
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 20%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Profit Distribution Example -->
+                        <div class="p-4 bg-black rounded-lg border border-gray-800">
+                            <div class="flex items-center mb-2">
+                                <i class="fas fa-coins text-yellow-400 mr-3"></i>
+                                <div class="font-medium" id="profitExampleTitle">Project A Profit Distribution Example</div>
+                            </div>
+                            <div class="text-sm text-gray-400">
+                                <p class="mb-2">If Project A makes <span class="text-green-400">₹1,00,00,000</span> profit:</p>
+                                <div class="space-y-2 text-xs">
+                                    <div class="flex justify-between">
+                                        <span>Platform Fee (1.08%):</span>
+                                        <span class="text-orange-400">-₹1,08,000</span>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <span>Net Profit:</span>
+                                        <span class="text-green-400">₹98,92,000</span>
+                                    </div>
+                                    <div class="border-t border-gray-800 pt-2 mt-2 grid grid-cols-2 gap-2">
+                                        <div>BRO 1 gets: <span class="text-green-400">₹49,46,000</span></div>
+                                        <div>BRO 2 gets: <span class="text-blue-400">₹29,67,600</span></div>
+                                        <div>BRO 3 gets: <span class="text-purple-400">₹19,78,400</span></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Additional Info Section -->
+                <section class="glass-card p-6 rounded-2xl mt-12">
+                    <h2 class="text-2xl font-bold mb-6">Premium Brotherhood Model</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <h3 class="text-xl font-medium mb-4 flex items-center">
+                                <i class="fas fa-key text-green-400 mr-3"></i>
+                                Membership Benefits
+                            </h3>
+                            <ul class="space-y-3 text-gray-400">
+                                <li class="flex items-start">
+                                    <i class="fas fa-check text-green-400 mr-3 mt-1"></i>
+                                    <span>Access to Premium & Elite brotherhood tiers</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check text-green-400 mr-3 mt-1"></i>
+                                    <span>Priority access to all BHRATHA projects</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check text-green-400 mr-3 mt-1"></i>
+                                    <span>Direct communication channels with founders</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check text-green-400 mr-3 mt-1"></i>
+                                    <span>Exclusive networking events and meetings</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check text-green-400 mr-3 mt-1"></i>
+                                    <span>Early access to new investment opportunities</span>
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <div>
+                            <h3 class="text-xl font-medium mb-4 flex items-center">
+                                <i class="fas fa-chart-network text-orange-400 mr-3"></i>
+                                Project Structure
+                            </h3>
+                            <div class="space-y-4">
+                                <div class="p-3 bg-black/30 rounded-lg">
+                                    <div class="flex items-center mb-2">
+                                        <span class="project-tag project-a mr-3">Project A</span>
+                                        <span class="text-sm font-medium">Lifestyle & Hospitality</span>
+                                    </div>
+                                    <p class="text-xs text-gray-400">Luxury resorts, member clubs, and high-end dining experiences.</p>
+                                </div>
+                                
+                                <div class="p-3 bg-black/30 rounded-lg">
+                                    <div class="flex items-center mb-2">
+                                        <span class="project-tag project-b mr-3">Project B</span>
+                                        <span class="text-sm font-medium">Technology & Innovation</span>
+                                    </div>
+                                    <p class="text-xs text-gray-400">Cutting-edge tech startups and digital platform investments.</p>
+                                </div>
+                                
+                                <div class="p-3 bg-black/30 rounded-lg">
+                                    <div class="flex items-center mb-2">
+                                        <span class="project-tag project-c mr-3">Project C</span>
+                                        <span class="text-sm font-medium">Real Estate & Infrastructure</span>
+                                    </div>
+                                    <p class="text-xs text-gray-400">Premium residential and commercial property developments.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-8 p-4 bg-gradient-to-r from-green-900/20 to-blue-900/20 rounded-lg border border-gray-800">
+                        <div class="text-center">
+                            <p class="text-lg"><span class="text-green-400 font-bold">The Brotherhood Promise:</span> Premium access, transparent fees, project-based investments, institutional-grade opportunities.</p>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+
+        <!-- Private Assessment (Hidden by default) -->
+        <div id="assessment" class="assessment-container" style="display: none;">
+            <!-- Section 0: Landing -->
+            <div id="section-landing" class="section active">
+                <div class="text-center pt-20">
+                    <h1 class="text-5xl font-light mb-6 tracking-tight">BHRATHA</h1>
+                    <div class="text-xl muted-text mb-10">Brotherhood for Institutional Builders</div>
+                    
+                    <div class="dark-card p-10 mb-12 max-w-2xl mx-auto">
+                        <p class="text-lg mb-8">
+                            This is not an application.<br>
+                            This is a private self-assessment.
+                        </p>
+                        <p class="muted-text mb-10">
+                            The following assessment explores responsibility, capital discipline, and long-horizon temperament.
+                            Your responses are private. Your result determines whether consideration is appropriate.
+                        </p>
+                        
+                        <button onclick="startAssessment()" class="btn-primary-assessment text-lg px-10 py-4">
+                            Begin Private Assessment
+                        </button>
+                        
+                        <div class="mt-12 text-sm muted-text">
+                            <p class="mb-4">BHRATHA accepts builders of systems, not users of systems.</p>
+                            <p>
+                                <a href="#" onclick="showNeverAllowed(event)" style="color: var(--accent-gold); text-decoration: underline;">
+                                    View who is never allowed →
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 1: Human Scale -->
+            <div id="section-human-scale" class="section">
+                <h2 class="section-title">Stage 1 of 5 — Human Scale</h2>
+                <p class="section-subtitle">Before capital, the system evaluates the human.</p>
+                
+                <div class="dark-card p-8">
+                    <div class="space-y-8">
+                        <!-- Question 1 -->
+                        <div>
+                            <h3 class="text-lg mb-4">1. Age Range</h3>
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+                                <div class="question-card" data-question="age" data-value="21-30" onclick="selectOption(this)">
+                                    <div class="font-medium">21–30</div>
+                                </div>
+                                <div class="question-card" data-question="age" data-value="31-40" onclick="selectOption(this)">
+                                    <div class="font-medium">31–40</div>
+                                </div>
+                                <div class="question-card" data-question="age" data-value="41-50" onclick="selectOption(this)">
+                                    <div class="font-medium">41–50</div>
+                                </div>
+                                <div class="question-card" data-question="age" data-value="51-60" onclick="selectOption(this)">
+                                    <div class="font-medium">51–60</div>
+                                </div>
+                                <div class="question-card" data-question="age" data-value="60+" onclick="selectOption(this)">
+                                    <div class="font-medium">60+</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Question 2 -->
+                        <div>
+                            <h3 class="text-lg mb-4">2. Primary operating geography</h3>
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+                                <div class="question-card" data-question="geography" data-value="India" onclick="selectOption(this)">
+                                    <div class="font-medium">India</div>
+                                </div>
+                                <div class="question-card" data-question="geography" data-value="Middle East" onclick="selectOption(this)">
+                                    <div class="font-medium">Middle East</div>
+                                </div>
+                                <div class="question-card" data-question="geography" data-value="Europe" onclick="selectOption(this)">
+                                    <div class="font-medium">Europe</div>
+                                </div>
+                                <div class="question-card" data-question="geography" data-value="North America" onclick="selectOption(this)">
+                                    <div class="font-medium">North America</div>
+                                </div>
+                                <div class="question-card" data-question="geography" data-value="East Asia" onclick="selectOption(this)">
+                                    <div class="font-medium">East Asia</div>
+                                </div>
+                                <div class="question-card" data-question="geography" data-value="Multi-region" onclick="selectOption(this)">
+                                    <div class="font-medium">Multi-region</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Question 3 -->
+                        <div>
+                            <h3 class="text-lg mb-4">3. Years actively building, operating, or allocating</h3>
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+                                <div class="question-card" data-question="experience" data-value="0-2" onclick="selectOption(this)">
+                                    <div class="font-medium">0–2 years</div>
+                                </div>
+                                <div class="question-card" data-question="experience" data-value="3-5" onclick="selectOption(this)">
+                                    <div class="font-medium">3–5 years</div>
+                                </div>
+                                <div class="question-card" data-question="experience" data-value="6-10" onclick="selectOption(this)">
+                                    <div class="font-medium">6–10 years</div>
+                                </div>
+                                <div class="question-card" data-question="experience" data-value="11-20" onclick="selectOption(this)">
+                                    <div class="font-medium">11–20 years</div>
+                                </div>
+                                <div class="question-card" data-question="experience" data-value="20+" onclick="selectOption(this)">
+                                    <div class="font-medium">20+ years</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="progress-container mt-12">
+                        <div class="progress-bar-assessment" id="progress-bar" style="width: 20%"></div>
+                    </div>
+                    
+                    <div class="flex justify-between">
+                        <button onclick="showAssessmentSection('landing')" class="btn-primary-assessment">
+                            ← Back
+                        </button>
+                        <button onclick="showAssessmentSection('capital-discipline')" class="btn-primary-assessment">
+                            Continue →
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 2: Capital Discipline -->
+            <div id="section-capital-discipline" class="section">
+                <h2 class="section-title">Stage 2 of 5 — Capital Discipline</h2>
+                <p class="section-subtitle">BHRATHA does not measure money. It measures relationship with capital.</p>
+                
+                <div class="dark-card p-8">
+                    <div class="space-y-8">
+                        <!-- Question 4 -->
+                        <div>
+                            <h3 class="text-lg mb-4">4. Capital personally controlled (approximate)</h3>
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+                                <div class="question-card" data-question="capital-controlled" data-value="<50L" onclick="selectOption(this)">
+                                    <div class="font-medium">&lt; ₹50L</div>
+                                </div>
+                                <div class="question-card" data-question="capital-controlled" data-value="50L-2Cr" onclick="selectOption(this)">
+                                    <div class="font-medium">₹50L – ₹2 Cr</div>
+                                </div>
+                                <div class="question-card" data-question="capital-controlled" data-value="2Cr-10Cr" onclick="selectOption(this)">
+                                    <div class="font-medium">₹2 Cr – ₹10 Cr</div>
+                                </div>
+                                <div class="question-card" data-question="capital-controlled" data-value="10Cr-50Cr" onclick="selectOption(this)">
+                                    <div class="font-medium">₹10 Cr – ₹50 Cr</div>
+                                </div>
+                                <div class="question-card" data-question="capital-controlled" data-value="50Cr+" onclick="selectOption(this)">
+                                    <div class="font-medium">₹50 Cr+</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Question 5 -->
+                        <div>
+                            <h3 class="text-lg mb-4">5. Capital you have deployed or governed historically</h3>
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+                                <div class="question-card" data-question="capital-deployed" data-value="<1Cr" onclick="selectOption(this)">
+                                    <div class="font-medium">&lt; ₹1 Cr</div>
+                                </div>
+                                <div class="question-card" data-question="capital-deployed" data-value="1-5Cr" onclick="selectOption(this)">
+                                    <div class="font-medium">₹1–5 Cr</div>
+                                </div>
+                                <div class="question-card" data-question="capital-deployed" data-value="5-25Cr" onclick="selectOption(this)">
+                                    <div class="font-medium">₹5–25 Cr</div>
+                                </div>
+                                <div class="question-card" data-question="capital-deployed" data-value="25-100Cr" onclick="selectOption(this)">
+                                    <div class="font-medium">₹25–100 Cr</div>
+                                </div>
+                                <div class="question-card" data-question="capital-deployed" data-value="100Cr+" onclick="selectOption(this)">
+                                    <div class="font-medium">₹100 Cr+</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Question 6 -->
+                        <div>
+                            <h3 class="text-lg mb-4">6. Longest period capital stayed locked under your decision</h3>
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+                                <div class="question-card" data-question="capital-lock" data-value="<1" onclick="selectOption(this)">
+                                    <div class="font-medium">&lt; 1 year</div>
+                                </div>
+                                <div class="question-card" data-question="capital-lock" data-value="1-3" onclick="selectOption(this)">
+                                    <div class="font-medium">1–3 years</div>
+                                </div>
+                                <div class="question-card" data-question="capital-lock" data-value="3-7" onclick="selectOption(this)">
+                                    <div class="font-medium">3–7 years</div>
+                                </div>
+                                <div class="question-card" data-question="capital-lock" data-value="7-12" onclick="selectOption(this)">
+                                    <div class="font-medium">7–12 years</div>
+                                </div>
+                                <div class="question-card" data-question="capital-lock" data-value="12+" onclick="selectOption(this)">
+                                    <div class="font-medium">12+ years</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="progress-container mt-12">
+                        <div class="progress-bar-assessment" style="width: 40%"></div>
+                    </div>
+                    
+                    <div class="flex justify-between">
+                        <button onclick="showAssessmentSection('human-scale')" class="btn-primary-assessment">
+                            ← Back
+                        </button>
+                        <button onclick="showAssessmentSection('responsibility-load')" class="btn-primary-assessment">
+                            Continue →
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 3: Responsibility Load -->
+            <div id="section-responsibility-load" class="section">
+                <h2 class="section-title">Stage 3 of 5 — Responsibility Load</h2>
+                <p class="section-subtitle">Institutions are carried on nervous systems.</p>
+                
+                <div class="dark-card p-8">
+                    <div class="space-y-8">
+                        <!-- Question 7 -->
+                        <div>
+                            <h3 class="text-lg mb-4">7. Largest number of people whose outcomes depended on you</h3>
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+                                <div class="question-card" data-question="people-dependent" data-value="0-5" onclick="selectOption(this)">
+                                    <div class="font-medium">0–5</div>
+                                </div>
+                                <div class="question-card" data-question="people-dependent" data-value="6-20" onclick="selectOption(this)">
+                                    <div class="font-medium">6–20</div>
+                                </div>
+                                <div class="question-card" data-question="people-dependent" data-value="21-100" onclick="selectOption(this)">
+                                    <div class="font-medium">21–100</div>
+                                </div>
+                                <div class="question-card" data-question="people-dependent" data-value="100-500" onclick="selectOption(this)">
+                                    <div class="font-medium">100–500</div>
+                                </div>
+                                <div class="question-card" data-question="people-dependent" data-value="500+" onclick="selectOption(this)">
+                                    <div class="font-medium">500+</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Question 8 -->
+                        <div>
+                            <h3 class="text-lg mb-4">8. Have you signed personal legal or financial liability?</h3>
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+                                <div class="question-card" data-question="liability" data-value="Never" onclick="selectOption(this)">
+                                    <div class="font-medium">Never</div>
+                                </div>
+                                <div class="question-card" data-question="liability" data-value="Once" onclick="selectOption(this)">
+                                    <div class="font-medium">Once</div>
+                                </div>
+                                <div class="question-card" data-question="liability" data-value="Multiple" onclick="selectOption(this)">
+                                    <div class="font-medium">Multiple times</div>
+                                </div>
+                                <div class="question-card" data-question="liability" data-value="Regularly" onclick="selectOption(this)">
+                                    <div class="font-medium">Regularly</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Question 9 -->
+                        <div>
+                            <h3 class="text-lg mb-4">9. Have you carried an organization through crisis?</h3>
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+                                <div class="question-card" data-question="crisis" data-value="No" onclick="selectOption(this)">
+                                    <div class="font-medium">No</div>
+                                </div>
+                                <div class="question-card" data-question="crisis" data-value="Minor" onclick="selectOption(this)">
+                                    <div class="font-medium">Minor disruption</div>
+                                </div>
+                                <div class="question-card" data-question="crisis" data-value="Severe" onclick="selectOption(this)">
+                                    <div class="font-medium">Severe instability</div>
+                                </div>
+                                <div class="question-card" data-question="crisis" data-value="Near-collapse" onclick="selectOption(this)">
+                                    <div class="font-medium">Near collapse</div>
+                                </div>
+                                <div class="question-card" data-question="crisis" data-value="Survival" onclick="selectOption(this)">
+                                    <div class="font-medium">Full survival event</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="progress-container mt-12">
+                        <div class="progress-bar-assessment" style="width: 60%"></div>
+                    </div>
+                    
+                    <div class="flex justify-between">
+                        <button onclick="showAssessmentSection('capital-discipline')" class="btn-primary-assessment">
+                            ← Back
+                        </button>
+                        <button onclick="showAssessmentSection('character-mindset')" class="btn-primary-assessment">
+                            Continue →
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 4: Character & Mindset -->
+            <div id="section-character-mindset" class="section">
+                <h2 class="section-title">Stage 4 of 5 — Character & Mindset</h2>
+                <p class="section-subtitle">Power tests character before skill.</p>
+                
+                <div class="dark-card p-8">
+                    <div class="space-y-8">
+                        <!-- Question 10 -->
+                        <div>
+                            <h3 class="text-lg mb-4">10. Which matters more?</h3>
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+                                <div class="question-card" data-question="values" data-value="Power" onclick="selectOption(this)">
+                                    <div class="font-medium">Power</div>
+                                </div>
+                                <div class="question-card" data-question="values" data-value="Trust" onclick="selectOption(this)">
+                                    <div class="font-medium">Trust</div>
+                                </div>
+                                <div class="question-card" data-question="values" data-value="Autonomy" onclick="selectOption(this)">
+                                    <div class="font-medium">Autonomy</div>
+                                </div>
+                                <div class="question-card" data-question="values" data-value="Legacy" onclick="selectOption(this)">
+                                    <div class="font-medium">Legacy</div>
+                                </div>
+                                <div class="question-card" data-question="values" data-value="Stability" onclick="selectOption(this)">
+                                    <div class="font-medium">Stability</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Question 11 -->
+                        <div>
+                            <h3 class="text-lg mb-4">11. Would you stay invisible if influence was real?</h3>
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+                                <div class="question-card" data-question="invisibility" data-value="No" onclick="selectOption(this)">
+                                    <div class="font-medium">No</div>
+                                </div>
+                                <div class="question-card" data-question="invisibility" data-value="If required" onclick="selectOption(this)">
+                                    <div class="font-medium">If required</div>
+                                </div>
+                                <div class="question-card" data-question="invisibility" data-value="Yes" onclick="selectOption(this)">
+                                    <div class="font-medium">Yes</div>
+                                </div>
+                                <div class="question-card" data-question="invisibility" data-value="Preferably" onclick="selectOption(this)">
+                                    <div class="font-medium">Preferably</div>
+                                </div>
+                                <div class="question-card" data-question="invisibility" data-value="Only invisibly" onclick="selectOption(this)">
+                                    <div class="font-medium">Only invisibly</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Question 12 -->
+                        <div>
+                            <h3 class="text-lg mb-4">12. Which cannot be compromised? (select up to 3)</h3>
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-3" id="compromise-container">
+                                <div class="question-card" data-question="compromise" data-value="Reputation" onclick="selectMultiOption(this)">
+                                    <div class="font-medium">Reputation</div>
+                                </div>
+                                <div class="question-card" data-question="compromise" data-value="Loyalty" onclick="selectMultiOption(this)">
+                                    <div class="font-medium">Loyalty</div>
+                                </div>
+                                <div class="question-card" data-question="compromise" data-value="Wealth" onclick="selectMultiOption(this)">
+                                    <div class="font-medium">Wealth</div>
+                                </div>
+                                <div class="question-card" data-question="compromise" data-value="Family" onclick="selectMultiOption(this)">
+                                    <div class="font-medium">Family</div>
+                                </div>
+                                <div class="question-card" data-question="compromise" data-value="Truth" onclick="selectMultiOption(this)">
+                                    <div class="font-medium">Truth</div>
+                                </div>
+                                <div class="question-card" data-question="compromise" data-value="Nation" onclick="selectMultiOption(this)">
+                                    <div class="font-medium">Nation</div>
+                                </div>
+                                <div class="question-card" data-question="compromise" data-value="Legacy" onclick="selectMultiOption(this)">
+                                    <div class="font-medium">Legacy</div>
+                                </div>
+                                <div class="question-card" data-question="compromise" data-value="Brotherhood" onclick="selectMultiOption(this)">
+                                    <div class="font-medium">Brotherhood</div>
+                                </div>
+                            </div>
+                            <div class="multi-select-counter" id="compromise-counter">Selected: 0/3</div>
+                        </div>
+                    </div>
+                    
+                    <div class="progress-container mt-12">
+                        <div class="progress-bar-assessment" style="width: 80%"></div>
+                    </div>
+                    
+                    <div class="flex justify-between">
+                        <button onclick="showAssessmentSection('responsibility-load')" class="btn-primary-assessment">
+                            ← Back
+                        </button>
+                        <button onclick="showAssessmentSection('bhratha-fit')" class="btn-primary-assessment">
+                            Continue →
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 5: BHRATHA Fit -->
+            <div id="section-bhratha-fit" class="section">
+                <h2 class="section-title">Stage 5 of 5 — BHRATHA Orientation</h2>
+                <p class="section-subtitle">Final alignment assessment</p>
+                
+                <div class="dark-card p-8">
+                    <div class="space-y-8">
+                        <!-- Question 13 -->
+                        <div>
+                            <h3 class="text-lg mb-4">13. Why do you seek a brotherhood?</h3>
+                            <textarea class="text-input" id="q-brotherhood" placeholder="Your response..."></textarea>
+                        </div>
+                        
+                        <!-- Question 14 -->
+                        <div>
+                            <h3 class="text-lg mb-4">14. Why unseen influence?</h3>
+                            <textarea class="text-input" id="q-influence" placeholder="Your response..."></textarea>
+                        </div>
+                        
+                        <!-- Question 15 -->
+                        <div>
+                            <h3 class="text-lg mb-4">15. Why institutions over assets?</h3>
+                            <textarea class="text-input" id="q-institutions" placeholder="Your response..."></textarea>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-12">
+                        <h3 class="text-lg mb-6" style="color: var(--accent-gold);">Final Declaration</h3>
+                        
+                        <div class="space-y-4">
+                            <div class="flex items-center">
+                                <div class="checkbox-custom" onclick="toggleCheckbox(this)"></div>
+                                <span>I accept BHRATHA is not networking</span>
+                            </div>
+                            
+                            <div class="flex items-center">
+                                <div class="checkbox-custom" onclick="toggleCheckbox(this)"></div>
+                                <span>I accept no guaranteed returns</span>
+                            </div>
+                            
+                            <div class="flex items-center">
+                                <div class="checkbox-custom" onclick="toggleCheckbox(this)"></div>
+                                <span>I accept discretion obligations</span>
+                            </div>
+                            
+                            <div class="flex items-center">
+                                <div class="checkbox-custom" onclick="toggleCheckbox(this)"></div>
+                                <span>I follow clean-money policy</span>
+                            </div>
+                            
+                            <div class="flex items-center">
+                                <div class="checkbox-custom" onclick="toggleCheckbox(this)"></div>
+                                <span>I understand membership requires ₹1.08 Cr capital seriousness</span>
+                            </div>
+                            
+                            <div class="flex items-center">
+                                <div class="checkbox-custom" onclick="toggleCheckbox(this)"></div>
+                                <span>I understand numbers 2–101 are accountable institutional positions</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="progress-container mt-12">
+                        <div class="progress-bar-assessment" style="width: 100%"></div>
+                    </div>
+                    
+                    <div class="flex justify-between mt-8">
+                        <button onclick="showAssessmentSection('character-mindset')" class="btn-primary-assessment">
+                            ← Back
+                        </button>
+                        <button onclick="calculateResults()" class="btn-primary-assessment">
+                            View Assessment Results
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 6: Results -->
+            <div id="section-results" class="section">
+                <h2 class="section-title">Private Assessment Summary</h2>
+                <p class="section-subtitle">Your position within the BHRATHA framework</p>
+                
+                <div class="dark-card p-8">
+                    <div class="space-y-6">
+                        <div class="result-metric">
+                            <div class="text-sm muted-text mb-2">Primary Archetype</div>
+                            <div class="text-2xl" id="result-archetype" style="color: var(--accent-gold);">—</div>
+                        </div>
+                        
+                        <div class="result-metric">
+                            <div class="text-sm muted-text mb-2">Dominant Strength</div>
+                            <div class="text-2xl" id="result-strength" style="color: var(--accent-gold);">—</div>
+                        </div>
+                        
+                        <div class="result-metric">
+                            <div class="text-sm muted-text mb-2">Risk Vector</div>
+                            <div class="text-2xl" id="result-risk" style="color: var(--accent-gold);">—</div>
+                        </div>
+                        
+                        <div class="result-metric">
+                            <div class="text-sm muted-text mb-2">BHRATHA Compatibility</div>
+                            <div class="text-2xl" id="result-compatibility" style="color: var(--accent-gold);">—</div>
+                        </div>
+                        
+                        <div class="result-metric">
+                            <div class="text-sm muted-text mb-2">Reflection</div>
+                            <p class="text-lg" id="result-reflection">—</p>
+                        </div>
+                        
+                        <div class="warning-text">
+                            BHRATHA membership requires ₹1.08 Cr as capital seriousness, independent of any investment participation.
+                        </div>
+                    </div>
+                    
+                    <div class="mt-12 text-center">
+                        <button onclick="showAssessmentSection('application')" class="btn-primary-assessment px-12 py-4 text-lg">
+                            Request Consideration
+                        </button>
+                        <p class="text-sm muted-text mt-4">
+                            By proceeding, you acknowledge this is not an application but a request for consideration.
+                        </p>
+                    </div>
+                    
+                    <div class="mt-8 text-center">
+                        <button onclick="restartAssessment()" class="btn-primary-assessment">
+                            Restart Assessment
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 7: Application -->
+            <div id="section-application" class="section">
+                <h2 class="section-title">Request for Consideration</h2>
+                <p class="section-subtitle">Complete the following for BHRATHA review</p>
+                
+                <div class="dark-card p-8">
+                    <div class="space-y-6">
+                        <div>
+                            <label class="block mb-2">Legal Full Name</label>
+                            <input type="text" class="text-input" id="app-name">
+                        </div>
+                        
+                        <div>
+                            <label class="block mb-2">Primary Contact Email</label>
+                            <input type="email" class="text-input" id="app-email">
+                        </div>
+                        
+                        <div>
+                            <label class="block mb-2">Background Summary</label>
+                            <textarea class="text-input h-32" id="app-background"></textarea>
+                        </div>
+                        
+                        <div>
+                            <label class="block mb-2">Capital Declaration (Approximate)</label>
+                            <select class="text-input" id="app-capital">
+                                <option value="">Select range</option>
+                                <option value="<50L">&lt; ₹50L</option>
+                                <option value="50L-2Cr">₹50L – ₹2 Cr</option>
+                                <option value="2Cr-10Cr">₹2 Cr – ₹10 Cr</option>
+                                <option value="10Cr-50Cr">₹10 Cr – ₹50 Cr</option>
+                                <option value="50Cr+">₹50 Cr+</option>
+                            </select>
+                        </div>
+                        
+                        <div>
+                            <label class="block mb-2">References (Names & Context)</label>
+                            <textarea class="text-input h-24" id="app-references"></textarea>
+                        </div>
+                        
+                        <div class="flex items-center mt-6">
+                            <div class="checkbox-custom" onclick="toggleCheckbox(this)"></div>
+                            <span>I accept confidentiality and privacy obligations</span>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-12 text-center">
+                        <button onclick="submitApplication()" class="btn-primary-assessment px-12 py-4 text-lg">
+                            Submit for Consideration
+                        </button>
+                        <p class="text-sm muted-text mt-4">
+                            Your request will be logged. Consideration is not guaranteed.
+                        </p>
+                    </div>
+                    
+                    <div class="mt-8 text-center">
+                        <button onclick="showAssessmentSection('results')" class="btn-primary-assessment">
+                            ← Back to Results
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Save Summary Modal -->
+    <div id="saveModal" class="modal">
+        <div class="modal-content">
+            <div class="close-modal" onclick="closeSaveModal()">×</div>
+            <div class="text-center mb-6">
+                <div class="text-4xl mb-4">📊</div>
+                <h2 class="text-2xl font-bold mb-2">Brotherhood Summary</h2>
+                <p class="text-gray-400">Your investment calculation has been completed.</p>
+            </div>
+            
+            <div class="mb-6 p-4 bg-black/30 rounded-lg">
+                <div class="text-center">
+                    <div class="text-3xl font-bold text-green-400 mb-2" id="modalTotalMembership">₹3.24 Cr</div>
+                    <div class="text-gray-400">Total Membership Fees</div>
+                </div>
+            </div>
+            
+            <div class="space-y-4 mb-8">
+                <div class="flex justify-between items-center">
+                    <div class="text-gray-400">Active BROs</div>
+                    <div class="font-bold text-blue-400" id="modalBroCount">3 BROs</div>
+                </div>
+                <div class="flex justify-between items-center">
+                    <div class="text-gray-400">Project A Total</div>
+                    <div class="font-bold text-green-400" id="modalProjectA">₹1,00,00,000</div>
+                </div>
+                <div class="flex justify-between items-center">
+                    <div class="text-gray-400">Project B Total</div>
+                    <div class="font-bold text-blue-400" id="modalProjectB">₹60,00,000</div>
+                </div>
+                <div class="flex justify-between items-center">
+                    <div class="text-gray-400">Project C Total</div>
+                    <div class="font-bold text-purple-400" id="modalProjectC">₹40,00,000</div>
+                </div>
+            </div>
+            
+            <div class="text-center text-sm text-gray-500 mb-6">
+                Platform fee of 1.08% applies to all annual payouts. Membership fee is one-time and non-refundable.
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <button 
+                    onclick="closeSaveModal()" 
+                    class="px-4 py-3 bg-gray-800 hover:bg-gray-700 font-semibold rounded-lg"
+                >
+                    Continue Editing
+                </button>
+                <button 
+                    onclick="downloadBrotherhoodSummary()" 
+                    class="px-4 py-3 btn-success font-bold rounded-lg flex items-center justify-center"
+                >
+                    <i class="fas fa-download mr-2"></i>
+                    Download Summary
+                </button>
+            </div>
+            
+            <div class="mt-6 text-center">
+                <a href="https://wa.me/916292306090?text=I've%20completed%20the%20BHRATHA%20brotherhood%20calculator%20and%20would%20like%20to%20discuss%20membership%20opportunities." target="_blank" class="whatsapp-btn">
+                    <i class="fab fa-whatsapp mr-2"></i>
+                    Contact on WhatsApp
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Never Allowed Modal -->
+    <div id="neverAllowedModal" class="modal">
+        <div class="modal-content">
+            <div class="close-modal" onclick="closeNeverAllowedModal()">×</div>
+            <h2 class="text-2xl mb-8" style="color: var(--danger); text-align: center;">WHO IS NEVER ALLOWED</h2>
+            <p class="text-center muted-text mb-10">(Even if they are rich.)</p>
+            
+            <div class="space-y-8">
+                <div>
+                    <h3 class="text-lg mb-4" style="color: var(--danger);">1️⃣ Integrity Violators</h3>
+                    <p class="muted-text mb-2">Those who build wealth by damaging systems.</p>
+                    <ul class="list-disc pl-5 muted-text space-y-1">
+                        <li>Black money operators</li>
+                        <li>Shell-company builders</li>
+                        <li>Ponzi / MLM creators</li>
+                        <li>Political fund laundering networks</li>
+                        <li>Exploitative loan sharks</li>
+                        <li>Religious donation abusers</li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg mb-4" style="color: var(--danger);">2️⃣ Character Risks</h3>
+                    <p class="muted-text mb-2">Those who collapse under power.</p>
+                    <ul class="list-disc pl-5 muted-text space-y-1">
+                        <li>Addictive personalities (drugs, gambling, power abuse)</li>
+                        <li>Ego-driven publicity seekers</li>
+                        <li>Serial betrayal histories</li>
+                        <li>Sexual exploitation records</li>
+                        <li>Violence-oriented operators</li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg mb-4" style="color: var(--danger);">3️⃣ System Corruptors</h3>
+                    <p class="muted-text mb-2">Those who poison institutions from inside.</p>
+                    <ul class="list-disc pl-5 muted-text space-y-1">
+                        <li>People who destroy organizations after entering</li>
+                        <li>People who leak private structures</li>
+                        <li>People who weaponize influence irresponsibly</li>
+                        <li>People who convert everything into transactions</li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg mb-4" style="color: var(--danger);">4️⃣ Short-Term Thinkers</h3>
+                    <p class="muted-text mb-2">Those who cannot build what they cannot quickly benefit from.</p>
+                    <ul class="list-disc pl-5 muted-text space-y-1">
+                        <li>Quick-return mindset</li>
+                        <li>Trend chasers</li>
+                        <li>Crypto-casino mentality</li>
+                        <li>People unable to commit beyond three years</li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg mb-4" style="color: var(--danger);">5️⃣ Hidden Control Agents</h3>
+                    <p class="muted-text mb-2">Those whose primary loyalty is not their own conscience.</p>
+                    <p class="muted-text mb-2">Individuals acting primarily for:</p>
+                    <ul class="list-disc pl-5 muted-text space-y-1">
+                        <li>Political parties</li>
+                        <li>Intelligence agencies</li>
+                        <li>Criminal syndicates</li>
+                        <li>Extremist groups</li>
+                    </ul>
+                </div>
+                
+                <div class="text-center pt-8 border-t border-gray-800">
+                    <p class="text-xl" style="color: var(--accent-gold); font-weight: 500;">
+                        BHRATHA accepts builders of systems, not users of systems.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="p-8 border-t border-gray-900 text-center">
+        <div class="text-xl font-bold tracking-widest mb-4">
+            BH<span class="logo-rupee">₹</span>ATHA<span class="logo-fullstop">.</span>
+        </div>
+        <p class="text-gray-600 text-sm max-w-md mx-auto">
+            A brotherhood-led global lifestyle brand. Built on trust. Protected by standards. Partnerships are selective.
+        </p>
+    </footer>
+
+    <script>
+        // ========== Navigation Between Calculators ==========
+        document.querySelectorAll('.nav-tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                // Update active tab
+                document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+                
+                // Show selected calculator
+                const tabId = this.dataset.tab;
+                if (tabId === 'brotherhood-calculator') {
+                    document.getElementById('brotherhood-calculator').style.display = 'block';
+                    document.getElementById('assessment').style.display = 'none';
+                } else {
+                    document.getElementById('brotherhood-calculator').style.display = 'none';
+                    document.getElementById('assessment').style.display = 'block';
+                }
+            });
+        });
+
+        // ========== NEW BROTHERHOOD CALCULATOR LOGIC ==========
+        // DOM Elements
+        const broInputsContainer = document.getElementById('broInputsContainer');
+        const addBroBtn = document.getElementById('addBroBtn');
+        const calculateBtn = document.getElementById('calculateBtn');
+        const resetBtn = document.getElementById('resetBtn');
+        const saveBtn = document.getElementById('saveBtn');
+        const ownershipChart = document.getElementById('ownershipChart');
+        const totalMembershipEl = document.getElementById('totalMembership');
+        const totalBrosEl = document.getElementById('totalBros');
+        const projectSelectors = document.querySelectorAll('.project-selector');
+        const projectTotalInvestment = document.getElementById('projectTotalInvestment');
+        const projectInvestors = document.getElementById('projectInvestors');
+        const highestPercentageEl = document.getElementById('highestPercentage');
+        const projectTitle = document.getElementById('projectTitle');
+        const projectBreakdownTitle = document.getElementById('projectBreakdownTitle');
+        const profitExampleTitle = document.getElementById('profitExampleTitle');
+        const calculationTimeEl = document.getElementById('calculationTime');
+        
+        // Colors for BROs
+        const broColors = [
+            'bg-green-500', 'bg-blue-500', 'bg-purple-500', 'bg-pink-500', 
+            'bg-yellow-500', 'bg-indigo-500', 'bg-teal-500', 'bg-red-500',
+            'bg-amber-500', 'bg-cyan-500', 'bg-lime-500', 'bg-emerald-500'
+        ];
+        
+        // Store BRO data with new structure
+        let bros = [
+            { 
+                id: 1, 
+                membershipFee: 10800000, // ₹1.08 Cr
+                investments: {
+                    A: 5000000,
+                    B: 3000000,
+                    C: 2000000
+                },
+                color: broColors[0],
+                totalInvestment: 10000000 // Sum of A+B+C
+            },
+            { 
+                id: 2, 
+                membershipFee: 10800000,
+                investments: {
+                    A: 3000000,
+                    B: 2000000,
+                    C: 1000000
+                },
+                color: broColors[1],
+                totalInvestment: 6000000
+            },
+            { 
+                id: 3, 
+                membershipFee: 10800000,
+                investments: {
+                    A: 2000000,
+                    B: 1000000,
+                    C: 1000000
+                },
+                color: broColors[2],
+                totalInvestment: 4000000
+            }
+        ];
+        
+        // BRO counter
+        let broCounter = 3;
+        let selectedProject = 'A'; // Default project
+        
+        // Constants
+        const MEMBERSHIP_FEE = 10800000; // ₹1.08 Cr
+        const PLATFORM_FEE_PERCENT = 1.08; // 1.08%
+        
+        // Format currency in Indian format
+        function formatCurrency(amount) {
+            if (!amount && amount !== 0) return '₹0';
+            
+            if (amount >= 10000000) {
+                return '₹' + (amount / 10000000).toFixed(2) + ' Cr';
+            } else if (amount >= 100000) {
+                return '₹' + (amount / 100000).toFixed(2) + ' L';
+            } else {
+                return '₹' + amount.toLocaleString('en-IN');
+            }
+        }
+        
+        // Format percentage to 3 decimal places
+        function formatPercentage(value) {
+            return value.toFixed(3) + '%';
+        }
+        
+        // Calculate total for a BRO
+        function calculateBroTotal(broId) {
+            const bro = bros.find(b => b.id === broId);
+            if (bro) {
+                const total = bro.investments.A + bro.investments.B + bro.investments.C;
+                bro.totalInvestment = total;
+                return total;
+            }
+            return 0;
+        }
+        
+        // Update BRO total display
+        function updateBroTotalDisplay(broId) {
+            const total = calculateBroTotal(broId);
+            const element = document.getElementById(`bro-${broId}-total`);
+            if (element) {
+                element.textContent = formatCurrency(total);
+            }
+        }
+        
+        // Add a new BRO input field
+        function addBroInput() {
+            broCounter++;
+            const newBroIndex = bros.length;
+            const colorClass = broColors[newBroIndex % broColors.length];
+            
+            const broDiv = document.createElement('div');
+            broDiv.className = 'bro-input-item fade-in';
+            broDiv.innerHTML = `
+                <div class="flex items-center mb-4">
+                    <div class="w-10 h-10 rounded-full ${colorClass} flex items-center justify-center text-black font-bold mr-3">BRO ${broCounter}</div>
+                    <div>
+                        <div class="font-bold">BRO ${broCounter}</div>
+                        <div class="text-xs text-gray-400">Membership: <span class="text-orange-400">₹1.08 Cr</span></div>
+                    </div>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-3 mb-4">
+                    <div class="project-card">
+                        <div class="text-sm text-gray-400 mb-2 flex items-center">
+                            <i class="fas fa-chart-line mr-2 text-green-400"></i>
+                            Project A
+                        </div>
+                        <input 
+                            type="number" 
+                            class="project-a-investment bg-black border border-gray-700 rounded-lg px-3 py-2 text-sm w-full" 
+                            placeholder="₹ Amount"
+                            value="1000000"
+                            min="0"
+                            step="100000"
+                            data-bro="${broCounter}"
+                            data-project="A"
+                        >
+                    </div>
+                    
+                    <div class="project-card">
+                        <div class="text-sm text-gray-400 mb-2 flex items-center">
+                            <i class="fas fa-chart-line mr-2 text-blue-400"></i>
+                            Project B
+                        </div>
+                        <input 
+                            type="number" 
+                            class="project-b-investment bg-black border border-gray-700 rounded-lg px-3 py-2 text-sm w-full" 
+                            placeholder="₹ Amount"
+                            value="1000000"
+                            min="0"
+                            step="100000"
+                            data-bro="${broCounter}"
+                            data-project="B"
+                        >
+                    </div>
+                    
+                    <div class="project-card">
+                        <div class="text-sm text-gray-400 mb-2 flex items-center">
+                            <i class="fas fa-chart-line mr-2 text-purple-400"></i>
+                            Project C
+                        </div>
+                        <input 
+                            type="number" 
+                            class="project-c-investment bg-black border border-gray-700 rounded-lg px-3 py-2 text-sm w-full" 
+                            placeholder="₹ Amount"
+                            value="1000000"
+                            min="0"
+                            step="100000"
+                            data-bro="${broCounter}"
+                            data-project="C"
+                        >
+                    </div>
+                </div>
+                
+                <div class="flex justify-between items-center">
+                    <div class="text-xs text-gray-500">
+                        Total Investment: <span class="text-green-400 font-bold" id="bro-${broCounter}-total">₹30,00,000</span>
+                    </div>
+                    <button class="remove-bro-btn p-2 text-red-400 hover:text-red-300 opacity-70 hover:opacity-100">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            `;
+            
+            broInputsContainer.appendChild(broDiv);
+            
+            // Add to bros array
+            bros.push({
+                id: broCounter,
+                membershipFee: MEMBERSHIP_FEE,
+                investments: {
+                    A: 1000000,
+                    B: 1000000,
+                    C: 1000000
+                },
+                color: colorClass,
+                totalInvestment: 3000000
+            });
+            
+            // Add event listener to remove button
+            const removeBtn = broDiv.querySelector('.remove-bro-btn');
+            removeBtn.addEventListener('click', function() {
+                const broId = broCounter;
+                removeBro(broId, broDiv);
+            });
+            
+            // Add event listeners to investment inputs
+            const inputs = broDiv.querySelectorAll('input[type="number"]');
+            inputs.forEach(input => {
+                input.addEventListener('input', function() {
+                    const broId = parseInt(this.dataset.bro);
+                    const project = this.dataset.project;
+                    const value = parseFloat(this.value) || 0;
+                    
+                    // Update bro data
+                    const bro = bros.find(b => b.id === broId);
+                    if (bro) {
+                        bro.investments[project] = value;
+                        updateBroTotalDisplay(broId);
+                    }
+                    
+                    // Auto-calculate after a delay
+                    setTimeout(() => calculateProject(selectedProject), 500);
+                });
+            });
+            
+            // Recalculate after adding
+            updateBroTotalDisplay(broCounter);
+            calculateProject(selectedProject);
+        }
+        
+        // Remove a BRO
+        function removeBro(broId, element) {
+            // Remove from DOM
+            if (element && element.parentNode) {
+                element.classList.add('opacity-0', 'transform', '-translate-x-10');
+                setTimeout(() => {
+                    if (element.parentNode) {
+                        element.parentNode.removeChild(element);
+                    }
+                }, 300);
+            }
+            
+            // Remove from bros array
+            bros = bros.filter(bro => bro.id !== broId);
+            
+            // Recalculate
+            calculateProject(selectedProject);
+        }
+        
+        // Calculate project statistics
+        function calculateProject(project) {
+            // Update selected project
+            selectedProject = project;
+            
+            // Update UI for selected project
+            projectSelectors.forEach(selector => {
+                if (selector.dataset.project === project) {
+                    selector.classList.add('active');
+                    selector.classList.remove('bg-black/20');
+                    // Set border color based on project
+                    if (project === 'A') {
+                        selector.classList.add('bg-green-900/20', 'border-green-700', 'text-green-400');
+                        selector.classList.remove('bg-blue-900/20', 'border-blue-700', 'text-blue-400', 'bg-purple-900/20', 'border-purple-700', 'text-purple-400');
+                    } else if (project === 'B') {
+                        selector.classList.add('bg-blue-900/20', 'border-blue-700', 'text-blue-400');
+                        selector.classList.remove('bg-green-900/20', 'border-green-700', 'text-green-400', 'bg-purple-900/20', 'border-purple-700', 'text-purple-400');
+                    } else if (project === 'C') {
+                        selector.classList.add('bg-purple-900/20', 'border-purple-700', 'text-purple-400');
+                        selector.classList.remove('bg-green-900/20', 'border-green-700', 'text-green-400', 'bg-blue-900/20', 'border-blue-700', 'text-blue-400');
+                    }
+                } else {
+                    selector.classList.remove('active');
+                    selector.classList.add('bg-black/20', 'border-gray-700', 'text-gray-400');
+                    selector.classList.remove('bg-green-900/20', 'border-green-700', 'text-green-400', 'bg-blue-900/20', 'border-blue-700', 'text-blue-400', 'bg-purple-900/20', 'border-purple-700', 'text-purple-400');
+                }
+            });
+            
+            // Update titles
+            const projectNames = { A: 'A', B: 'B', C: 'C' };
+            const projectColors = { A: 'green', B: 'blue', C: 'purple' };
+            
+            projectTitle.textContent = `Project ${projectNames[project]} Statistics`;
+            projectBreakdownTitle.textContent = `Project ${projectNames[project]} Breakdown`;
+            profitExampleTitle.textContent = `Project ${projectNames[project]} Profit Distribution Example`;
+            
+            // Calculate project total
+            let projectTotal = 0;
+            let projectInvestorsCount = 0;
+            
+            bros.forEach(bro => {
+                const investment = bro.investments[project] || 0;
+                if (investment > 0) {
+                    projectTotal += investment;
+                    projectInvestorsCount++;
+                }
+            });
+            
+            // Update project stats
+            projectTotalInvestment.textContent = formatCurrency(projectTotal);
+            projectInvestors.textContent = `${projectInvestorsCount} BRO${projectInvestorsCount !== 1 ? 's' : ''}`;
+            
+            // Calculate percentages for each BRO
+            const brosWithInvestment = bros.filter(bro => (bro.investments[project] || 0) > 0);
+            
+            brosWithInvestment.forEach(bro => {
+                bro.projectPercentage = projectTotal > 0 ? 
+                    (bro.investments[project] / projectTotal) * 100 : 0;
+                bro.percentageAfterFee = bro.projectPercentage * (100 - PLATFORM_FEE_PERCENT) / 100;
+            });
+            
+            // Sort BROs by percentage (highest first)
+            brosWithInvestment.sort((a, b) => b.projectPercentage - a.projectPercentage);
+            
+            // Update highest percentage
+            if (brosWithInvestment.length > 0) {
+                highestPercentageEl.textContent = formatPercentage(brosWithInvestment[0].projectPercentage);
+            } else {
+                highestPercentageEl.textContent = '0.000%';
+            }
+            
+            // Update calculation time
+            const now = new Date();
+            calculationTimeEl.textContent = `Calculated at ${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}`;
+            
+            // Update summary stats
+            const totalMembershipFees = bros.length * MEMBERSHIP_FEE;
+            totalMembershipEl.textContent = formatCurrency(totalMembershipFees);
+            totalBrosEl.textContent = `${bros.length} BRO${bros.length !== 1 ? 's' : ''}`;
+            
+            // Display results
+            displayProjectResults(project, brosWithInvestment, projectTotal);
+            
+            // Update profit example
+            updateProfitExample(project, projectTotal, brosWithInvestment);
+        }
+        
+        // Display project results
+        function displayProjectResults(project, brosWithInvestment, projectTotal) {
+            // Clear existing rows
+            ownershipChart.innerHTML = '';
+            
+            // Color mapping
+            const colorMap = {
+                'bg-green-500': '#00ff88',
+                'bg-blue-500': '#0095ff',
+                'bg-purple-500': '#8a2be2',
+                'bg-pink-500': '#ff1493',
+                'bg-yellow-500': '#ffd700',
+                'bg-indigo-500': '#4b0082',
+                'bg-teal-500': '#20b2aa',
+                'bg-red-500': '#ff4444',
+                'bg-amber-500': '#ffbf00',
+                'bg-cyan-500': '#00ffff',
+                'bg-lime-500': '#bfff00',
+                'bg-emerald-500': '#00cc99'
+            };
+            
+            // Add BRO rows
+            brosWithInvestment.forEach((bro, index) => {
+                const broDiv = document.createElement('div');
+                broDiv.className = 'owner-row investor fade-in';
+                
+                // Determine if this is the highest BRO
+                const highestBadge = index === 0 ? '• Highest Investor' : '';
+                
+                const broColor = colorMap[bro.color] || '#ffffff';
+                
+                broDiv.innerHTML = `
+                    <div class="flex justify-between items-center mb-1">
+                        <div class="flex items-center">
+                            <div class="w-10 h-10 rounded-full ${bro.color} flex items-center justify-center text-black font-bold mr-3">BRO ${bro.id}</div>
+                            <div>
+                                <div class="font-bold">BRO ${bro.id}</div>
+                                <div class="text-xs text-gray-400">${formatCurrency(bro.investments[project])} ${highestBadge}</div>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <div class="text-xl font-bold" style="color: ${broColor}">${formatPercentage(bro.projectPercentage)}</div>
+                            <div class="text-xs text-gray-400">After 1.08% fee: ${formatPercentage(bro.percentageAfterFee)}</div>
+                        </div>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: ${bro.projectPercentage}%"></div>
+                    </div>
+                `;
+                
+                ownershipChart.appendChild(broDiv);
+            });
+            
+            // If no BROs have invested in this project
+            if (brosWithInvestment.length === 0) {
+                const emptyDiv = document.createElement('div');
+                emptyDiv.className = 'text-center py-8 text-gray-500';
+                emptyDiv.innerHTML = `
+                    <i class="fas fa-chart-bar text-3xl mb-3"></i>
+                    <p>No BROs have invested in this project yet.</p>
+                `;
+                ownershipChart.appendChild(emptyDiv);
+            }
+        }
+        
+        // Update profit distribution example
+        function updateProfitExample(project, projectTotal, brosWithInvestment) {
+            const exampleProfit = projectTotal; // Example: Profit equals total investment for simplicity
+            
+            // Calculate platform fee
+            const platformFee = exampleProfit * (PLATFORM_FEE_PERCENT / 100);
+            const netProfit = exampleProfit - platformFee;
+            
+            // Update profit example in UI (we'll just recalc when needed, shown in display)
+        }
+        
+        // Reset all inputs
+        function resetAll() {
+            // Reset bros array
+            bros = [
+                { 
+                    id: 1, 
+                    membershipFee: MEMBERSHIP_FEE,
+                    investments: {
+                        A: 5000000,
+                        B: 3000000,
+                        C: 2000000
+                    },
+                    color: broColors[0],
+                    totalInvestment: 10000000
+                },
+                { 
+                    id: 2, 
+                    membershipFee: MEMBERSHIP_FEE,
+                    investments: {
+                        A: 3000000,
+                        B: 2000000,
+                        C: 1000000
+                    },
+                    color: broColors[1],
+                    totalInvestment: 6000000
+                },
+                { 
+                    id: 3, 
+                    membershipFee: MEMBERSHIP_FEE,
+                    investments: {
+                        A: 2000000,
+                        B: 1000000,
+                        C: 1000000
+                    },
+                    color: broColors[2],
+                    totalInvestment: 4000000
+                }
+            ];
+            
+            // Reset counter
+            broCounter = 3;
+            
+            // Recreate input fields
+            broInputsContainer.innerHTML = '';
+            
+            // Re-add initial BROs
+            for (let i = 0; i < 3; i++) {
+                const broDiv = document.createElement('div');
+                broDiv.className = 'bro-input-item fade-in';
+                broDiv.innerHTML = `
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 rounded-full ${broColors[i]} flex items-center justify-center text-black font-bold mr-3">BRO ${i+1}</div>
+                        <div>
+                            <div class="font-bold">BRO ${i+1}</div>
+                            <div class="text-xs text-gray-400">Membership: <span class="text-orange-400">₹1.08 Cr</span></div>
+                        </div>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-3 mb-4">
+                        <div class="project-card">
+                            <div class="text-sm text-gray-400 mb-2 flex items-center">
+                                <i class="fas fa-chart-line mr-2 text-green-400"></i>
+                                Project A
+                            </div>
+                            <input 
+                                type="number" 
+                                class="project-a-investment bg-black border border-gray-700 rounded-lg px-3 py-2 text-sm w-full" 
+                                placeholder="₹ Amount"
+                                value="${[5000000, 3000000, 2000000][i]}"
+                                min="0"
+                                step="100000"
+                                data-bro="${i+1}"
+                                data-project="A"
+                            >
+                        </div>
+                        
+                        <div class="project-card">
+                            <div class="text-sm text-gray-400 mb-2 flex items-center">
+                                <i class="fas fa-chart-line mr-2 text-blue-400"></i>
+                                Project B
+                            </div>
+                            <input 
+                                type="number" 
+                                class="project-b-investment bg-black border border-gray-700 rounded-lg px-3 py-2 text-sm w-full" 
+                                placeholder="₹ Amount"
+                                value="${[3000000, 2000000, 1000000][i]}"
+                                min="0"
+                                step="100000"
+                                data-bro="${i+1}"
+                                data-project="B"
+                            >
+                        </div>
+                        
+                        <div class="project-card">
+                            <div class="text-sm text-gray-400 mb-2 flex items-center">
+                                <i class="fas fa-chart-line mr-2 text-purple-400"></i>
+                                Project C
+                            </div>
+                            <input 
+                                type="number" 
+                                class="project-c-investment bg-black border border-gray-700 rounded-lg px-3 py-2 text-sm w-full" 
+                                placeholder="₹ Amount"
+                                value="${[2000000, 1000000, 1000000][i]}"
+                                min="0"
+                                step="100000"
+                                data-bro="${i+1}"
+                                data-project="C"
+                            >
+                        </div>
+                    </div>
+                    
+                    <div class="flex justify-between items-center">
+                        <div class="text-xs text-gray-500">
+                            Total Investment: <span class="text-green-400 font-bold" id="bro-${i+1}-total">${formatCurrency([10000000, 6000000, 4000000][i])}</span>
+                        </div>
+                        <button class="remove-bro-btn p-2 text-red-400 hover:text-red-300 opacity-70 hover:opacity-100">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                `;
+                
+                broInputsContainer.appendChild(broDiv);
+                
+                // Add event listener to remove button
+                const removeBtn = broDiv.querySelector('.remove-bro-btn');
+                removeBtn.addEventListener('click', function() {
+                    const broId = i + 1;
+                    removeBro(broId, broDiv);
+                });
+                
+                // Add event listeners to investment inputs
+                const inputs = broDiv.querySelectorAll('input[type="number"]');
+                inputs.forEach(input => {
+                    input.addEventListener('input', function() {
+                        const broId = parseInt(this.dataset.bro);
+                        const project = this.dataset.project;
+                        const value = parseFloat(this.value) || 0;
+                        
+                        // Update bro data
+                        const bro = bros.find(b => b.id === broId);
+                        if (bro) {
+                            bro.investments[project] = value;
+                            updateBroTotalDisplay(broId);
+                        }
+                        
+                        // Auto-calculate after a delay
+                        setTimeout(() => calculateProject(selectedProject), 500);
+                    });
+                });
+            }
+            
+            // Recalculate
+            calculateProject(selectedProject);
+            
+            // Show notification
+            calculateBtn.innerHTML = '<i class="fas fa-check mr-2"></i> Reset Complete!';
+            calculateBtn.classList.remove('btn-success');
+            calculateBtn.classList.add('btn-primary');
+            
+            setTimeout(() => {
+                calculateBtn.innerHTML = '<i class="fas fa-calculator mr-2"></i> Calculate';
+                calculateBtn.classList.remove('btn-primary');
+                calculateBtn.classList.add('btn-success');
+            }, 2000);
+        }
+        
+        // Show save modal
+        function showSaveModal() {
+            // Calculate totals
+            const totalMembershipFees = bros.length * MEMBERSHIP_FEE;
+            
+            let projectATotal = 0;
+            let projectBTotal = 0;
+            let projectCTotal = 0;
+            
+            bros.forEach(bro => {
+                projectATotal += bro.investments.A || 0;
+                projectBTotal += bro.investments.B || 0;
+                projectCTotal += bro.investments.C || 0;
+            });
+            
+            // Update modal values
+            document.getElementById('modalTotalMembership').textContent = formatCurrency(totalMembershipFees);
+            document.getElementById('modalBroCount').textContent = `${bros.length} BRO${bros.length !== 1 ? 's' : ''}`;
+            document.getElementById('modalProjectA').textContent = formatCurrency(projectATotal);
+            document.getElementById('modalProjectB').textContent = formatCurrency(projectBTotal);
+            document.getElementById('modalProjectC').textContent = formatCurrency(projectCTotal);
+            
+            // Show modal
+            document.getElementById('saveModal').classList.add('active');
+        }
+        
+        // Close save modal
+        function closeSaveModal() {
+            document.getElementById('saveModal').classList.remove('active');
+        }
+        
+        // Download brotherhood summary
+        function downloadBrotherhoodSummary() {
+            // Create summary text
+            let summary = `BHRATHA BROTHERHOOD INVESTMENT SUMMARY\n`;
+            summary += `==========================================\n`;
+            summary += `Calculation Date: ${new Date().toLocaleDateString()}\n\n`;
+            
+            summary += `MEMBERSHIP FEES:\n`;
+            summary += `----------------\n`;
+            summary += `Number of BROs: ${bros.length}\n`;
+            summary += `Membership Fee per BRO: ${formatCurrency(MEMBERSHIP_FEE)}\n`;
+            summary += `Total Membership Fees: ${formatCurrency(bros.length * MEMBERSHIP_FEE)}\n\n`;
+            
+            summary += `PROJECT INVESTMENTS:\n`;
+            summary += `-------------------\n`;
+            
+            // Calculate project totals
+            let projectATotal = 0;
+            let projectBTotal = 0;
+            let projectCTotal = 0;
+            
+            bros.forEach(bro => {
+                projectATotal += bro.investments.A || 0;
+                projectBTotal += bro.investments.B || 0;
+                projectCTotal += bro.investments.C || 0;
+            });
+            
+            summary += `Project A Total: ${formatCurrency(projectATotal)}\n`;
+            summary += `Project B Total: ${formatCurrency(projectBTotal)}\n`;
+            summary += `Project C Total: ${formatCurrency(projectCTotal)}\n\n`;
+            
+            summary += `INDIVIDUAL BRO INVESTMENTS:\n`;
+            summary += `--------------------------\n`;
+            
+            bros.forEach((bro, index) => {
+                summary += `BRO ${bro.id}:\n`;
+                summary += `  Membership: ${formatCurrency(MEMBERSHIP_FEE)}\n`;
+                summary += `  Project A: ${formatCurrency(bro.investments.A || 0)}\n`;
+                summary += `  Project B: ${formatCurrency(bro.investments.B || 0)}\n`;
+                summary += `  Project C: ${formatCurrency(bro.investments.C || 0)}\n`;
+                summary += `  Total Investment: ${formatCurrency(bro.totalInvestment)}\n\n`;
+            });
+            
+            summary += `FEE STRUCTURE:\n`;
+            summary += `--------------\n`;
+            summary += `Platform Fee: ${PLATFORM_FEE_PERCENT}% (annual on payouts)\n`;
+            summary += `Membership Fee: One-time, non-refundable\n\n`;
+            
+            summary += `BHRATHA Premium Brotherhood Model\n`;
+            summary += `Access-driven | Project-based | Transparent fees`;
+            
+            // Download the file
+            downloadTextFile(summary, `BHRATHA-Brotherhood-Summary-${new Date().toISOString().split('T')[0]}.txt`);
+            
+            // Update button text
+            const downloadBtn = document.querySelector('#saveModal .btn-success');
+            downloadBtn.innerHTML = '<i class="fas fa-check mr-2"></i> Downloaded!';
+            setTimeout(() => {
+                downloadBtn.innerHTML = '<i class="fas fa-download mr-2"></i> Download Summary';
+            }, 2000);
+        }
+        
+        // Generic function to download text file
+        function downloadTextFile(content, filename) {
+            const blob = new Blob([content], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = filename;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+        
+        // Initialize the new calculator
+        function initNewCalculator() {
+            // Add event listeners to project selectors
+            projectSelectors.forEach(selector => {
+                selector.addEventListener('click', function() {
+                    const project = this.dataset.project;
+                    calculateProject(project);
+                });
+            });
+            
+            // Add event listeners to existing investment inputs
+            document.querySelectorAll('.project-a-investment, .project-b-investment, .project-c-investment').forEach(input => {
+                input.addEventListener('input', function() {
+                    const broId = parseInt(this.dataset.bro);
+                    const project = this.dataset.project;
+                    const value = parseFloat(this.value) || 0;
+                    
+                    // Update bro data
+                    const bro = bros.find(b => b.id === broId);
+                    if (bro) {
+                        bro.investments[project] = value;
+                        updateBroTotalDisplay(broId);
+                    }
+                    
+                    // Auto-calculate after a delay
+                    setTimeout(() => calculateProject(selectedProject), 500);
+                });
+            });
+            
+            // Add event listeners to existing remove buttons
+            document.querySelectorAll('.remove-bro-btn').forEach((btn, index) => {
+                btn.addEventListener('click', function() {
+                    const broDiv = this.closest('.bro-input-item');
+                    const broId = index + 1;
+                    removeBro(broId, broDiv);
+                });
+            });
+            
+            // Add event listeners to buttons
+            addBroBtn.addEventListener('click', addBroInput);
+            calculateBtn.addEventListener('click', () => calculateProject(selectedProject));
+            resetBtn.addEventListener('click', resetAll);
+            saveBtn.addEventListener('click', showSaveModal);
+            
+            // Calculate initial project
+            calculateProject(selectedProject);
+            
+            // Auto-calculate when inputs change (with debounce)
+            let calculateTimeout;
+            broInputsContainer.addEventListener('input', function(e) {
+                if (e.target.classList.contains('project-a-investment') || 
+                    e.target.classList.contains('project-b-investment') || 
+                    e.target.classList.contains('project-c-investment')) {
+                    clearTimeout(calculateTimeout);
+                    calculateTimeout = setTimeout(() => calculateProject(selectedProject), 800);
+                }
+            });
+        }
+
+        // ========== ASSESSMENT CALCULATOR LOGIC ==========
+        // Application State
+        const assessmentState = {
+            answers: {},
+            currentSection: 'landing',
+            selectedCompromises: []
+        };
+
+        // Section Navigation for Assessment
+        function showAssessmentSection(sectionId) {
+            // Hide all sections
+            document.querySelectorAll('#assessment .section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Show target section
+            const targetSection = document.getElementById(`section-${sectionId}`);
+            if (targetSection) {
+                targetSection.classList.add('active');
+                assessmentState.currentSection = sectionId;
+                
+                // Scroll to top
+                window.scrollTo(0, 0);
+            }
+        }
+
+        function startAssessment() {
+            showAssessmentSection('human-scale');
+        }
+
+        // Question Selection
+        function selectOption(element) {
+            const question = element.getAttribute('data-question');
+            const value = element.getAttribute('data-value');
+            
+            // Deselect all other options for this question
+            const parent = element.parentElement;
+            parent.querySelectorAll('.question-card').forEach(card => {
+                if (card.getAttribute('data-question') === question) {
+                    card.classList.remove('selected');
+                }
+            });
+            
+            // Select this option
+            element.classList.add('selected');
+            
+            // Store answer
+            assessmentState.answers[question] = value;
+        }
+
+        function selectMultiOption(element) {
+            const question = element.getAttribute('data-question');
+            const value = element.getAttribute('data-value');
+            
+            if (!assessmentState.selectedCompromises) {
+                assessmentState.selectedCompromises = [];
+            }
+            
+            // Toggle selection
+            if (element.classList.contains('selected')) {
+                element.classList.remove('selected');
+                const index = assessmentState.selectedCompromises.indexOf(value);
+                if (index > -1) {
+                    assessmentState.selectedCompromises.splice(index, 1);
+                }
+            } else {
+                // Check if we've reached limit
+                if (assessmentState.selectedCompromises.length >= 3) {
+                    return; // Don't allow more than 3 selections
+                }
+                element.classList.add('selected');
+                assessmentState.selectedCompromises.push(value);
+            }
+            
+            // Update counter
+            const counter = document.getElementById('compromise-counter');
+            if (counter) {
+                counter.textContent = `Selected: ${assessmentState.selectedCompromises.length}/3`;
+            }
+            
+            // Store answer
+            assessmentState.answers[question] = assessmentState.selectedCompromises;
+        }
+
+        // Checkbox Handling
+        function toggleCheckbox(element) {
+            element.classList.toggle('checked');
+        }
+
+        // Modal Functions
+        function showNeverAllowed(event) {
+            event.preventDefault();
+            document.getElementById('neverAllowedModal').classList.add('active');
+        }
+
+        function closeNeverAllowedModal() {
+            document.getElementById('neverAllowedModal').classList.remove('active');
+        }
+
+        // Calculate Results
+        function calculateResults() {
+            // Check if all required fields are filled
+            const textAnswers = ['q-brotherhood', 'q-influence', 'q-institutions'];
+            const allTextFilled = textAnswers.every(id => {
+                const el = document.getElementById(id);
+                return el && el.value.trim().length > 0;
+            });
+            
+            if (!allTextFilled) {
+                alert('Please complete all text responses before viewing results.');
+                return;
+            }
+            
+            // Check if all checkboxes are checked
+            const checkboxes = document.querySelectorAll('#section-bhratha-fit .checkbox-custom');
+            const allChecked = Array.from(checkboxes).every(cb => cb.classList.contains('checked'));
+            
+            if (!allChecked) {
+                alert('Please accept all declarations before viewing results.');
+                return;
+            }
+            
+            // Calculate archetype based on answers (simplified logic)
+            let archetype = 'Builder';
+            let strength = 'Systems';
+            let risk = 'Impatience';
+            let compatibility = 'Developing';
+            let reflection = '';
+            
+            // Simple scoring logic based on selected answers
+            const age = assessmentState.answers['age'];
+            const experience = assessmentState.answers['experience'];
+            const capital = assessmentState.answers['capital-controlled'];
+            const people = assessmentState.answers['people-dependent'];
+            const values = assessmentState.answers['values'];
+            
+            // Archetype logic
+            if (capital && capital.includes('50Cr+')) {
+                archetype = 'Financier';
+                strength = 'Capital';
+                risk = 'Control';
+            } else if (people && people.includes('500+')) {
+                archetype = 'Architect';
+                strength = 'People';
+                risk = 'Ego';
+            } else if (experience && experience.includes('20+')) {
+                archetype = 'Guardian';
+                strength = 'Stability';
+                risk = 'Fragmentation';
+            }
+            
+            // Compatibility logic
+            const capitalScore = getCapitalScore(capital);
+            const responsibilityScore = getResponsibilityScore(people);
+            const valuesScore = values === 'Trust' || values === 'Legacy' ? 2 : 1;
+            
+            const totalScore = capitalScore + responsibilityScore + valuesScore;
+            
+            if (totalScore >= 8) {
+                compatibility = 'Rare';
+                reflection = 'Your profile indicates exceptional alignment with BHRATHA principles. You demonstrate the temperament, experience, and capital discipline for institutional guardianship.';
+            } else if (totalScore >= 6) {
+                compatibility = 'Strong';
+                reflection = 'Your profile demonstrates strong alignment with BHRATHA principles. You show capacity for institutional thinking and long-term system stewardship.';
+            } else if (totalScore >= 4) {
+                compatibility = 'Developing';
+                reflection = 'Your responses indicate exposure to responsibility and capital cycles, with developing institutional temperament. BHRATHA demands long-horizon discipline and discreet system building.';
+            } else {
+                compatibility = 'Low';
+                reflection = 'Your responses indicate limited alignment with BHRATHA principles of long-horizon institutional building. The brotherhood demands deeper commitment to system stewardship over transactional gain.';
+            }
+            
+            // Update result display
+            document.getElementById('result-archetype').textContent = archetype;
+            document.getElementById('result-strength').textContent = strength;
+            document.getElementById('result-risk').textContent = risk;
+            document.getElementById('result-compatibility').textContent = compatibility;
+            document.getElementById('result-reflection').textContent = reflection;
+            
+            // Show results section
+            showAssessmentSection('results');
+        }
+
+        function getCapitalScore(capital) {
+            if (!capital) return 1;
+            if (capital.includes('50Cr+')) return 3;
+            if (capital.includes('10Cr-50Cr')) return 2;
+            if (capital.includes('2Cr-10Cr')) return 1;
+            return 0;
+        }
+
+        function getResponsibilityScore(people) {
+            if (!people) return 1;
+            if (people.includes('500+')) return 3;
+            if (people.includes('100-500')) return 2;
+            if (people.includes('21-100')) return 1;
+            return 0;
+        }
+
+        // Application Submission
+        function submitApplication() {
+            // Get form values
+            const name = document.getElementById('app-name').value.trim();
+            const email = document.getElementById('app-email').value.trim();
+            const background = document.getElementById('app-background').value.trim();
+            const capital = document.getElementById('app-capital').value;
+            const references = document.getElementById('app-references').value.trim();
+            
+            // Check if confidentiality checkbox is checked
+            const confidentialityChecked = document.querySelector('#section-application .checkbox-custom.checked');
+            
+            // Validate
+            if (!name || !email || !background || !capital || !references || !confidentialityChecked) {
+                alert('Please complete all fields and confirm confidentiality before submitting.');
+                return;
+            }
+            
+            // Store application data
+            assessmentState.application = {
+                name,
+                email,
+                background,
+                capital,
+                references,
+                date: new Date().toISOString()
+            };
+            
+            // Show completion section
+            showAssessmentSection('complete');
+            
+            // In a real implementation, you would send this data to a server
+            console.log('Assessment application submitted:', assessmentState.application);
+        }
+
+        // Restart Assessment
+        function restartAssessment() {
+            // Reset state
+            assessmentState.answers = {};
+            assessmentState.selectedCompromises = [];
+            assessmentState.application = null;
+            
+            // Reset UI
+            document.querySelectorAll('.question-card').forEach(card => {
+                card.classList.remove('selected');
+            });
+            
+            document.querySelectorAll('.checkbox-custom').forEach(cb => {
+                cb.classList.remove('checked');
+            });
+            
+            document.querySelectorAll('textarea').forEach(ta => {
+                ta.value = '';
+            });
+            
+            document.querySelectorAll('input').forEach(input => {
+                if (input.type !== 'button' && input.type !== 'submit') {
+                    input.value = '';
+                }
+            });
+            
+            // Reset multi-select counter
+            const counter = document.getElementById('compromise-counter');
+            if (counter) {
+                counter.textContent = 'Selected: 0/3';
+            }
+            
+            // Reset select
+            document.getElementById('app-capital').value = '';
+            
+            // Go to landing page
+            showAssessmentSection('landing');
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            // Close modal when clicking outside
+            document.getElementById('neverAllowedModal').addEventListener('click', function(e) {
+                if (e.target === this) {
+                    closeNeverAllowedModal();
+                }
+            });
+            
+            // Close save modal when clicking outside
+            document.getElementById('saveModal').addEventListener('click', function(e) {
+                if (e.target === this) {
+                    closeSaveModal();
+                }
+            });
+            
+            // Initialize new brotherhood calculator
+            initNewCalculator();
+            
+            // Start with brotherhood calculator
+            document.getElementById('brotherhood-calculator').style.display = 'block';
+            document.getElementById('assessment').style.display = 'none';
+        });
+    </script>
+</body>
+</html>

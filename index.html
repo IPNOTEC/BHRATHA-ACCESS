@@ -3,23 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BHRATHA | Brotherhood Platform</title>
+    <title>BH₹ATHA | Cultural Infrastructure Company</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* Combined styles from both calculators */
+        /* ========== GLOBAL STYLES ========== */
         :root {
-            --primary: #050505;
+            --primary: #000000;
             --secondary: #ffffff;
             --accent-green: #00ff88;
             --accent-orange: #ff6900;
             --accent-blue: #0095ff;
             --accent-purple: #8a2be2;
             --accent-gold: #B89B5E;
+            --accent-red: #ff0000;
+            --accent-yellow: #FFD700;
             --muted: #8A8A8A;
             --dark-bg: #0A0A0A;
-            --danger: #8B0000;
+            --violet: #9D00FF;
+            --indigo: #4B00B2;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
         }
         
         body {
@@ -29,172 +42,175 @@
             overflow-x: hidden;
         }
         
-        /* Calculator 1 styles */
-        .calculator-1 {
-            font-family: 'Space Grotesk', sans-serif;
-        }
-        
-        .logo-rupee {
-            font-weight: 700;
-            color: #00ff88;
-            display: inline-block;
-            text-shadow: 0 0 10px rgba(0, 255, 136, 0.5);
-        }
-        
-        .logo-fullstop {
-            color: #0095ff;
-            display: inline-block;
-            font-size: 0.8em;
-            vertical-align: super;
-            margin-left: 2px;
-        }
-        
-        .glass-card {
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            transition: all 0.3s ease;
-        }
-        
-        .glass-card:hover {
-            border-color: rgba(255, 255, 255, 0.1);
-        }
-        
-        .progress-bar {
-            height: 6px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 3px;
+        /* ========== PITCH DECK STYLES ========== */
+        .pitch-section {
+            min-height: 100vh;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 80px 20px;
+            position: relative;
+            background: var(--dark-bg);
             overflow: hidden;
+        }
+        
+        /* Concrete Background Pattern */
+        .concrete-bg {
+            background-image: 
+                radial-gradient(circle at 25% 25%, rgba(255,255,255,0.03) 0%, transparent 55%),
+                radial-gradient(circle at 75% 75%, rgba(255,255,255,0.02) 0%, transparent 55%);
+            background-color: var(--dark-bg);
             position: relative;
         }
         
-        .progress-fill {
-            height: 100%;
-            position: absolute;
-            left: 0;
-            top: 0;
-            background: linear-gradient(90deg, var(--accent-green), var(--accent-blue));
-            border-radius: 3px;
+        /* Neon Effects */
+        .neon-violet {
+            color: var(--violet);
+            text-shadow: 0 0 10px var(--violet), 0 0 30px var(--violet), 0 0 40px var(--violet);
         }
         
-        .ownership-badge {
-            display: inline-block;
-            padding: 2px 8px;
-            border-radius: 12px;
-            font-size: 0.7rem;
-            font-weight: 600;
-            margin-left: 8px;
+        .neon-indigo {
+            color: var(--indigo);
+            text-shadow: 0 0 10px var(--indigo), 0 0 30px var(--indigo), 0 0 40px var(--indigo);
         }
         
-        .founder-badge {
-            background: rgba(255, 105, 0, 0.2);
-            color: var(--accent-orange);
+        .neon-blue {
+            color: var(--accent-blue);
+            text-shadow: 0 0 10px var(--accent-blue), 0 0 30px var(--accent-blue), 0 0 40px var(--accent-blue);
         }
         
-        .investor-badge {
-            background: rgba(0, 255, 136, 0.2);
+        .neon-green {
             color: var(--accent-green);
+            text-shadow: 0 0 10px var(--accent-green), 0 0 30px var(--accent-green), 0 0 40px var(--accent-green);
         }
         
-        .pulse {
-            animation: pulse 2s infinite;
+        .neon-yellow {
+            color: var(--accent-yellow);
+            text-shadow: 0 0 10px var(--accent-yellow), 0 0 30px var(--accent-yellow), 0 0 40px var(--accent-yellow);
         }
         
-        @keyframes pulse {
-            0% { opacity: 0.7; }
-            50% { opacity: 1; }
-            100% { opacity: 0.7; }
+        .neon-orange {
+            color: var(--accent-orange);
+            text-shadow: 0 0 10px var(--accent-orange), 0 0 30px var(--accent-orange), 0 0 40px var(--accent-orange);
         }
         
-        input:focus {
-            outline: none;
-            border-color: var(--accent-green) !important;
-            box-shadow: 0 0 0 1px rgba(0, 255, 136, 0.2);
+        .neon-red {
+            color: var(--accent-red);
+            text-shadow: 0 0 10px var(--accent-red), 0 0 30px var(--accent-red), 0 0 40px var(--accent-red);
         }
         
-        input[type=number]::-webkit-inner-spin-button, 
-        input[type=number]::-webkit-outer-spin-button { 
-            -webkit-appearance: none;
-            margin: 0;
+        /* Typography */
+        .display-1 {
+            font-size: 5rem;
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+            font-family: 'Space Grotesk', sans-serif;
         }
         
-        ::-webkit-scrollbar {
-            width: 6px;
+        .display-2 {
+            font-size: 3.5rem;
+            font-weight: 600;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+            font-family: 'Space Grotesk', sans-serif;
         }
         
-        ::-webkit-scrollbar-track {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 3px;
+        .display-3 {
+            font-size: 2.5rem;
+            font-weight: 600;
+            line-height: 1.3;
+            margin-bottom: 1rem;
+            font-family: 'Space Grotesk', sans-serif;
         }
         
-        ::-webkit-scrollbar-thumb {
-            background: var(--accent-green);
-            border-radius: 3px;
+        .lead {
+            font-size: 1.5rem;
+            font-weight: 300;
+            line-height: 1.6;
+            max-width: 800px;
         }
         
-        .bro-tag {
-            background: rgba(0, 149, 255, 0.1);
-            border: 1px solid rgba(0, 149, 255, 0.3);
-            padding: 3px 10px;
-            border-radius: 15px;
-            font-size: 0.8rem;
-            display: inline-flex;
-            align-items: center;
-            margin: 2px;
+        .body-text {
+            font-size: 1.25rem;
+            line-height: 1.8;
+            max-width: 800px;
         }
         
-        .btn-success {
-            background: linear-gradient(135deg, #00ff88, #00cc6d);
-            color: #050505;
+        /* Bubble Animations */
+        .bubble-heading {
+            position: relative;
+            display: inline-block;
         }
         
-        .btn-warning {
-            background: linear-gradient(135deg, #ff6900, #cc5500);
-            color: white;
+        .bubble-heading::after {
+            content: '';
+            position: absolute;
+            top: -15px;
+            right: -20px;
+            width: 12px;
+            height: 12px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+            animation: bubbleFloat 3s infinite ease-in-out;
+            z-index: -1;
         }
         
-        .btn-danger {
-            background: linear-gradient(135deg, #ff4444, #cc0000);
-            color: white;
+        .bubble-heading::before {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: -15px;
+            width: 8px;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 50%;
+            animation: bubbleFloat 4s infinite ease-in-out 0.5s;
+            z-index: -1;
         }
         
-        .btn-primary {
-            background: linear-gradient(135deg, #0095ff, #0066cc);
-            color: white;
+        @keyframes bubbleFloat {
+            0%, 100% { transform: translateY(0) scale(0.8); opacity: 0.3; }
+            50% { transform: translateY(-25px) scale(1.2); opacity: 0.9; }
         }
         
-        .fade-in {
-            animation: fadeIn 0.5s ease-in-out;
+        /* Cards */
+        .portfolio-card {
+            background: rgba(20, 20, 30, 0.7);
+            border-radius: 16px;
+            padding: 30px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            height: 100%;
         }
         
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+        .portfolio-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0, 112, 255, 0.2);
+            border-color: var(--accent-blue);
         }
         
-        .highlight {
-            background: rgba(0, 255, 136, 0.1);
-            border-left: 3px solid #00ff88;
-            padding: 10px;
-            border-radius: 0 8px 8px 0;
-        }
-        
-        /* Calculator 2 styles */
+        /* ========== ASSESSMENT STYLES ========== */
         .assessment-container {
             min-height: 100vh;
             padding: 20px;
+            background: var(--dark-bg);
+            display: none;
         }
         
-        .section {
+        .assessment-section {
             display: none;
             opacity: 0;
             transform: translateY(20px);
             transition: opacity 0.5s ease, transform 0.5s ease;
             max-width: 800px;
             margin: 0 auto;
+            width: 100%;
         }
         
-        .section.active {
+        .assessment-section.active {
             display: block;
             opacity: 1;
             transform: translateY(0);
@@ -215,15 +231,11 @@
             border-radius: 4px;
             transition: all 0.3s ease;
             font-weight: 500;
+            cursor: pointer;
         }
         
         .btn-primary-assessment:hover:not(:disabled) {
             background: rgba(184, 155, 94, 0.1);
-        }
-        
-        .btn-primary-assessment:disabled {
-            opacity: 0.3;
-            cursor: not-allowed;
         }
         
         .question-card {
@@ -245,20 +257,21 @@
             background: rgba(184, 155, 94, 0.05);
         }
         
-        .progress-container {
-            height: 2px;
-            background: rgba(255, 255, 255, 0.05);
-            margin: 40px 0;
-            position: relative;
+        .text-input {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            padding: 15px;
+            color: var(--secondary);
+            width: 100%;
+            font-family: 'Inter', sans-serif;
+            resize: vertical;
+            min-height: 100px;
         }
         
-        .progress-bar-assessment {
-            height: 100%;
-            background: var(--accent-gold);
-            position: absolute;
-            left: 0;
-            top: 0;
-            transition: width 0.5s ease;
+        .text-input:focus {
+            outline: none;
+            border-color: var(--accent-gold);
         }
         
         .checkbox-custom {
@@ -283,121 +296,21 @@
             font-weight: bold;
         }
         
-        .archetype-badge {
-            background: rgba(184, 155, 94, 0.1);
-            color: var(--accent-gold);
-            padding: 8px 16px;
-            border-radius: 20px;
-            display: inline-block;
-            font-size: 14px;
-            font-weight: 500;
-            margin: 5px;
-        }
-        
         .warning-text {
-            color: var(--danger);
-            border-left: 3px solid var(--danger);
+            color: var(--accent-red);
+            border-left: 3px solid var(--accent-red);
             padding-left: 15px;
             margin: 20px 0;
         }
         
-        .result-metric {
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-            padding: 20px 0;
-        }
-        
-        .result-metric:last-child {
-            border-bottom: none;
-        }
-        
-        .modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.9);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 1000;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.3s ease;
-        }
-        
-        .modal.active {
-            opacity: 1;
-            pointer-events: all;
-        }
-        
-        .modal-content {
-            max-width: 800px;
-            max-height: 80vh;
-            overflow-y: auto;
-            background: var(--dark-bg);
-            border: 1px solid rgba(184, 155, 94, 0.2);
-            border-radius: 4px;
-            padding: 40px;
-            position: relative;
-        }
-        
-        .close-modal {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            color: var(--muted);
-            cursor: pointer;
-            font-size: 24px;
-        }
-        
-        .close-modal:hover {
-            color: var(--secondary);
-        }
-        
-        .text-input {
-            background: rgba(0, 0, 0, 0.3);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 4px;
-            padding: 15px;
-            color: var(--secondary);
-            width: 100%;
-            font-family: 'Inter', sans-serif;
-            resize: vertical;
-            min-height: 100px;
-        }
-        
-        .text-input:focus {
-            outline: none;
-            border-color: var(--accent-gold);
-        }
-        
-        .section-title {
-            font-size: 28px;
-            font-weight: 300;
-            margin-bottom: 10px;
-            color: var(--accent-gold);
-        }
-        
-        .section-subtitle {
-            color: var(--muted);
-            margin-bottom: 40px;
-            font-size: 16px;
-        }
-        
-        .multi-select-counter {
-            font-size: 12px;
-            color: var(--muted);
-            margin-top: 10px;
-        }
-        
-        /* Navigation tabs */
+        /* ========== NAVIGATION ========== */
         .nav-tab {
             padding: 15px 30px;
             border-bottom: 2px solid transparent;
             cursor: pointer;
             transition: all 0.3s ease;
             font-weight: 500;
+            font-family: 'Space Grotesk', sans-serif;
         }
         
         .nav-tab.active {
@@ -410,7 +323,46 @@
             color: var(--muted);
         }
         
-        /* WhatsApp button */
+        /* ========== RESPONSIVE ========== */
+        @media (max-width: 768px) {
+            .display-1 { font-size: 3rem; }
+            .display-2 { font-size: 2.5rem; }
+            .display-3 { font-size: 2rem; }
+            .lead { font-size: 1.25rem; }
+            .body-text { font-size: 1.1rem; }
+            .pitch-section { padding: 60px 15px; }
+            .nav-tab { padding: 10px 15px; }
+        }
+        
+        @media (max-width: 480px) {
+            .display-1 { font-size: 2.5rem; }
+            .display-2 { font-size: 2rem; }
+            .nav-tab { padding: 10px 10px; font-size: 0.9rem; }
+        }
+        
+        /* ========== PROGRESS BAR ========== */
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 4px;
+            background: linear-gradient(90deg, 
+                var(--violet), 
+                var(--indigo), 
+                var(--accent-blue), 
+                var(--accent-green), 
+                var(--accent-yellow), 
+                var(--accent-orange), 
+                var(--accent-red)
+            );
+            z-index: 101;
+            transition: width 0.1s ease-out;
+            filter: brightness(1.3);
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+        }
+        
+        /* ========== WHATSAPP BUTTON ========== */
         .whatsapp-btn {
             background: linear-gradient(135deg, #25D366, #128C7E);
             color: white;
@@ -422,6 +374,9 @@
             text-decoration: none;
             font-weight: 500;
             transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            font-family: inherit;
         }
         
         .whatsapp-btn:hover {
@@ -429,10 +384,28 @@
             box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3);
         }
         
-        /* Exit/Submit Modal */
-        .exit-modal {
+        /* ========== SCROLLBAR ========== */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: var(--accent-green);
+            border-radius: 4px;
+        }
+        
+        /* ========== MODAL ========== */
+        .modal-overlay {
             position: fixed;
-            inset: 0;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
             background: rgba(0, 0, 0, 0.95);
             z-index: 9999;
             display: none;
@@ -441,437 +414,639 @@
             padding: 20px;
         }
         
-        .exit-modal.active {
-            display: flex;
-        }
-        
-        .exit-modal-content {
+        .modal-content {
             background: var(--dark-bg);
             border: 1px solid var(--accent-gold);
             border-radius: 4px;
             padding: 40px;
-            max-width: 600px;
+            max-width: 800px;
             width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
             position: relative;
         }
         
-        .modal-section {
-            margin-bottom: 30px;
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            color: var(--muted);
+            cursor: pointer;
+            font-size: 24px;
         }
         
-        .modal-section-title {
-            color: var(--accent-gold);
-            font-size: 20px;
-            margin-bottom: 15px;
-            border-bottom: 1px solid rgba(184, 155, 94, 0.2);
-            padding-bottom: 10px;
+        .modal-close:hover {
+            color: var(--secondary);
+        }
+        
+        /* ========== UTILITY CLASSES ========== */
+        .content-container {
+            max-width: 1200px;
+            width: 100%;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .text-center {
+            text-align: center;
+        }
+        
+        .mx-auto {
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .floating-element {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.08;
+            filter: blur(25px);
+            z-index: 1;
         }
     </style>
 </head>
-<body class="antialiased">
+<body class="concrete-bg">
+    <!-- Progress Bar -->
+    <div class="progress-bar" id="progressBar"></div>
+    
     <!-- Navigation -->
-    <div class="flex justify-center border-b border-gray-900">
+    <div class="flex justify-center border-b border-gray-900 bg-black sticky top-0 z-50">
         <div class="flex space-x-1">
-            <div class="nav-tab active" data-tab="brotherhood-calculator">
-                <i class="fas fa-calculator mr-2"></i>
-                Brotherhood Calculator
+            <div class="nav-tab active" data-tab="pitch-deck" onclick="showTab('pitch-deck')">
+                <i class="fas fa-presentation-screen mr-2"></i>
+                Pitch Deck
             </div>
-            <div class="nav-tab" data-tab="assessment">
+            <div class="nav-tab" data-tab="assessment" onclick="showTab('assessment')">
                 <i class="fas fa-user-shield mr-2"></i>
-                Private Assessment
+                Investor Assessment
             </div>
         </div>
     </div>
-
+    
     <!-- Main Content Container -->
-    <div id="content-container" class="min-h-screen">
-        <!-- Brotherhood Calculator -->
-        <div id="brotherhood-calculator" class="calculator-1">
-            <!-- Header -->
-            <header class="p-6 md:p-8">
-                <div class="flex justify-between items-center">
-                    <div class="text-2xl font-bold tracking-wider">
-                        BH<span class="logo-rupee">₹</span>ATHA<span class="logo-fullstop">.</span>
-                    </div>
-                    <div class="text-xs text-gray-500 uppercase tracking-widest pulse">Dynamic Brotherhood Calculator</div>
-                </div>
-            </header>
-
-            <main class="max-w-6xl mx-auto px-4 md:px-8 pb-20">
-                <!-- Hero Section -->
-                <section class="text-center mb-16 mt-8">
-                    <h1 class="text-4xl md:text-6xl font-bold mb-6">
-                        Brotherhood <span class="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-500">Ownership</span> Model
-                    </h1>
-                    <p class="text-gray-400 max-w-2xl mx-auto text-lg">
-                        A mathematically clean, power-neutral, and transparent equity distribution system for the brotherhood.
-                    </p>
-                </section>
-
-                <!-- Principles Grid -->
-                <section class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-                    <div class="glass-card p-6 rounded-xl">
-                        <div class="text-green-400 text-2xl mb-4">01</div>
-                        <h3 class="text-xl font-medium mb-3">Founder's Base</h3>
-                        <p class="text-gray-400">Bharath holds a fixed <span class="text-orange-400 font-bold">10.8%</span> stake as the vision keeper.</p>
-                    </div>
-                    
-                    <div class="glass-card p-6 rounded-xl">
-                        <div class="text-blue-400 text-2xl mb-4">02</div>
-                        <h3 class="text-xl font-medium mb-3">Remaining Equity</h3>
-                        <p class="text-gray-400"><span class="text-green-400 font-bold">89.2%</span> distributed purely proportional to investment.</p>
-                    </div>
-                    
-                    <div class="glass-card p-6 rounded-xl">
-                        <div class="text-purple-400 text-2xl mb-4">03</div>
-                        <h3 class="text-xl font-medium mb-3">Power Neutral</h3>
-                        <p class="text-gray-400">Whoever invests more → automatically gets more ownership. No subjective negotiation.</p>
-                    </div>
-                </section>
-
-                <!-- Calculator -->
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                    <!-- Input Section -->
-                    <div class="glass-card p-6 rounded-2xl">
-                        <h2 class="text-2xl font-bold mb-6 flex items-center">
-                            <i class="fas fa-users mr-3 text-blue-400"></i>
-                            Add BROs & Investments
-                        </h2>
-                        
-                        <!-- Founder Info -->
-                        <div class="mb-6 p-4 bg-black/30 rounded-lg">
-                            <div class="flex items-center">
-                                <div class="w-10 h-10 rounded-full bg-orange-500 flex items-center justify-center text-black text-lg font-bold mr-4">F</div>
-                                <div>
-                                    <div class="font-bold text-lg">Bharath (Founder)</div>
-                                    <div class="text-gray-400 text-sm">Fixed <span class="text-orange-400 font-bold">10.8%</span> stake • Non-negotiable</div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- BRO Inputs Container -->
-                        <div id="broInputsContainer" class="mb-6 space-y-4 max-h-[400px] overflow-y-auto p-2">
-                            <!-- BRO inputs will be dynamically added here -->
-                            <div class="bro-input-item fade-in">
-                                <div class="flex items-center">
-                                    <div class="w-10 h-10 rounded-full bg-green-500 flex items-center justify-center text-black font-bold mr-3">BRO 1</div>
-                                    <div class="flex-grow">
-                                        <div class="text-sm text-gray-400 mb-1">Investment Amount (₹)</div>
-                                        <input 
-                                            type="number" 
-                                            class="bro-amount bg-black border border-gray-700 rounded-lg px-4 py-3 text-lg w-full" 
-                                            placeholder="e.g., 5000000" 
-                                            value="5000000"
-                                            min="0"
-                                            step="100000"
-                                        >
-                                    </div>
-                                    <button class="remove-bro-btn ml-3 p-2 text-red-400 hover:text-red-300 opacity-70 hover:opacity-100">
-                                        <i class="fas fa-times"></i>
-                                    </button>
-                                </div>
-                            </div>
-                            
-                            <div class="bro-input-item fade-in">
-                                <div class="flex items-center">
-                                    <div class="w-10 h-10 rounded-full bg-blue-500 flex items-center justify-center text-black font-bold mr-3">BRO 2</div>
-                                    <div class="flex-grow">
-                                        <div class="text-sm text-gray-400 mb-1">Investment Amount (₹)</div>
-                                        <input 
-                                            type="number" 
-                                            class="bro-amount bg-black border border-gray-700 rounded-lg px-4 py-3 text-lg w-full" 
-                                            placeholder="e.g., 3000000" 
-                                            value="3000000"
-                                            min="0"
-                                            step="100000"
-                                        >
-                                    </div>
-                                    <button class="remove-bro-btn ml-3 p-2 text-red-400 hover:text-red-300 opacity-70 hover:opacity-100">
-                                        <i class="fas fa-times"></i>
-                                    </button>
-                                </div>
-                            </div>
-                            
-                            <div class="bro-input-item fade-in">
-                                <div class="flex items-center">
-                                    <div class="w-10 h-10 rounded-full bg-purple-500 flex items-center justify-center text-black font-bold mr-3">BRO 3</div>
-                                    <div class="flex-grow">
-                                        <div class="text-sm text-gray-400 mb-1">Investment Amount (₹)</div>
-                                        <input 
-                                            type="number" 
-                                            class="bro-amount bg-black border border-gray-700 rounded-lg px-4 py-3 text-lg w-full" 
-                                            placeholder="e.g., 2000000" 
-                                            value="2000000"
-                                            min="0"
-                                            step="100000"
-                                        >
-                                    </div>
-                                    <button class="remove-bro-btn ml-3 p-2 text-red-400 hover:text-red-300 opacity-70 hover:opacity-100">
-                                        <i class="fas fa-times"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- Action Buttons -->
-                        <div class="grid grid-cols-2 gap-4 mb-6">
-                            <button 
-                                id="addBroBtn" 
-                                class="px-4 py-3 btn-primary font-semibold rounded-lg flex items-center justify-center"
-                            >
-                                <i class="fas fa-user-plus mr-2"></i>
-                                Add BRO
-                            </button>
-                            
-                            <button 
-                                id="calculateBtn" 
-                                class="px-4 py-3 btn-success font-bold rounded-lg flex items-center justify-center"
-                            >
-                                <i class="fas fa-calculator mr-2"></i>
-                                Calculate
-                            </button>
-                        </div>
-                        
-                        <!-- Control Buttons -->
-                        <div class="grid grid-cols-2 gap-4">
-                            <button 
-                                id="resetBtn" 
-                                class="px-4 py-3 bg-gray-800 hover:bg-gray-700 font-semibold rounded-lg flex items-center justify-center"
-                            >
-                                <i class="fas fa-redo mr-2"></i>
-                                Reset All
-                            </button>
-                            
-                            <button 
-                                id="exitBtn" 
-                                class="px-4 py-3 btn-danger font-bold rounded-lg flex items-center justify-center"
-                            >
-                                <i class="fas fa-sign-out-alt mr-2"></i>
-                                Exit & Save
-                            </button>
-                        </div>
-                        
-                        <!-- Formula Display -->
-                        <div class="mt-8 p-4 bg-black rounded-lg border border-gray-800">
-                            <div class="text-sm text-gray-400 mb-2">The Formula</div>
-                            <div class="text-sm space-y-1">
-                                <div>Founder Stake = <span class="text-orange-400">10.8%</span> (fixed)</div>
-                                <div>Remaining Pool = <span class="text-green-400">89.2%</span></div>
-                                <div class="highlight">BRO % = (Investment / Total Investment) × <span class="text-green-400">89.2%</span></div>
-                                <div class="text-xs text-gray-500 mt-2">Percentages calculated to 3 decimal places (e.g., 44.600%)</div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Results Section -->
-                    <div class="glass-card p-6 rounded-2xl">
-                        <h2 class="text-2xl font-bold mb-6 flex items-center">
-                            <i class="fas fa-chart-pie mr-3 text-green-400"></i>
-                            Ownership Distribution
-                        </h2>
-                        
-                        <!-- Summary Stats -->
-                        <div id="summaryStats" class="grid grid-cols-2 gap-4 mb-8">
-                            <div class="bg-black p-4 rounded-lg">
-                                <div class="text-sm text-gray-400">Total Investment</div>
-                                <div id="totalInvestment" class="text-2xl font-bold text-green-400">₹1,00,00,000</div>
-                            </div>
-                            <div class="bg-black p-4 rounded-lg">
-                                <div class="text-sm text-gray-400">Active BROs</div>
-                                <div id="totalBros" class="text-2xl font-bold text-blue-400">3 BROs</div>
-                            </div>
-                        </div>
-                        
-                        <!-- Quick Stats -->
+    <div id="content-container">
+        <!-- ========== PITCH DECK ========== -->
+        <div id="pitch-deck">
+            <!-- Section 1: Cover -->
+            <section id="section1" class="pitch-section">
+                <div class="content-container text-center">
+                    <div class="mb-12">
+                        <h1 class="display-1 neon-blue mb-4 bubble-heading">BH<span class="neon-green">₹</span>ATHA</h1>
                         <div class="mb-6">
-                            <div class="text-lg font-medium mb-3">Quick Stats</div>
-                            <div class="grid grid-cols-3 gap-3 text-center">
-                                <div class="p-3 bg-black/30 rounded-lg">
-                                    <div class="text-2xl font-bold text-orange-400">10.800%</div>
-                                    <div class="text-xs text-gray-400">Founder</div>
-                                </div>
-                                <div class="p-3 bg-black/30 rounded-lg">
-                                    <div class="text-2xl font-bold text-green-400" id="highestPercentage">44.600%</div>
-                                    <div class="text-xs text-gray-400">Highest BRO</div>
-                                </div>
-                                <div class="p-3 bg-black/30 rounded-lg">
-                                    <div class="text-2xl font-bold text-blue-400" id="remainingPoolDisplay">89.200%</div>
-                                    <div class="text-xs text-gray-400">Remaining Pool</div>
-                                </div>
-                            </div>
+                            <span class="neon-orange text-2xl">Cultural Infrastructure</span> 
+                            <span class="neon-green text-2xl">Company</span>
                         </div>
-                        
-                        <!-- Ownership Chart -->
-                        <div class="mb-8">
-                            <div class="flex justify-between items-center mb-3">
-                                <div class="text-lg font-medium">Detailed Breakdown</div>
-                                <div class="text-sm text-gray-400" id="calculationTime">Calculated just now</div>
-                            </div>
-                            
-                            <div id="ownershipChart" class="space-y-4 max-h-[300px] overflow-y-auto p-2">
-                                <!-- Founder Row -->
-                                <div class="owner-row founder">
-                                    <div class="flex justify-between items-center mb-1">
-                                        <div class="flex items-center">
-                                            <div class="w-10 h-10 rounded-full bg-orange-500 flex items-center justify-center text-black font-bold mr-3">F</div>
-                                            <div>
-                                                <div class="font-bold">Bharath</div>
-                                                <div class="text-xs text-gray-400">Founder • Fixed Stake</div>
-                                            </div>
-                                        </div>
-                                        <div class="text-right">
-                                            <div class="text-xl font-bold text-orange-400">10.800%</div>
-                                            <div class="text-xs text-gray-400">Non-negotiable</div>
-                                        </div>
-                                    </div>
-                                    <div class="progress-bar">
-                                        <div class="progress-fill" style="width: 10.8%"></div>
-                                    </div>
-                                </div>
-                                
-                                <!-- BRO rows will be dynamically added here -->
-                                <div class="owner-row investor">
-                                    <div class="flex justify-between items-center mb-1">
-                                        <div class="flex items-center">
-                                            <div class="w-10 h-10 rounded-full bg-green-500 flex items-center justify-center text-black font-bold mr-3">BRO 1</div>
-                                            <div>
-                                                <div class="font-bold">BRO 1</div>
-                                                <div class="text-xs text-gray-400">₹50,00,000 • Highest Investor</div>
-                                            </div>
-                                        </div>
-                                        <div class="text-right">
-                                            <div class="text-xl font-bold text-green-400">44.600%</div>
-                                            <div class="text-xs text-gray-400">₹44.60 per ₹100 profit</div>
-                                        </div>
-                                    </div>
-                                    <div class="progress-bar">
-                                        <div class="progress-fill" style="width: 44.6%"></div>
-                                    </div>
-                                </div>
-                                
-                                <div class="owner-row investor">
-                                    <div class="flex justify-between items-center mb-1">
-                                        <div class="flex items-center">
-                                            <div class="w-10 h-10 rounded-full bg-blue-500 flex items-center justify-center text-black font-bold mr-3">BRO 2</div>
-                                            <div>
-                                                <div class="font-bold">BRO 2</div>
-                                                <div class="text-xs text-gray-400">₹30,00,000</div>
-                                            </div>
-                                        </div>
-                                        <div class="text-right">
-                                            <div class="text-xl font-bold text-blue-400">26.760%</div>
-                                            <div class="text-xs text-gray-400">₹26.76 per ₹100 profit</div>
-                                        </div>
-                                    </div>
-                                    <div class="progress-bar">
-                                        <div class="progress-fill" style="width: 26.76%"></div>
-                                    </div>
-                                </div>
-                                
-                                <div class="owner-row investor">
-                                    <div class="flex justify-between items-center mb-1">
-                                        <div class="flex items-center">
-                                            <div class="w-10 h-10 rounded-full bg-purple-500 flex items-center justify-center text-black font-bold mr-3">BRO 3</div>
-                                            <div>
-                                                <div class="font-bold">BRO 3</div>
-                                                <div class="text-xs text-gray-400">₹20,00,000</div>
-                                            </div>
-                                        </div>
-                                        <div class="text-right">
-                                            <div class="text-xl font-bold text-purple-400">17.840%</div>
-                                            <div class="text-xs text-gray-400">₹17.84 per ₹100 profit</div>
-                                        </div>
-                                    </div>
-                                    <div class="progress-bar">
-                                        <div class="progress-fill" style="width: 17.84%"></div>
-                                    </div>
-                                </div>
-                            </div>
+                        <p class="lead text-gray-400 bubble-heading">
+                            Creating profitable urban third-spaces through digital networks, physical assets & narrative systems
+                        </p>
+                    </div>
+                    
+                    <div class="mt-20">
+                        <div class="inline-block p-6 border border-accent-blue rounded-xl mb-8">
+                            <p class="body-text max-w-2xl">
+                                Building not startups, but a future systems architecture — a convergence of identity, technology, real-world access, culture, and venture creation.
+                            </p>
                         </div>
-                        
-                        <!-- Profit Distribution Example -->
-                        <div class="p-4 bg-black rounded-lg border border-gray-800">
-                            <div class="flex items-center mb-2">
-                                <i class="fas fa-coins text-yellow-400 mr-3"></i>
-                                <div class="font-medium">Profit Distribution Example</div>
-                            </div>
-                            <div class="text-sm text-gray-400">
-                                <p class="mb-2">If BHRATHA makes <span class="text-green-400">₹1,00,00,000</span> profit:</p>
-                                <div class="grid grid-cols-2 gap-2 text-xs">
-                                    <div>Bharath gets: <span class="text-orange-400">₹10,80,000</span></div>
-                                    <div>BRO 1 gets: <span class="text-green-400">₹44,60,000</span></div>
-                                    <div>BRO 2 gets: <span class="text-blue-400">₹26,76,000</span></div>
-                                    <div>BRO 3 gets: <span class="text-purple-400">₹17,84,000</span></div>
-                                </div>
+                        <div class="mt-12 text-sm text-gray-600 tracking-widest uppercase">
+                            <div class="flex items-center justify-center space-x-4">
+                                <div class="w-8 h-px bg-gray-600"></div>
+                                <span>Scroll to Continue</span>
+                                <div class="w-8 h-px bg-gray-600"></div>
                             </div>
                         </div>
                     </div>
                 </div>
-                
-                <!-- Additional Info Section -->
-                <section class="glass-card p-6 rounded-2xl mt-12">
-                    <h2 class="text-2xl font-bold mb-6">Dynamic Brotherhood Model</h2>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div>
-                            <h3 class="text-xl font-medium mb-4 flex items-center">
-                                <i class="fas fa-user-plus text-green-400 mr-3"></i>
-                                Adding New BROs
-                            </h3>
-                            <p class="text-gray-400 mb-4">The model dynamically adjusts when new BROs join. The formula automatically recalculates ownership percentages based on the new total investment pool.</p>
-                            <div class="p-4 bg-black rounded-lg mb-4">
-                                <div class="text-sm text-gray-400 mb-2">Example: Adding BRO 4 with ₹60,00,000</div>
-                                <div class="text-sm space-y-1">
-                                    <div>New Total Investment = ₹1,60,00,000</div>
-                                    <div>BRO 4 gets: (60/160) × 89.2% = <span class="text-green-400">33.450%</span></div>
-                                    <div>Existing BROs' stakes adjust proportionally downward</div>
-                                    <div class="text-xs text-gray-500 mt-2">Use the "Add BRO" button to simulate this scenario</div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div>
-                            <h3 class="text-xl font-medium mb-4 flex items-center">
-                                <i class="fas fa-shield-alt text-orange-400 mr-3"></i>
-                                Power-Safety Features
-                            </h3>
-                            <p class="text-gray-400 mb-4">To maintain vision and control while respecting capital contribution:</p>
-                            <ul class="space-y-3 text-gray-400">
-                                <li class="flex items-start">
-                                    <i class="fas fa-check text-green-400 mr-3 mt-1"></i>
-                                    <span>Founder retains <span class="text-orange-400">veto power</span> on key decisions</span>
+            </section>
+            
+            <!-- Section 2: The Urban Problem -->
+            <section id="section2" class="pitch-section">
+                <div class="content-container">
+                    <div class="mb-16 text-center">
+                        <h2 class="display-2 mb-8 bubble-heading">
+                            THE URBAN <span class="neon-red">PROBLEM</span>
+                        </h2>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                        <div class="portfolio-card">
+                            <h3 class="display-3 neon-red mb-6 bubble-heading">Fragmented City Experience</h3>
+                            <p class="body-text mb-6">
+                                Cities today are disconnected across:
+                            </p>
+                            <ul class="space-y-4">
+                                <li class="flex items-center">
+                                    <div class="w-3 h-3 rounded-full bg-red-500 mr-3"></div>
+                                    <span>Digital networks without physical power</span>
                                 </li>
-                                <li class="flex items-start">
-                                    <i class="fas fa-check text-green-400 mr-3 mt-1"></i>
-                                    <span>Brand/IP ownership stays with founder outside the company</span>
+                                <li class="flex items-center">
+                                    <div class="w-3 h-3 rounded-full bg-red-500 mr-3"></div>
+                                    <span>Real estate without communities</span>
                                 </li>
-                                <li class="flex items-start">
-                                    <i class="fas fa-check text-green-400 mr-3 mt-1"></i>
-                                    <span>This ensures vision ≠ money equation stays balanced</span>
+                                <li class="flex items-center">
+                                    <div class="w-3 h-3 rounded-full bg-red-500 mr-3"></div>
+                                    <span>Media without ownership</span>
+                                </li>
+                                <li class="flex items-center">
+                                    <div class="w-3 h-3 rounded-full bg-red-500 mr-3"></div>
+                                    <span>Investors without cultural control</span>
                                 </li>
                             </ul>
-                            <div class="mt-6 p-4 bg-gradient-to-r from-orange-900/20 to-transparent rounded-lg border border-orange-900/30">
-                                <div class="text-sm"><span class="text-orange-400 font-bold">The Brotherhood Promise:</span> Capital-respecting, ego-neutral, mathematically fair, vision-protected.</div>
+                            <div class="mt-8 pt-6 border-t border-gray-800">
+                                <p class="body-text neon-red font-bold bubble-heading">
+                                    Urban life lacks integrated infrastructure.
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <div class="portfolio-card">
+                            <h3 class="display-3 neon-green mb-6 bubble-heading">The BH₹ATHA Insight</h3>
+                            <p class="body-text mb-6">
+                                The next empires will not be:
+                            </p>
+                            <ul class="space-y-4">
+                                <li class="flex items-center">
+                                    <div class="w-3 h-3 rounded-full bg-green-500 mr-3"></div>
+                                    <span>Apps</span>
+                                </li>
+                                <li class="flex items-center">
+                                    <div class="w-3 h-3 rounded-full bg-green-500 mr-3"></div>
+                                    <span>Buildings</span>
+                                </li>
+                                <li class="flex items-center">
+                                    <div class="w-3 h-3 rounded-full bg-green-500 mr-3"></div>
+                                    <span>Media houses</span>
+                                </li>
+                            </ul>
+                            <p class="body-text mt-6">
+                                They will be city-level systems that control:
+                            </p>
+                            <p class="body-text neon-yellow font-bold mt-4 bubble-heading">
+                                People → Spaces → Data → Narrative → Capital
+                            </p>
+                            <div class="mt-8 pt-6 border-t border-gray-800">
+                                <p class="body-text text-gray-400">
+                                    The future belongs to integrated urban infrastructure.
+                                </p>
                             </div>
                         </div>
                     </div>
-                </section>
-            </main>
+                </div>
+            </section>
+            
+            <!-- Section 3: The BH₹ATHA Stack -->
+            <section id="section3" class="pitch-section">
+                <div class="content-container">
+                    <div class="mb-16 text-center">
+                        <h2 class="display-2 neon-violet mb-8 bubble-heading">THE BH₹ATHA STACK</h2>
+                        <p class="lead text-gray-400">Integrated Ecosystem Architecture</p>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <!-- IPNOTEC Card -->
+                        <div class="portfolio-card">
+                            <div class="flex items-center mb-6">
+                                <div class="w-12 h-12 rounded-full bg-blue-500 flex items-center justify-center mr-4">
+                                    <i class="fas fa-microchip text-xl"></i>
+                                </div>
+                                <h3 class="text-2xl font-bold neon-blue bubble-heading">IPNOTEC</h3>
+                            </div>
+                            <p class="body-text mb-4">
+                                <span class="neon-blue font-bold">Identity & Access Company</span><br>
+                                Private networking & infrastructure app with paid city chapters
+                            </p>
+                            <div class="mt-6 space-y-2">
+                                <div class="flex items-center">
+                                    <i class="fas fa-link text-blue-500 mr-2"></i>
+                                    <a href="https://www.ipnotec.com" target="_blank" class="text-blue-500 hover:text-blue-400">www.ipnotec.com</a>
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-link text-blue-500 mr-2"></i>
+                                    <a href="https://www.ipnotec.vip" target="_blank" class="text-blue-500 hover:text-blue-400">www.ipnotec.vip</a>
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-file-alt text-blue-500 mr-2"></i>
+                                    <a href="https://www.canva.com/design/DAG8l69C-sc/hSBAIh9zGTlOY4FGLx2_kQ/view" target="_blank" class="text-blue-500 hover:text-blue-400">View Pitch Deck</a>
+                                </div>
+                            </div>
+                            <div class="mt-6 p-3 bg-blue-900/20 rounded-lg">
+                                <p class="text-sm font-bold neon-blue">Equity Structure</p>
+                                <p class="text-sm">9% public dilution • 91% Bharath BholeY • 3-year lock-in</p>
+                            </div>
+                        </div>
+                        
+                        <!-- CLUBICLES Card -->
+                        <div class="portfolio-card">
+                            <div class="flex items-center mb-6">
+                                <div class="w-12 h-12 rounded-full bg-orange-500 flex items-center justify-center mr-4">
+                                    <i class="fas fa-building text-xl"></i>
+                                </div>
+                                <h3 class="text-2xl font-bold neon-orange bubble-heading">CLUBICLES</h3>
+                            </div>
+                            <p class="body-text mb-4">
+                                <span class="neon-orange font-bold">Real World Engine</span><br>
+                                Franchised urban asset & third-space network
+                            </p>
+                            <div class="mt-6 space-y-2">
+                                <div class="flex items-center">
+                                    <i class="fas fa-link text-orange-500 mr-2"></i>
+                                    <a href="https://www.clubicles.com" target="_blank" class="text-orange-500 hover:text-orange-400">www.clubicles.com</a>
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-link text-orange-500 mr-2"></i>
+                                    <a href="https://www.clubicles.club" target="_blank" class="text-orange-500 hover:text-orange-400">www.clubicles.club</a>
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-file-alt text-orange-500 mr-2"></i>
+                                    <a href="https://www.canva.com/design/DAGztZPFhOE/8VfzP3ZqE1wbB-8RhRAFlQ/view" target="_blank" class="text-orange-500 hover:text-orange-400">View Pitch Deck</a>
+                                </div>
+                            </div>
+                            <div class="mt-6 p-3 bg-orange-900/20 rounded-lg">
+                                <p class="text-sm font-bold neon-orange">Equity Structure</p>
+                                <p class="text-sm">18% public dilution • 82% Bharath BholeY • 3-year lock-in</p>
+                            </div>
+                        </div>
+                        
+                        <!-- RWAWE Card -->
+                        <div class="portfolio-card">
+                            <div class="flex items-center mb-6">
+                                <div class="w-12 h-12 rounded-full bg-green-500 flex items-center justify-center mr-4">
+                                    <i class="fas fa-om text-xl"></i>
+                                </div>
+                                <h3 class="text-2xl font-bold neon-green bubble-heading">RWAWE</h3>
+                            </div>
+                            <p class="body-text mb-4">
+                                <span class="neon-green font-bold">Data & Narrative Infrastructure</span><br>
+                                Cultural intelligence & spiritual-tech platform
+                            </p>
+                            <div class="mt-6 space-y-2">
+                                <div class="flex items-center">
+                                    <i class="fas fa-link text-green-500 mr-2"></i>
+                                    <a href="https://www.rwawe.com" target="_blank" class="text-green-500 hover:text-green-400">www.rwawe.com</a>
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-file-alt text-green-500 mr-2"></i>
+                                    <a href="https://www.canva.com/design/DAG8socosqg/5arKYvqUZy-BexwwaAhwPQ/view" target="_blank" class="text-green-500 hover:text-green-400">View Pitch Deck</a>
+                                </div>
+                            </div>
+                            <div class="mt-6 p-3 bg-green-900/20 rounded-lg">
+                                <p class="text-sm font-bold neon-green">Equity Structure</p>
+                                <p class="text-sm">27% public dilution • 73% Bharath BholeY • 3-year lock-in</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-12 text-center">
+                        <p class="body-text neon-yellow font-bold max-w-3xl mx-auto bubble-heading">
+                            Technology powered by IPNOTEC. Real-world deployment through CLUBICLES. Cultural resonance through RWAWE.
+                        </p>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Section 4: Capital Architecture -->
+            <section id="section4" class="pitch-section">
+                <div class="content-container">
+                    <div class="mb-16 text-center">
+                        <h2 class="display-2 neon-yellow mb-8 bubble-heading">CAPITAL ARCHITECTURE</h2>
+                        <p class="lead text-gray-400">Private Investment System</p>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                        <div class="portfolio-card">
+                            <h3 class="display-3 neon-green mb-6 bubble-heading">Access Economy</h3>
+                            <div class="mb-8">
+                                <div class="text-5xl font-bold neon-green mb-4">₹1.08 Cr</div>
+                                <p class="body-text">Non-negotiable, non-refundable access deposit</p>
+                                <p class="text-gray-400 text-sm mt-2">Entry into BH₹ATHA capital ecosystem (Access ≠ automatic equity)</p>
+                            </div>
+                            
+                            <div class="space-y-6">
+                                <div>
+                                    <h4 class="text-xl font-bold neon-blue mb-3 bubble-heading">Platform Fee</h4>
+                                    <div class="text-3xl font-bold neon-blue">1.08%</div>
+                                    <p class="text-gray-400">Yearly fee on profits generated by ventures</p>
+                                </div>
+                                
+                                <div class="mt-8">
+                                    <h4 class="text-xl font-bold neon-orange mb-3 bubble-heading">BH₹ATHA Platform</h4>
+                                    <div class="flex space-x-4">
+                                        <a href="https://www.bhratha.com" target="_blank" class="text-accent-gold hover:text-yellow-400">www.bhratha.com</a>
+                                        <a href="https://www.bhratha.ltd" target="_blank" class="text-accent-gold hover:text-yellow-400">www.bhratha.ltd</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="portfolio-card">
+                            <h3 class="display-3 neon-blue mb-6 bubble-heading">Member Classes</h3>
+                            
+                            <div class="mb-8">
+                                <div class="flex items-center mb-4">
+                                    <div class="w-8 h-8 rounded-full bg-yellow-500 flex items-center justify-center text-black font-bold mr-3">10</div>
+                                    <div>
+                                        <h4 class="text-xl font-bold neon-yellow bubble-heading">Founding Capital Circle</h4>
+                                        <p class="text-gray-400 text-sm">Equity across all three ventures • Governance-grade partners</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex items-center">
+                                    <div class="w-8 h-8 rounded-full bg-green-500 flex items-center justify-center text-black font-bold mr-3">90</div>
+                                    <div>
+                                        <h4 class="text-xl font-bold neon-green bubble-heading">Principle Capital Circle</h4>
+                                        <p class="text-gray-400 text-sm">No equity • Returns-only capital participation</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-8 p-4 bg-black/30 rounded-lg">
+                                <p class="text-sm font-bold neon-red bubble-heading">Total Capital Pool</p>
+                                <div class="text-2xl font-bold neon-green mt-2">₹108 Cr</div>
+                                <p class="text-gray-400 text-sm">100 members × ₹1.08 Cr each</p>
+                            </div>
+                            
+                            <div class="mt-6">
+                                <h4 class="text-lg font-bold neon-purple mb-3 bubble-heading">Capital Allocation</h4>
+                                <ul class="space-y-2">
+                                    <li class="flex justify-between">
+                                        <span>IPNOTEC</span>
+                                        <span class="neon-blue">70% (₹75.6 Cr)</span>
+                                    </li>
+                                    <li class="flex justify-between">
+                                        <span>CLUBICLES</span>
+                                        <span class="neon-orange">30% (₹32.4 Cr)</span>
+                                    </li>
+                                    <li class="flex justify-between">
+                                        <span>RWAWE</span>
+                                        <span class="neon-green">30% (₹32.4 Cr)</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Section 5: Financial Engine -->
+            <section id="section5" class="pitch-section">
+                <div class="content-container">
+                    <div class="mb-16 text-center">
+                        <h2 class="display-2 neon-green mb-8 bubble-heading">FINANCIAL ENGINE</h2>
+                        <p class="lead text-gray-400">Scalable Revenue Architecture</p>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <div class="portfolio-card">
+                            <h3 class="text-2xl font-bold neon-blue mb-4 bubble-heading">IPNOTEC</h3>
+                            <div class="mb-4">
+                                <p class="text-sm text-gray-400">Per City Model</p>
+                                <div class="text-3xl font-bold neon-blue">₹1 Cr</div>
+                                <p class="text-gray-400 text-sm">Annual Revenue</p>
+                            </div>
+                            <ul class="space-y-3">
+                                <li class="flex items-center">
+                                    <i class="fas fa-users text-blue-500 mr-2"></i>
+                                    <span>1,000 paid users per city</span>
+                                </li>
+                                <li class="flex items-center">
+                                    <i class="fas fa-rupee-sign text-blue-500 mr-2"></i>
+                                    <span>₹10,000 per user/year</span>
+                                </li>
+                                <li class="flex items-center">
+                                    <i class="fas fa-chart-line text-blue-500 mr-2"></i>
+                                    <span>40% profit margin</span>
+                                </li>
+                            </ul>
+                            <div class="mt-6 p-3 bg-blue-900/20 rounded-lg">
+                                <p class="text-sm font-bold neon-blue">Target: 100 Cities</p>
+                                <p class="text-sm">₹100 Cr annual revenue • ₹40 Cr profit</p>
+                            </div>
+                        </div>
+                        
+                        <div class="portfolio-card">
+                            <h3 class="text-2xl font-bold neon-orange mb-4 bubble-heading">CLUBICLES</h3>
+                            <div class="mb-4">
+                                <p class="text-sm text-gray-400">Per Unit Model</p>
+                                <div class="text-3xl font-bold neon-orange">₹2.16 Cr</div>
+                                <p class="text-gray-400 text-sm">Annual Revenue</p>
+                            </div>
+                            <ul class="space-y-3">
+                                <li class="flex items-center">
+                                    <i class="fas fa-building text-orange-500 mr-2"></i>
+                                    <span>Co-working aggregation platform</span>
+                                </li>
+                                <li class="flex items-center">
+                                    <i class="fas fa-rupee-sign text-orange-500 mr-2"></i>
+                                    <span>₹18L/month revenue</span>
+                                </li>
+                                <li class="flex items-center">
+                                    <i class="fas fa-chart-line text-orange-500 mr-2"></i>
+                                    <span>30% profit margin</span>
+                                </li>
+                            </ul>
+                            <div class="mt-6 p-3 bg-orange-900/20 rounded-lg">
+                                <p class="text-sm font-bold neon-orange">Target: 30 Units</p>
+                                <p class="text-sm">₹64.8 Cr annual revenue • ₹19.44 Cr profit</p>
+                            </div>
+                        </div>
+                        
+                        <div class="portfolio-card">
+                            <h3 class="text-2xl font-bold neon-green mb-4 bubble-heading">RWAWE</h3>
+                            <div class="mb-4">
+                                <p class="text-sm text-gray-400">User Model</p>
+                                <div class="text-3xl font-bold neon-green">₹1.2 Cr</div>
+                                <p class="text-gray-400 text-sm">Annual Revenue</p>
+                            </div>
+                            <ul class="space-y-3">
+                                <li class="flex items-center">
+                                    <i class="fas fa-users text-green-500 mr-2"></i>
+                                    <span>10,000 paying users</span>
+                                </li>
+                                <li class="flex items-center">
+                                    <i class="fas fa-rupee-sign text-green-500 mr-2"></i>
+                                    <span>₹1,200 per user/year</span>
+                                </li>
+                                <li class="flex items-center">
+                                    <i class="fas fa-chart-line text-green-500 mr-2"></i>
+                                    <span>35% profit margin</span>
+                                </li>
+                            </ul>
+                            <div class="mt-6 p-3 bg-green-900/20 rounded-lg">
+                                <p class="text-sm font-bold neon-green">Target: Data Infrastructure</p>
+                                <p class="text-sm">Cultural intelligence & narrative layer</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-12 portfolio-card">
+                        <h3 class="text-2xl font-bold neon-yellow mb-6 bubble-heading">BH₹ATHA Platform Economics</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                            <div class="text-center">
+                                <div class="text-3xl font-bold neon-green">₹108 Cr</div>
+                                <p class="text-gray-400 text-sm">Capital Pool</p>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-3xl font-bold neon-blue">1.08%</div>
+                                <p class="text-gray-400 text-sm">Platform Fee on Profits</p>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-3xl font-bold neon-orange">3 Years</div>
+                                <p class="text-gray-400 text-sm">Lock-in Period</p>
+                            </div>
+                        </div>
+                        <div class="mt-6 pt-6 border-t border-gray-800">
+                            <p class="body-text text-center neon-green font-bold bubble-heading">
+                                BH₹ATHA is not a fund. It is a permanent capital machine.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Section 6: Founder & Vision -->
+            <section id="section6" class="pitch-section">
+                <div class="content-container">
+                    <div class="mb-16 text-center">
+                        <h2 class="display-2 neon-indigo mb-8 bubble-heading">FOUNDER & VISION</h2>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                        <div>
+                            <div class="portfolio-card">
+                                <h3 class="text-2xl font-bold neon-blue mb-4 bubble-heading">Bharath BholeY</h3>
+                                <p class="body-text mb-4">
+                                    Founder & CEO, IPNOTEC<br>
+                                    <span class="text-gray-400">Future-Society Designer • Venture Architect</span>
+                                </p>
+                                
+                                <div class="space-y-3 mb-6">
+                                    <div class="flex items-center">
+                                        <i class="fas fa-briefcase text-blue-500 mr-3"></i>
+                                        <span>20 years IT experience • MBA</span>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <i class="fas fa-rocket text-green-500 mr-3"></i>
+                                        <span>Career break to build institution-grade ventures</span>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <i class="fas fa-eye text-purple-500 mr-3"></i>
+                                        <span>Architecting systems for decades, not quarters</span>
+                                    </div>
+                                </div>
+                                
+                                <a href="https://byb-resume.vercel.app" target="_blank" class="inline-flex items-center px-4 py-2 border border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-black transition-all">
+                                    <i class="fas fa-external-link-alt mr-2"></i>View Founder Profile
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="portfolio-card">
+                                <h3 class="text-2xl font-bold neon-green mb-6 bubble-heading">The Grand Vision</h3>
+                                <p class="body-text mb-6">
+                                    BH₹ATHA is building a future systems architecture — a convergence of:
+                                </p>
+                                <ul class="space-y-4">
+                                    <li class="flex items-center">
+                                        <div class="w-3 h-3 rounded-full bg-green-500 mr-3"></div>
+                                        <span>Identity systems</span>
+                                    </li>
+                                    <li class="flex items-center">
+                                        <div class="w-3 h-3 rounded-full bg-blue-500 mr-3"></div>
+                                        <span>Access infrastructures</span>
+                                    </li>
+                                    <li class="flex items-center">
+                                        <div class="w-3 h-3 rounded-full bg-purple-500 mr-3"></div>
+                                        <span>Cultural technologies</span>
+                                    </li>
+                                    <li class="flex items-center">
+                                        <div class="w-3 h-3 rounded-full bg-orange-500 mr-3"></div>
+                                        <span>Institution-grade ventures</span>
+                                    </li>
+                                </ul>
+                                <div class="mt-8 pt-6 border-t border-gray-800">
+                                    <p class="body-text neon-red font-bold bubble-heading">
+                                        IPNOTEC is the first machine.<br>
+                                        BHRATHA is the long-term institution.<br>
+                                        The portfolio is the execution field.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Section 7: Call to Action -->
+            <section id="section7" class="pitch-section">
+                <div class="content-container text-center">
+                    <div class="mb-16">
+                        <h2 class="display-2 mb-8 bubble-heading">
+                            <span class="neon-green">THE</span> 
+                            <span class="neon-blue">INVITATION</span>
+                        </h2>
+                        <p class="lead text-gray-400">
+                            This is not an investment. This is entry into a private urban system.
+                        </p>
+                    </div>
+                    
+                    <div class="portfolio-card mb-12 max-w-4xl mx-auto">
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+                            <div>
+                                <div class="text-4xl neon-violet mb-4 bubble-heading">01</div>
+                                <h4 class="text-xl font-bold neon-violet mb-2 bubble-heading">Identity First</h4>
+                                <p class="text-sm text-gray-400">Unified digital shadow</p>
+                            </div>
+                            <div>
+                                <div class="text-4xl neon-green mb-4 bubble-heading">02</div>
+                                <h4 class="text-xl font-bold neon-green mb-2 bubble-heading">Access as Power</h4>
+                                <p class="text-sm text-gray-400">Key-less, phone-less future</p>
+                            </div>
+                            <div>
+                                <div class="text-4xl neon-orange mb-4 bubble-heading">03</div>
+                                <h4 class="text-xl font-bold neon-orange mb-2 bubble-heading">Brotherhood by Design</h4>
+                                <p class="text-sm text-gray-400">Aligned capital, culture</p>
+                            </div>
+                        </div>
+                        
+                        <p class="body-text neon-yellow font-bold mb-8 bubble-heading">
+                            BH₹ATHA builds cities. Not companies.
+                        </p>
+                        
+                        <div class="flex flex-col md:flex-row gap-4 justify-center mt-8">
+                            <button onclick="showTab('assessment')" class="px-8 py-3 border border-accent-gold text-accent-gold hover:bg-accent-gold hover:text-black transition-all duration-300 bubble-heading">
+                                <i class="fas fa-user-check mr-2"></i>Begin Investor Assessment
+                            </button>
+                            <a href="https://wa.me/916292306090?text=BH%E2%82%B9ATHA%20Investment%20Inquiry" target="_blank" class="whatsapp-btn px-8 py-3">
+                                <i class="fab fa-whatsapp mr-2"></i>Contact on WhatsApp
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-12 pt-8 border-t border-gray-800">
+                        <p class="text-sm text-gray-600">
+                            © 2024 BHARATH BHOLEY | BH₹ATHA PORTFOLIO. All rights reserved.<br>
+                            Future systems architecture by design. Institution-grade ventures by choice.
+                        </p>
+                    </div>
+                </div>
+            </section>
         </div>
-
-        <!-- Private Assessment (Hidden by default) -->
-        <div id="assessment" class="assessment-container" style="display: none;">
+        
+        <!-- ========== ASSESSMENT SECTION ========== -->
+        <div id="assessment" class="assessment-container">
             <!-- Section 0: Landing -->
-            <div id="section-landing" class="section active">
-                <div class="text-center pt-20">
-                    <h1 class="text-5xl font-light mb-6 tracking-tight">BHRATHA</h1>
-                    <div class="text-xl muted-text mb-10">Brotherhood for Institutional Builders</div>
+            <div id="assessment-landing" class="assessment-section active">
+                <div class="text-center py-20">
+                    <h1 class="display-2 mb-6 tracking-tight">BH<span class="neon-green">₹</span>ATHA</h1>
+                    <div class="text-xl text-gray-400 mb-10">Brotherhood for Institutional Builders</div>
                     
                     <div class="dark-card p-10 mb-12 max-w-2xl mx-auto">
-                        <p class="text-lg mb-8">
+                        <p class="text-2xl mb-8" style="color: var(--accent-gold);">
                             This is not an application.<br>
                             This is a private self-assessment.
                         </p>
-                        <p class="muted-text mb-10">
+                        <p class="text-gray-400 mb-10">
                             The following assessment explores responsibility, capital discipline, and long-horizon temperament.
                             Your responses are private. Your result determines whether consideration is appropriate.
                         </p>
@@ -880,12 +1055,12 @@
                             Begin Private Assessment
                         </button>
                         
-                        <div class="mt-12 text-sm muted-text">
-                            <p class="mb-4">BHRATHA accepts builders of systems, not users of systems.</p>
+                        <div class="mt-12 text-sm text-gray-500">
+                            <p class="mb-4">BH₹ATHA accepts builders of systems, not users of systems.</p>
                             <p>
-                                <a href="#" onclick="showNeverAllowed(event)" style="color: var(--accent-gold); text-decoration: underline;">
+                                <button onclick="showNeverAllowed()" style="color: var(--accent-gold); text-decoration: underline; background: none; border: none; cursor: pointer;">
                                     View who is never allowed →
-                                </a>
+                                </button>
                             </p>
                         </div>
                     </div>
@@ -893,9 +1068,9 @@
             </div>
 
             <!-- Section 1: Human Scale -->
-            <div id="section-human-scale" class="section">
-                <h2 class="section-title">Stage 1 of 5 — Human Scale</h2>
-                <p class="section-subtitle">Before capital, the system evaluates the human.</p>
+            <div id="assessment-human-scale" class="assessment-section">
+                <h2 class="text-3xl font-bold mb-4" style="color: var(--accent-gold);">Stage 1 of 5 — Human Scale</h2>
+                <p class="text-gray-400 mb-10">Before capital, the system evaluates the human.</p>
                 
                 <div class="dark-card p-8">
                     <div class="space-y-8">
@@ -969,11 +1144,11 @@
                         </div>
                     </div>
                     
-                    <div class="progress-container mt-12">
-                        <div class="progress-bar-assessment" id="progress-bar" style="width: 20%"></div>
+                    <div class="mt-12 h-2 bg-gray-800 rounded-full">
+                        <div class="h-full bg-accent-gold rounded-full" style="width: 20%"></div>
                     </div>
                     
-                    <div class="flex justify-between">
+                    <div class="flex justify-between mt-8">
                         <button onclick="showAssessmentSection('landing')" class="btn-primary-assessment">
                             ← Back
                         </button>
@@ -985,9 +1160,9 @@
             </div>
 
             <!-- Section 2: Capital Discipline -->
-            <div id="section-capital-discipline" class="section">
-                <h2 class="section-title">Stage 2 of 5 — Capital Discipline</h2>
-                <p class="section-subtitle">BHRATHA does not measure money. It measures relationship with capital.</p>
+            <div id="assessment-capital-discipline" class="assessment-section">
+                <h2 class="text-3xl font-bold mb-4" style="color: var(--accent-gold);">Stage 2 of 5 — Capital Discipline</h2>
+                <p class="text-gray-400 mb-10">BH₹ATHA does not measure money. It measures relationship with capital.</p>
                 
                 <div class="dark-card p-8">
                     <div class="space-y-8">
@@ -1058,11 +1233,11 @@
                         </div>
                     </div>
                     
-                    <div class="progress-container mt-12">
-                        <div class="progress-bar-assessment" style="width: 40%"></div>
+                    <div class="mt-12 h-2 bg-gray-800 rounded-full">
+                        <div class="h-full bg-accent-gold rounded-full" style="width: 40%"></div>
                     </div>
                     
-                    <div class="flex justify-between">
+                    <div class="flex justify-between mt-8">
                         <button onclick="showAssessmentSection('human-scale')" class="btn-primary-assessment">
                             ← Back
                         </button>
@@ -1074,9 +1249,9 @@
             </div>
 
             <!-- Section 3: Responsibility Load -->
-            <div id="section-responsibility-load" class="section">
-                <h2 class="section-title">Stage 3 of 5 — Responsibility Load</h2>
-                <p class="section-subtitle">Institutions are carried on nervous systems.</p>
+            <div id="assessment-responsibility-load" class="assessment-section">
+                <h2 class="text-3xl font-bold mb-4" style="color: var(--accent-gold);">Stage 3 of 5 — Responsibility Load</h2>
+                <p class="text-gray-400 mb-10">Institutions are carried on nervous systems.</p>
                 
                 <div class="dark-card p-8">
                     <div class="space-y-8">
@@ -1144,11 +1319,11 @@
                         </div>
                     </div>
                     
-                    <div class="progress-container mt-12">
-                        <div class="progress-bar-assessment" style="width: 60%"></div>
+                    <div class="mt-12 h-2 bg-gray-800 rounded-full">
+                        <div class="h-full bg-accent-gold rounded-full" style="width: 60%"></div>
                     </div>
                     
-                    <div class="flex justify-between">
+                    <div class="flex justify-between mt-8">
                         <button onclick="showAssessmentSection('capital-discipline')" class="btn-primary-assessment">
                             ← Back
                         </button>
@@ -1160,9 +1335,9 @@
             </div>
 
             <!-- Section 4: Character & Mindset -->
-            <div id="section-character-mindset" class="section">
-                <h2 class="section-title">Stage 4 of 5 — Character & Mindset</h2>
-                <p class="section-subtitle">Power tests character before skill.</p>
+            <div id="assessment-character-mindset" class="assessment-section">
+                <h2 class="text-3xl font-bold mb-4" style="color: var(--accent-gold);">Stage 4 of 5 — Character & Mindset</h2>
+                <p class="text-gray-400 mb-10">Power tests character before skill.</p>
                 
                 <div class="dark-card p-8">
                     <div class="space-y-8">
@@ -1239,15 +1414,15 @@
                                     <div class="font-medium">Brotherhood</div>
                                 </div>
                             </div>
-                            <div class="multi-select-counter" id="compromise-counter">Selected: 0/3</div>
+                            <div class="text-sm text-gray-500 mt-2" id="compromise-counter">Selected: 0/3</div>
                         </div>
                     </div>
                     
-                    <div class="progress-container mt-12">
-                        <div class="progress-bar-assessment" style="width: 80%"></div>
+                    <div class="mt-12 h-2 bg-gray-800 rounded-full">
+                        <div class="h-full bg-accent-gold rounded-full" style="width: 80%"></div>
                     </div>
                     
-                    <div class="flex justify-between">
+                    <div class="flex justify-between mt-8">
                         <button onclick="showAssessmentSection('responsibility-load')" class="btn-primary-assessment">
                             ← Back
                         </button>
@@ -1259,9 +1434,9 @@
             </div>
 
             <!-- Section 5: BHRATHA Fit -->
-            <div id="section-bhratha-fit" class="section">
-                <h2 class="section-title">Stage 5 of 5 — BHRATHA Orientation</h2>
-                <p class="section-subtitle">Final alignment assessment</p>
+            <div id="assessment-bhratha-fit" class="assessment-section">
+                <h2 class="text-3xl font-bold mb-4" style="color: var(--accent-gold);">Stage 5 of 5 — BH₹ATHA Orientation</h2>
+                <p class="text-gray-400 mb-10">Final alignment assessment</p>
                 
                 <div class="dark-card p-8">
                     <div class="space-y-8">
@@ -1290,7 +1465,7 @@
                         <div class="space-y-4">
                             <div class="flex items-center">
                                 <div class="checkbox-custom" onclick="toggleCheckbox(this)"></div>
-                                <span>I accept BHRATHA is not networking</span>
+                                <span>I accept BH₹ATHA is not networking</span>
                             </div>
                             
                             <div class="flex items-center">
@@ -1320,8 +1495,8 @@
                         </div>
                     </div>
                     
-                    <div class="progress-container mt-12">
-                        <div class="progress-bar-assessment" style="width: 100%"></div>
+                    <div class="mt-12 h-2 bg-gray-800 rounded-full">
+                        <div class="h-full bg-accent-gold rounded-full" style="width: 100%"></div>
                     </div>
                     
                     <div class="flex justify-between mt-8">
@@ -1336,39 +1511,39 @@
             </div>
 
             <!-- Section 6: Results -->
-            <div id="section-results" class="section">
-                <h2 class="section-title">Private Assessment Summary</h2>
-                <p class="section-subtitle">Your position within the BHRATHA framework</p>
+            <div id="assessment-results" class="assessment-section">
+                <h2 class="text-3xl font-bold mb-4" style="color: var(--accent-gold);">Private Assessment Summary</h2>
+                <p class="text-gray-400 mb-10">Your position within the BH₹ATHA framework</p>
                 
                 <div class="dark-card p-8">
                     <div class="space-y-6">
-                        <div class="result-metric">
-                            <div class="text-sm muted-text mb-2">Primary Archetype</div>
-                            <div class="text-2xl" id="result-archetype" style="color: var(--accent-gold);">—</div>
+                        <div class="py-6 border-b border-gray-800">
+                            <div class="text-sm text-gray-500 mb-2">Primary Archetype</div>
+                            <div class="text-2xl font-bold" id="result-archetype" style="color: var(--accent-gold);">—</div>
                         </div>
                         
-                        <div class="result-metric">
-                            <div class="text-sm muted-text mb-2">Dominant Strength</div>
-                            <div class="text-2xl" id="result-strength" style="color: var(--accent-gold);">—</div>
+                        <div class="py-6 border-b border-gray-800">
+                            <div class="text-sm text-gray-500 mb-2">Dominant Strength</div>
+                            <div class="text-2xl font-bold" id="result-strength" style="color: var(--accent-gold);">—</div>
                         </div>
                         
-                        <div class="result-metric">
-                            <div class="text-sm muted-text mb-2">Risk Vector</div>
-                            <div class="text-2xl" id="result-risk" style="color: var(--accent-gold);">—</div>
+                        <div class="py-6 border-b border-gray-800">
+                            <div class="text-sm text-gray-500 mb-2">Risk Vector</div>
+                            <div class="text-2xl font-bold" id="result-risk" style="color: var(--accent-gold);">—</div>
                         </div>
                         
-                        <div class="result-metric">
-                            <div class="text-sm muted-text mb-2">BHRATHA Compatibility</div>
-                            <div class="text-2xl" id="result-compatibility" style="color: var(--accent-gold);">—</div>
+                        <div class="py-6 border-b border-gray-800">
+                            <div class="text-sm text-gray-500 mb-2">BH₹ATHA Compatibility</div>
+                            <div class="text-2xl font-bold" id="result-compatibility" style="color: var(--accent-gold);">—</div>
                         </div>
                         
-                        <div class="result-metric">
-                            <div class="text-sm muted-text mb-2">Reflection</div>
+                        <div class="py-6">
+                            <div class="text-sm text-gray-500 mb-2">Reflection</div>
                             <p class="text-lg" id="result-reflection">—</p>
                         </div>
                         
-                        <div class="warning-text">
-                            BHRATHA membership requires ₹1.08 Cr as capital seriousness, independent of any investment participation.
+                        <div class="warning-text mt-8">
+                            BH₹ATHA membership requires ₹1.08 Cr as capital seriousness, independent of any investment participation.
                         </div>
                     </div>
                     
@@ -1376,7 +1551,7 @@
                         <button onclick="showAssessmentSection('application')" class="btn-primary-assessment px-12 py-4 text-lg">
                             Request Consideration
                         </button>
-                        <p class="text-sm muted-text mt-4">
+                        <p class="text-sm text-gray-500 mt-4">
                             By proceeding, you acknowledge this is not an application but a request for consideration.
                         </p>
                     </div>
@@ -1390,9 +1565,9 @@
             </div>
 
             <!-- Section 7: Application -->
-            <div id="section-application" class="section">
-                <h2 class="section-title">Request for Consideration</h2>
-                <p class="section-subtitle">Complete the following for BHRATHA review</p>
+            <div id="assessment-application" class="assessment-section">
+                <h2 class="text-3xl font-bold mb-4" style="color: var(--accent-gold);">Request for Consideration</h2>
+                <p class="text-gray-400 mb-10">Complete the following for BH₹ATHA review</p>
                 
                 <div class="dark-card p-8">
                     <div class="space-y-6">
@@ -1438,7 +1613,7 @@
                         <button onclick="submitApplication()" class="btn-primary-assessment px-12 py-4 text-lg">
                             Submit for Consideration
                         </button>
-                        <p class="text-sm muted-text mt-4">
+                        <p class="text-sm text-gray-500 mt-4">
                             Your request will be logged. Consideration is not guaranteed.
                         </p>
                     </div>
@@ -1450,97 +1625,69 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
 
-    <!-- Exit/Submit Modal -->
-    <div id="exitModal" class="exit-modal">
-        <div class="exit-modal-content">
-            <div class="close-modal" onclick="closeExitModal()">×</div>
-            
-            <div class="text-center mb-8">
-                <div class="text-4xl mb-4">🏁</div>
-                <h2 class="text-2xl font-bold mb-2">Assessment Complete</h2>
-                <p class="text-gray-400">Your private assessment results have been calculated.</p>
-            </div>
-            
-            <div class="modal-section">
-                <div class="modal-section-title">Assessment Summary</div>
-                <div class="grid grid-cols-2 gap-4 mb-4">
-                    <div>
-                        <div class="text-sm text-gray-400">Primary Archetype</div>
-                        <div class="text-xl font-bold text-accent-gold" id="modal-archetype">—</div>
-                    </div>
-                    <div>
-                        <div class="text-sm text-gray-400">BHRATHA Compatibility</div>
-                        <div class="text-xl font-bold text-accent-gold" id="modal-compatibility">—</div>
+            <!-- Section 8: Thank You -->
+            <div id="assessment-thankyou" class="assessment-section">
+                <div class="text-center py-20">
+                    <h1 class="display-2 mb-6 tracking-tight">THANK YOU</h1>
+                    <div class="text-xl text-gray-400 mb-10">Your assessment has been submitted</div>
+                    
+                    <div class="dark-card p-10 mb-12 max-w-2xl mx-auto">
+                        <div class="text-6xl mb-8" style="color: var(--accent-green);">✓</div>
+                        <p class="text-2xl mb-8" style="color: var(--accent-green);">
+                            Assessment Complete
+                        </p>
+                        <p class="text-gray-400 mb-10">
+                            Your self-assessment responses and request for consideration have been logged successfully.
+                        </p>
+                        
+                        <div class="space-y-6 mb-10">
+                            <div class="p-4 bg-green-900/20 border border-green-700 rounded-lg">
+                                <p class="font-bold" style="color: var(--accent-green);">BH₹ATHA will contact you within 3 business days</p>
+                                <p class="text-sm text-gray-400 mt-2">Our team will review your assessment and determine next steps for consideration.</p>
+                            </div>
+                            
+                            <div class="p-4 bg-blue-900/20 border border-blue-700 rounded-lg">
+                                <p class="font-bold" style="color: var(--accent-blue);">Next Steps</p>
+                                <ul class="text-sm text-gray-400 mt-2 space-y-2">
+                                    <li>• Assessment review by BH₹ATHA team</li>
+                                    <li>• Preliminary compatibility evaluation</li>
+                                    <li>• Potential invitation for deeper discussion</li>
+                                    <li>• Clarity on membership pathway if aligned</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <p class="text-gray-500 text-sm mb-8">
+                            This is not a guarantee of acceptance. BH₹ATHA membership requires alignment across character, capital discipline, and institutional temperament.
+                        </p>
+                        
+                        <div class="flex flex-col md:flex-row gap-4 justify-center">
+                            <button onclick="restartAssessment()" class="btn-primary-assessment">
+                                <i class="fas fa-redo mr-2"></i>Restart Assessment
+                            </button>
+                            <button onclick="showTab('pitch-deck')" class="btn-primary-assessment">
+                                <i class="fas fa-presentation-screen mr-2"></i>Return to Pitch
+                            </button>
+                        </div>
                     </div>
                 </div>
-                <div class="mb-4">
-                    <div class="text-sm text-gray-400">Reflection</div>
-                    <p class="text-lg" id="modal-reflection">—</p>
-                </div>
-            </div>
-            
-            <div class="modal-section">
-                <div class="modal-section-title">Application Details</div>
-                <div class="space-y-3">
-                    <div class="flex justify-between">
-                        <span class="text-gray-400">Name:</span>
-                        <span class="font-medium" id="modal-name">—</span>
-                    </div>
-                    <div class="flex justify-between">
-                        <span class="text-gray-400">Email:</span>
-                        <span class="font-medium" id="modal-email">—</span>
-                    </div>
-                    <div class="flex justify-between">
-                        <span class="text-gray-400">Capital Range:</span>
-                        <span class="font-medium" id="modal-capital">—</span>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="text-center text-sm text-gray-500 mb-6">
-                This model ensures mathematical fairness while protecting the founder's vision. All percentages are calculated to three decimal places for precision.
-            </div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <button 
-                    onclick="closeExitModal()" 
-                    class="px-4 py-3 bg-gray-800 hover:bg-gray-700 font-semibold rounded-lg"
-                >
-                    Continue Editing
-                </button>
-                <button 
-                    onclick="downloadAssessmentSummary()" 
-                    class="px-4 py-3 btn-success font-bold rounded-lg flex items-center justify-center"
-                >
-                    <i class="fas fa-download mr-2"></i>
-                    Download Summary
-                </button>
-            </div>
-            
-            <div class="mt-6 text-center">
-                <a href="#" onclick="sendViaWhatsApp()" class="whatsapp-btn">
-                    <i class="fab fa-whatsapp mr-2"></i>
-                    Send via WhatsApp
-                </a>
             </div>
         </div>
     </div>
 
     <!-- Never Allowed Modal -->
-    <div id="neverAllowedModal" class="modal">
+    <div id="neverAllowedModal" class="modal-overlay">
         <div class="modal-content">
-            <div class="close-modal" onclick="closeNeverAllowedModal()">×</div>
-            <h2 class="text-2xl mb-8" style="color: var(--danger); text-align: center;">WHO IS NEVER ALLOWED</h2>
-            <p class="text-center muted-text mb-10">(Even if they are rich.)</p>
+            <div class="modal-close" onclick="closeModal('neverAllowedModal')">×</div>
+            <h2 class="text-2xl font-bold mb-8 text-center" style="color: var(--accent-red);">WHO IS NEVER ALLOWED</h2>
+            <p class="text-center text-gray-400 mb-10">(Even if they are rich.)</p>
             
             <div class="space-y-8">
                 <div>
-                    <h3 class="text-lg mb-4" style="color: var(--danger);">1️⃣ Integrity Violators</h3>
-                    <p class="muted-text mb-2">Those who build wealth by damaging systems.</p>
-                    <ul class="list-disc pl-5 muted-text space-y-1">
+                    <h3 class="text-lg mb-4" style="color: var(--accent-red);">1️⃣ Integrity Violators</h3>
+                    <p class="text-gray-400 mb-2">Those who build wealth by damaging systems.</p>
+                    <ul class="list-disc pl-5 text-gray-400 space-y-1">
                         <li>Black money operators</li>
                         <li>Shell-company builders</li>
                         <li>Ponzi / MLM creators</li>
@@ -1551,9 +1698,9 @@
                 </div>
                 
                 <div>
-                    <h3 class="text-lg mb-4" style="color: var(--danger);">2️⃣ Character Risks</h3>
-                    <p class="muted-text mb-2">Those who collapse under power.</p>
-                    <ul class="list-disc pl-5 muted-text space-y-1">
+                    <h3 class="text-lg mb-4" style="color: var(--accent-red);">2️⃣ Character Risks</h3>
+                    <p class="text-gray-400 mb-2">Those who collapse under power.</p>
+                    <ul class="list-disc pl-5 text-gray-400 space-y-1">
                         <li>Addictive personalities (drugs, gambling, power abuse)</li>
                         <li>Ego-driven publicity seekers</li>
                         <li>Serial betrayal histories</li>
@@ -1563,9 +1710,9 @@
                 </div>
                 
                 <div>
-                    <h3 class="text-lg mb-4" style="color: var(--danger);">3️⃣ System Corruptors</h3>
-                    <p class="muted-text mb-2">Those who poison institutions from inside.</p>
-                    <ul class="list-disc pl-5 muted-text space-y-1">
+                    <h3 class="text-lg mb-4" style="color: var(--accent-red);">3️⃣ System Corruptors</h3>
+                    <p class="text-gray-400 mb-2">Those who poison institutions from inside.</p>
+                    <ul class="list-disc pl-5 text-gray-400 space-y-1">
                         <li>People who destroy organizations after entering</li>
                         <li>People who leak private structures</li>
                         <li>People who weaponize influence irresponsibly</li>
@@ -1574,9 +1721,9 @@
                 </div>
                 
                 <div>
-                    <h3 class="text-lg mb-4" style="color: var(--danger);">4️⃣ Short-Term Thinkers</h3>
-                    <p class="muted-text mb-2">Those who cannot build what they cannot quickly benefit from.</p>
-                    <ul class="list-disc pl-5 muted-text space-y-1">
+                    <h3 class="text-lg mb-4" style="color: var(--accent-red);">4️⃣ Short-Term Thinkers</h3>
+                    <p class="text-gray-400 mb-2">Those who cannot build what they cannot quickly benefit from.</p>
+                    <ul class="list-disc pl-5 text-gray-400 space-y-1">
                         <li>Quick-return mindset</li>
                         <li>Trend chasers</li>
                         <li>Crypto-casino mentality</li>
@@ -1585,10 +1732,10 @@
                 </div>
                 
                 <div>
-                    <h3 class="text-lg mb-4" style="color: var(--danger);">5️⃣ Hidden Control Agents</h3>
-                    <p class="muted-text mb-2">Those whose primary loyalty is not their own conscience.</p>
-                    <p class="muted-text mb-2">Individuals acting primarily for:</p>
-                    <ul class="list-disc pl-5 muted-text space-y-1">
+                    <h3 class="text-lg mb-4" style="color: var(--accent-red);">5️⃣ Hidden Control Agents</h3>
+                    <p class="text-gray-400 mb-2">Those whose primary loyalty is not their own conscience.</p>
+                    <p class="text-gray-400 mb-2">Individuals acting primarily for:</p>
+                    <ul class="list-disc pl-5 text-gray-400 space-y-1">
                         <li>Political parties</li>
                         <li>Intelligence agencies</li>
                         <li>Criminal syndicates</li>
@@ -1598,478 +1745,80 @@
                 
                 <div class="text-center pt-8 border-t border-gray-800">
                     <p class="text-xl" style="color: var(--accent-gold); font-weight: 500;">
-                        BHRATHA accepts builders of systems, not users of systems.
+                        BH₹ATHA accepts builders of systems, not users of systems.
                     </p>
                 </div>
+            </div>
+            
+            <div class="mt-8 text-center">
+                <button onclick="closeModal('neverAllowedModal')" class="btn-primary-assessment px-8">
+                    I Understand
+                </button>
             </div>
         </div>
     </div>
 
-    <footer class="p-8 border-t border-gray-900 text-center">
-        <div class="text-xl font-bold tracking-widest mb-4">
-            BH<span class="logo-rupee">₹</span>ATHA<span class="logo-fullstop">.</span>
-        </div>
-        <p class="text-gray-600 text-sm max-w-md mx-auto">
-            A brotherhood-led global lifestyle brand. Built on trust. Protected by standards. Partnerships are selective.
-        </p>
-    </footer>
-
     <script>
-        // ========== Navigation Between Calculators ==========
-        document.querySelectorAll('.nav-tab').forEach(tab => {
-            tab.addEventListener('click', function() {
-                // Update active tab
-                document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
-                this.classList.add('active');
-                
-                // Show selected calculator
-                const tabId = this.dataset.tab;
-                if (tabId === 'brotherhood-calculator') {
-                    document.getElementById('brotherhood-calculator').style.display = 'block';
-                    document.getElementById('assessment').style.display = 'none';
-                } else {
-                    document.getElementById('brotherhood-calculator').style.display = 'none';
-                    document.getElementById('assessment').style.display = 'block';
-                }
-            });
-        });
-
-        // ========== BROTHERHOOD CALCULATOR LOGIC ==========
-        // DOM Elements
-        const broInputsContainer = document.getElementById('broInputsContainer');
-        const addBroBtn = document.getElementById('addBroBtn');
-        const calculateBtn = document.getElementById('calculateBtn');
-        const resetBtn = document.getElementById('resetBtn');
-        const exitBtn = document.getElementById('exitBtn');
-        const ownershipChart = document.getElementById('ownershipChart');
-        const totalInvestmentEl = document.getElementById('totalInvestment');
-        const totalBrosEl = document.getElementById('totalBros');
-        const highestPercentageEl = document.getElementById('highestPercentage');
-        const remainingPoolDisplayEl = document.getElementById('remainingPoolDisplay');
-        const calculationTimeEl = document.getElementById('calculationTime');
-        
-        // Colors for BROs
-        const broColors = [
-            'bg-green-500', 'bg-blue-500', 'bg-purple-500', 'bg-pink-500', 
-            'bg-yellow-500', 'bg-indigo-500', 'bg-teal-500', 'bg-red-500',
-            'bg-amber-500', 'bg-cyan-500', 'bg-lime-500', 'bg-emerald-500'
-        ];
-        
-        // Store BRO data
-        let bros = [
-            { id: 1, investment: 5000000, color: broColors[0] },
-            { id: 2, investment: 3000000, color: broColors[1] },
-            { id: 3, investment: 2000000, color: broColors[2] }
-        ];
-        
-        // BRO counter
-        let broCounter = 3;
-        
-        // Format currency in Indian format
-        function formatCurrency(amount) {
-            if (!amount && amount !== 0) return '₹0';
-            
-            if (amount >= 10000000) {
-                return '₹' + (amount / 10000000).toFixed(2) + ' Cr';
-            } else if (amount >= 100000) {
-                return '₹' + (amount / 100000).toFixed(2) + ' L';
-            } else {
-                return '₹' + amount.toLocaleString('en-IN');
-            }
-        }
-        
-        // Format percentage to 3 decimal places
-        function formatPercentage(value) {
-            return value.toFixed(3) + '%';
-        }
-        
-        // Add a new BRO input field
-        function addBroInput() {
-            broCounter++;
-            const newBroIndex = bros.length;
-            const colorClass = broColors[newBroIndex % broColors.length];
-            
-            const broDiv = document.createElement('div');
-            broDiv.className = 'bro-input-item fade-in';
-            broDiv.innerHTML = `
-                <div class="flex items-center">
-                    <div class="w-10 h-10 rounded-full ${colorClass} flex items-center justify-center text-black font-bold mr-3">BRO ${broCounter}</div>
-                    <div class="flex-grow">
-                        <div class="text-sm text-gray-400 mb-1">Investment Amount (₹)</div>
-                        <input 
-                            type="number" 
-                            class="bro-amount bg-black border border-gray-700 rounded-lg px-4 py-3 text-lg w-full" 
-                            placeholder="e.g., 1000000" 
-                            value="1000000"
-                            min="0"
-                            step="100000"
-                            data-id="${broCounter}"
-                        >
-                    </div>
-                    <button class="remove-bro-btn ml-3 p-2 text-red-400 hover:text-red-300 opacity-70 hover:opacity-100">
-                        <i class="fas fa-times"></i>
-                    </button>
-                </div>
-            `;
-            
-            broInputsContainer.appendChild(broDiv);
-            
-            // Add to bros array
-            bros.push({
-                id: broCounter,
-                investment: 1000000,
-                color: colorClass
-            });
-            
-            // Add event listener to remove button
-            const removeBtn = broDiv.querySelector('.remove-bro-btn');
-            removeBtn.addEventListener('click', function() {
-                const broId = parseInt(broDiv.querySelector('.bro-amount').dataset.id);
-                removeBro(broId, broDiv);
-            });
-            
-            // Add event listener to input
-            const input = broDiv.querySelector('.bro-amount');
-            input.addEventListener('input', function() {
-                const broId = parseInt(this.dataset.id);
-                updateBroInvestment(broId, parseFloat(this.value) || 0);
-                // Auto-calculate after a delay
-                setTimeout(calculateOwnership, 500);
-            });
-            
-            // Recalculate after adding
-            calculateOwnership();
-        }
-        
-        // Remove a BRO
-        function removeBro(broId, element) {
-            // Remove from DOM
-            if (element && element.parentNode) {
-                element.classList.add('opacity-0', 'transform', '-translate-x-10');
-                setTimeout(() => {
-                    if (element.parentNode) {
-                        element.parentNode.removeChild(element);
-                    }
-                }, 300);
-            }
-            
-            // Remove from bros array
-            bros = bros.filter(bro => bro.id !== broId);
-            
-            // Recalculate
-            calculateOwnership();
-        }
-        
-        // Update BRO investment amount
-        function updateBroInvestment(broId, investment) {
-            const bro = bros.find(b => b.id === broId);
-            if (bro) {
-                bro.investment = investment;
-            }
-        }
-        
-        // Calculate ownership percentages
-        function calculateOwnership() {
-            // Get all investment amounts
-            const broInputs = document.querySelectorAll('.bro-amount');
-            bros.forEach((bro, index) => {
-                if (broInputs[index]) {
-                    bro.investment = parseFloat(broInputs[index].value) || 0;
-                }
-            });
-            
-            // Calculate total investment
-            const totalInvestment = bros.reduce((sum, bro) => sum + bro.investment, 0);
-            
-            // Update summary stats
-            totalInvestmentEl.textContent = formatCurrency(totalInvestment);
-            totalBrosEl.textContent = `${bros.length} BRO${bros.length !== 1 ? 's' : ''}`;
-            remainingPoolDisplayEl.textContent = formatPercentage(89.2);
-            
-            // Calculate percentages for each BRO
-            bros.forEach(bro => {
-                bro.percentage = totalInvestment > 0 ? 
-                    (bro.investment / totalInvestment) * 89.2 : 0;
-                bro.formattedInvestment = formatCurrency(bro.investment);
-                bro.formattedPercentage = formatPercentage(bro.percentage);
-            });
-            
-            // Sort BROs by percentage (highest first)
-            bros.sort((a, b) => b.percentage - a.percentage);
-            
-            // Update highest percentage
-            if (bros.length > 0) {
-                highestPercentageEl.textContent = formatPercentage(bros[0].percentage);
-            } else {
-                highestPercentageEl.textContent = '0.000%';
-            }
-            
-            // Update calculation time
-            const now = new Date();
-            calculationTimeEl.textContent = `Calculated at ${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}`;
-            
-            // Display results
-            displayResults(totalInvestment);
-        }
-        
-        // Display calculation results
-        function displayResults(totalInvestment) {
-            // Clear existing BRO rows (keep founder row)
-            const founderRow = ownershipChart.querySelector('.owner-row.founder');
-            ownershipChart.innerHTML = '';
-            
-            // Add founder row back
-            if (founderRow) {
-                ownershipChart.appendChild(founderRow);
-            } else {
-                // Create founder row
-                const founderDiv = document.createElement('div');
-                founderDiv.className = 'owner-row founder';
-                founderDiv.innerHTML = `
-                    <div class="flex justify-between items-center mb-1">
-                        <div class="flex items-center">
-                            <div class="w-10 h-10 rounded-full bg-orange-500 flex items-center justify-center text-black font-bold mr-3">F</div>
-                            <div>
-                                <div class="font-bold">Bharath</div>
-                                <div class="text-xs text-gray-400">Founder • Fixed Stake</div>
-                            </div>
-                        </div>
-                        <div class="text-right">
-                            <div class="text-xl font-bold text-orange-400">10.800%</div>
-                            <div class="text-xs text-gray-400">Non-negotiable</div>
-                        </div>
-                    </div>
-                    <div class="progress-bar">
-                        <div class="progress-fill" style="width: 10.8%"></div>
-                    </div>
-                `;
-                ownershipChart.appendChild(founderDiv);
-            }
-            
-            // Add BRO rows
-            bros.forEach((bro, index) => {
-                const broDiv = document.createElement('div');
-                broDiv.className = 'owner-row investor fade-in';
-                
-                // Determine if this is the highest BRO
-                const highestBadge = index === 0 ? '• Highest Investor' : '';
-                
-                // Get color from class
-                const colorMap = {
-                    'bg-green-500': '#00ff88',
-                    'bg-blue-500': '#0095ff',
-                    'bg-purple-500': '#8a2be2',
-                    'bg-pink-500': '#ff1493',
-                    'bg-yellow-500': '#ffd700',
-                    'bg-indigo-500': '#4b0082',
-                    'bg-teal-500': '#20b2aa',
-                    'bg-red-500': '#ff4444',
-                    'bg-amber-500': '#ffbf00',
-                    'bg-cyan-500': '#00ffff',
-                    'bg-lime-500': '#bfff00',
-                    'bg-emerald-500': '#00cc99'
-                };
-                
-                const broColor = colorMap[bro.color] || '#ffffff';
-                
-                // Calculate profit per 100
-                const profitPer100 = bro.percentage.toFixed(3);
-                
-                broDiv.innerHTML = `
-                    <div class="flex justify-between items-center mb-1">
-                        <div class="flex items-center">
-                            <div class="w-10 h-10 rounded-full ${bro.color} flex items-center justify-center text-black font-bold mr-3">BRO ${bro.id}</div>
-                            <div>
-                                <div class="font-bold">BRO ${bro.id}</div>
-                                <div class="text-xs text-gray-400">${bro.formattedInvestment} ${highestBadge}</div>
-                            </div>
-                        </div>
-                        <div class="text-right">
-                            <div class="text-xl font-bold" style="color: ${broColor}">${bro.formattedPercentage}</div>
-                            <div class="text-xs text-gray-400">₹${profitPer100} per ₹100 profit</div>
-                        </div>
-                    </div>
-                    <div class="progress-bar">
-                        <div class="progress-fill" style="width: ${bro.percentage}%"></div>
-                    </div>
-                `;
-                
-                ownershipChart.appendChild(broDiv);
-            });
-        }
-        
-        // Reset all inputs
-        function resetAll() {
-            // Reset bros array
-            bros = [
-                { id: 1, investment: 5000000, color: broColors[0] },
-                { id: 2, investment: 3000000, color: broColors[1] },
-                { id: 3, investment: 2000000, color: broColors[2] }
-            ];
-            
-            // Reset counter
-            broCounter = 3;
-            
-            // Recreate input fields
-            broInputsContainer.innerHTML = '';
-            
-            // Re-add initial BROs
-            for (let i = 0; i < 3; i++) {
-                const broDiv = document.createElement('div');
-                broDiv.className = 'bro-input-item fade-in';
-                broDiv.innerHTML = `
-                    <div class="flex items-center">
-                        <div class="w-10 h-10 rounded-full ${broColors[i]} flex items-center justify-center text-black font-bold mr-3">BRO ${i+1}</div>
-                        <div class="flex-grow">
-                            <div class="text-sm text-gray-400 mb-1">Investment Amount (₹)</div>
-                            <input 
-                                type="number" 
-                                class="bro-amount bg-black border border-gray-700 rounded-lg px-4 py-3 text-lg w-full" 
-                                placeholder="e.g., ${[5000000, 3000000, 2000000][i]}" 
-                                value="${[5000000, 3000000, 2000000][i]}"
-                                min="0"
-                                step="100000"
-                                data-id="${i+1}"
-                            >
-                        </div>
-                        <button class="remove-bro-btn ml-3 p-2 text-red-400 hover:text-red-300 opacity-70 hover:opacity-100">
-                            <i class="fas fa-times"></i>
-                        </button>
-                    </div>
-                `;
-                
-                broInputsContainer.appendChild(broDiv);
-                
-                // Add event listeners
-                const removeBtn = broDiv.querySelector('.remove-bro-btn');
-                removeBtn.addEventListener('click', function() {
-                    const broId = parseInt(broDiv.querySelector('.bro-amount').dataset.id);
-                    removeBro(broId, broDiv);
-                });
-                
-                const input = broDiv.querySelector('.bro-amount');
-                input.addEventListener('input', function() {
-                    const broId = parseInt(this.dataset.id);
-                    updateBroInvestment(broId, parseFloat(this.value) || 0);
-                    setTimeout(calculateOwnership, 500);
-                });
-            }
-            
-            // Recalculate
-            calculateOwnership();
-            
-            // Show notification
-            calculateBtn.innerHTML = '<i class="fas fa-check mr-2"></i> Reset Complete!';
-            calculateBtn.classList.remove('btn-success');
-            calculateBtn.classList.add('btn-primary');
-            
-            setTimeout(() => {
-                calculateBtn.innerHTML = '<i class="fas fa-calculator mr-2"></i> Calculate';
-                calculateBtn.classList.remove('btn-primary');
-                calculateBtn.classList.add('btn-success');
-            }, 2000);
-        }
-        
-        // Show exit modal for brotherhood calculator
-        function showExitModalBrotherhood() {
-            // Calculate total investment
-            const totalInvestment = bros.reduce((sum, bro) => sum + bro.investment, 0);
-            
-            // Create summary
-            let summary = `BHRATHA BROTHERHOOD OWNERSHIP SUMMARY\n`;
-            summary += `=====================================\n`;
-            summary += `Calculation Date: ${new Date().toLocaleDateString()}\n`;
-            summary += `Total Investment: ${formatCurrency(totalInvestment)}\n`;
-            summary += `Number of BROs: ${bros.length}\n\n`;
-            summary += `OWNERSHIP DISTRIBUTION:\n`;
-            summary += `----------------------\n`;
-            summary += `Bharath (Founder): 10.800% (Fixed)\n\n`;
-            
-            // Sort BROs by percentage
-            const sortedBros = [...bros].sort((a, b) => b.percentage - a.percentage);
-            sortedBros.forEach((bro, index) => {
-                summary += `BRO ${bro.id}: ${formatCurrency(bro.investment)} = ${formatPercentage(bro.percentage)}\n`;
-            });
-            
-            summary += `\nTotal: 100.000%\n`;
-            summary += `\nBHRATHA Brotherhood Model\n`;
-            summary += `Capital-respecting | Ego-neutral | Mathematically fair`;
-            
-            // Download the summary
-            downloadTextFile(summary, `BHRATHA-Brotherhood-Ownership-${new Date().toISOString().split('T')[0]}.txt`);
-        }
-        
-        // Initialize the calculator
-        function initCalculator() {
-            // Add event listeners to existing BRO inputs
-            document.querySelectorAll('.bro-amount').forEach((input, index) => {
-                input.dataset.id = (index + 1).toString();
-                input.addEventListener('input', function() {
-                    const broId = parseInt(this.dataset.id);
-                    updateBroInvestment(broId, parseFloat(this.value) || 0);
-                    setTimeout(calculateOwnership, 500);
-                });
-            });
-            
-            // Add event listeners to existing remove buttons
-            document.querySelectorAll('.remove-bro-btn').forEach((btn, index) => {
-                btn.addEventListener('click', function() {
-                    const broDiv = this.closest('.bro-input-item');
-                    const broId = parseInt(broDiv.querySelector('.bro-amount').dataset.id);
-                    removeBro(broId, broDiv);
-                });
-            });
-            
-            // Add event listeners to buttons
-            addBroBtn.addEventListener('click', addBroInput);
-            calculateBtn.addEventListener('click', calculateOwnership);
-            resetBtn.addEventListener('click', resetAll);
-            exitBtn.addEventListener('click', showExitModalBrotherhood);
-            
-            // Calculate initial ownership
-            calculateOwnership();
-            
-            // Auto-calculate when inputs change (with debounce)
-            let calculateTimeout;
-            broInputsContainer.addEventListener('input', function(e) {
-                if (e.target.classList.contains('bro-amount')) {
-                    clearTimeout(calculateTimeout);
-                    calculateTimeout = setTimeout(calculateOwnership, 800);
-                }
-            });
-        }
-
-        // ========== ASSESSMENT CALCULATOR LOGIC ==========
-        // Application State
-        const assessmentState = {
+        // ========== GLOBAL STATE ==========
+        let currentAssessmentSection = 'landing';
+        let assessmentState = {
             answers: {},
-            currentSection: 'landing',
             selectedCompromises: []
         };
-
-        // Section Navigation for Assessment
+        
+        // ========== NAVIGATION FUNCTIONS ==========
+        function showTab(tabId) {
+            // Update active tab
+            document.querySelectorAll('.nav-tab').forEach(tab => {
+                tab.classList.remove('active');
+                if (tab.dataset.tab === tabId) {
+                    tab.classList.add('active');
+                }
+            });
+            
+            // Show selected section
+            if (tabId === 'pitch-deck') {
+                document.getElementById('pitch-deck').style.display = 'block';
+                document.getElementById('assessment').style.display = 'none';
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            } else {
+                document.getElementById('pitch-deck').style.display = 'none';
+                document.getElementById('assessment').style.display = 'block';
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+        
+        // ========== PROGRESS BAR ==========
+        function updateProgressBar() {
+            const totalHeight = document.body.scrollHeight - window.innerHeight;
+            const scrollPosition = window.scrollY;
+            const progress = (scrollPosition / totalHeight) * 100;
+            document.getElementById('progressBar').style.width = `${progress}%`;
+        }
+        
+        window.addEventListener('scroll', updateProgressBar);
+        window.addEventListener('resize', updateProgressBar);
+        
+        // ========== ASSESSMENT FUNCTIONS ==========
         function showAssessmentSection(sectionId) {
             // Hide all sections
-            document.querySelectorAll('#assessment .section').forEach(section => {
+            document.querySelectorAll('.assessment-section').forEach(section => {
                 section.classList.remove('active');
             });
             
             // Show target section
-            const targetSection = document.getElementById(`section-${sectionId}`);
+            const targetSection = document.getElementById(`assessment-${sectionId}`);
             if (targetSection) {
                 targetSection.classList.add('active');
-                assessmentState.currentSection = sectionId;
-                
-                // Scroll to top
-                window.scrollTo(0, 0);
+                currentAssessmentSection = sectionId;
+                window.scrollTo({ top: 0, behavior: 'smooth' });
             }
         }
-
+        
         function startAssessment() {
             showAssessmentSection('human-scale');
         }
-
-        // Question Selection
+        
         function selectOption(element) {
             const question = element.getAttribute('data-question');
             const value = element.getAttribute('data-value');
@@ -2088,14 +1837,10 @@
             // Store answer
             assessmentState.answers[question] = value;
         }
-
+        
         function selectMultiOption(element) {
             const question = element.getAttribute('data-question');
             const value = element.getAttribute('data-value');
-            
-            if (!assessmentState.selectedCompromises) {
-                assessmentState.selectedCompromises = [];
-            }
             
             // Toggle selection
             if (element.classList.contains('selected')) {
@@ -2107,7 +1852,7 @@
             } else {
                 // Check if we've reached limit
                 if (assessmentState.selectedCompromises.length >= 3) {
-                    return; // Don't allow more than 3 selections
+                    return;
                 }
                 element.classList.add('selected');
                 assessmentState.selectedCompromises.push(value);
@@ -2122,23 +1867,19 @@
             // Store answer
             assessmentState.answers[question] = assessmentState.selectedCompromises;
         }
-
-        // Checkbox Handling
+        
         function toggleCheckbox(element) {
             element.classList.toggle('checked');
         }
-
-        // Modal Functions
-        function showNeverAllowed(event) {
-            event.preventDefault();
-            document.getElementById('neverAllowedModal').classList.add('active');
+        
+        function showNeverAllowed() {
+            document.getElementById('neverAllowedModal').style.display = 'flex';
         }
-
-        function closeNeverAllowedModal() {
-            document.getElementById('neverAllowedModal').classList.remove('active');
+        
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
         }
-
-        // Calculate Results
+        
         function calculateResults() {
             // Check if all required fields are filled
             const textAnswers = ['q-brotherhood', 'q-influence', 'q-institutions'];
@@ -2153,7 +1894,7 @@
             }
             
             // Check if all checkboxes are checked
-            const checkboxes = document.querySelectorAll('#section-bhratha-fit .checkbox-custom');
+            const checkboxes = document.querySelectorAll('#assessment-bhratha-fit .checkbox-custom');
             const allChecked = Array.from(checkboxes).every(cb => cb.classList.contains('checked'));
             
             if (!allChecked) {
@@ -2161,14 +1902,14 @@
                 return;
             }
             
-            // Calculate archetype based on answers (simplified logic)
+            // Calculate archetype based on answers
             let archetype = 'Builder';
             let strength = 'Systems';
             let risk = 'Impatience';
-            let compatibility = 'Developing';
+            let compatibility = 'Developing Alignment';
             let reflection = '';
             
-            // Simple scoring logic based on selected answers
+            // Get answers
             const age = assessmentState.answers['age'];
             const experience = assessmentState.answers['experience'];
             const capital = assessmentState.answers['capital-controlled'];
@@ -2178,16 +1919,16 @@
             // Archetype logic
             if (capital && capital.includes('50Cr+')) {
                 archetype = 'Financier';
-                strength = 'Capital';
-                risk = 'Control';
+                strength = 'Capital Deployment';
+                risk = 'Control Addiction';
             } else if (people && people.includes('500+')) {
                 archetype = 'Architect';
-                strength = 'People';
-                risk = 'Ego';
+                strength = 'People Systems';
+                risk = 'Ego Fragmentation';
             } else if (experience && experience.includes('20+')) {
                 archetype = 'Guardian';
-                strength = 'Stability';
-                risk = 'Fragmentation';
+                strength = 'Institutional Stability';
+                risk = 'System Fragmentation';
             }
             
             // Compatibility logic
@@ -2198,17 +1939,17 @@
             const totalScore = capitalScore + responsibilityScore + valuesScore;
             
             if (totalScore >= 8) {
-                compatibility = 'Rare';
-                reflection = 'Your profile indicates exceptional alignment with BHRATHA principles. You demonstrate the temperament, experience, and capital discipline for institutional guardianship.';
+                compatibility = 'Rare Alignment';
+                reflection = 'Your profile indicates exceptional alignment with BH₹ATHA principles. You demonstrate the temperament, experience, and capital discipline for institutional guardianship.';
             } else if (totalScore >= 6) {
-                compatibility = 'Strong';
-                reflection = 'Your profile demonstrates strong alignment with BHRATHA principles. You show capacity for institutional thinking and long-term system stewardship.';
+                compatibility = 'Strong Alignment';
+                reflection = 'Your profile demonstrates strong alignment with BH₹ATHA principles. You show capacity for institutional thinking and long-term system stewardship.';
             } else if (totalScore >= 4) {
-                compatibility = 'Developing';
-                reflection = 'Your responses indicate exposure to responsibility and capital cycles, with developing institutional temperament. BHRATHA demands long-horizon discipline and discreet system building.';
+                compatibility = 'Developing Alignment';
+                reflection = 'Your responses indicate exposure to responsibility and capital cycles, with developing institutional temperament. BH₹ATHA demands long-horizon discipline and discreet system building.';
             } else {
-                compatibility = 'Low';
-                reflection = 'Your responses indicate limited alignment with BHRATHA principles of long-horizon institutional building. The brotherhood demands deeper commitment to system stewardship over transactional gain.';
+                compatibility = 'Limited Alignment';
+                reflection = 'Your responses indicate limited alignment with BH₹ATHA principles of long-horizon institutional building. The brotherhood demands deeper commitment to system stewardship over transactional gain.';
             }
             
             // Update result display
@@ -2221,7 +1962,7 @@
             // Show results section
             showAssessmentSection('results');
         }
-
+        
         function getCapitalScore(capital) {
             if (!capital) return 1;
             if (capital.includes('50Cr+')) return 3;
@@ -2229,7 +1970,7 @@
             if (capital.includes('2Cr-10Cr')) return 1;
             return 0;
         }
-
+        
         function getResponsibilityScore(people) {
             if (!people) return 1;
             if (people.includes('500+')) return 3;
@@ -2237,8 +1978,7 @@
             if (people.includes('21-100')) return 1;
             return 0;
         }
-
-        // Application Submission
+        
         function submitApplication() {
             // Get form values
             const name = document.getElementById('app-name').value.trim();
@@ -2248,7 +1988,7 @@
             const references = document.getElementById('app-references').value.trim();
             
             // Check if confidentiality checkbox is checked
-            const confidentialityChecked = document.querySelector('#section-application .checkbox-custom.checked');
+            const confidentialityChecked = document.querySelector('#assessment-application .checkbox-custom.checked');
             
             // Validate
             if (!name || !email || !background || !capital || !references || !confidentialityChecked) {
@@ -2263,128 +2003,36 @@
                 background,
                 capital,
                 references,
-                date: new Date().toISOString()
+                date: new Date().toISOString(),
+                assessmentResults: {
+                    archetype: document.getElementById('result-archetype').textContent,
+                    compatibility: document.getElementById('result-compatibility').textContent
+                }
             };
             
-            // Show the exit modal with assessment results
-            showExitModal();
-        }
-
-        // Show Exit Modal (for assessment)
-        function showExitModal() {
-            // Populate modal with assessment results
-            document.getElementById('modal-archetype').textContent = document.getElementById('result-archetype').textContent;
-            document.getElementById('modal-compatibility').textContent = document.getElementById('result-compatibility').textContent;
-            document.getElementById('modal-reflection').textContent = document.getElementById('result-reflection').textContent;
+            // Show completion section
+            showAssessmentSection('thankyou');
             
-            // Populate modal with application details
-            if (assessmentState.application) {
-                document.getElementById('modal-name').textContent = assessmentState.application.name;
-                document.getElementById('modal-email').textContent = assessmentState.application.email;
-                document.getElementById('modal-capital').textContent = assessmentState.application.capital;
-            }
+            // Log to console (in real implementation, send to server)
+            console.log('Assessment application submitted:', assessmentState.application);
             
-            // Show modal
-            document.getElementById('exitModal').classList.add('active');
-        }
-
-        // Close Exit Modal
-        function closeExitModal() {
-            document.getElementById('exitModal').classList.remove('active');
-        }
-
-        // Download Assessment Summary
-        function downloadAssessmentSummary() {
-            // Create summary text
-            let summary = `BHRATHA PRIVATE ASSESSMENT SUMMARY\n`;
-            summary += `=====================================\n`;
-            summary += `Assessment Date: ${new Date().toLocaleDateString()}\n\n`;
-            
-            summary += `ASSESSMENT RESULTS:\n`;
-            summary += `-------------------\n`;
-            summary += `Primary Archetype: ${document.getElementById('result-archetype').textContent}\n`;
-            summary += `Dominant Strength: ${document.getElementById('result-strength').textContent}\n`;
-            summary += `Risk Vector: ${document.getElementById('result-risk').textContent}\n`;
-            summary += `BHRATHA Compatibility: ${document.getElementById('result-compatibility').textContent}\n\n`;
-            summary += `Reflection: ${document.getElementById('result-reflection').textContent}\n\n`;
-            
-            if (assessmentState.application) {
-                summary += `APPLICATION DETAILS:\n`;
-                summary += `-------------------\n`;
-                summary += `Name: ${assessmentState.application.name}\n`;
-                summary += `Email: ${assessmentState.application.email}\n`;
-                summary += `Capital Range: ${assessmentState.application.capital}\n`;
-                summary += `Background: ${assessmentState.application.background}\n`;
-                summary += `References: ${assessmentState.application.references}\n\n`;
-            }
-            
-            summary += `ASSESSMENT ANSWERS:\n`;
-            summary += `-------------------\n`;
-            Object.keys(assessmentState.answers).forEach(key => {
-                const value = assessmentState.answers[key];
-                summary += `${key}: ${Array.isArray(value) ? value.join(', ') : value}\n`;
-            });
-            
-            summary += `\nBHRATHA Private Assessment\n`;
-            summary += `Confidential | For Consideration Only`;
-            
-            // Download the file
-            downloadTextFile(summary, `BHRATHA-Assessment-Summary-${new Date().toISOString().split('T')[0]}.txt`);
-            
-            // Update button text
-            const downloadBtn = document.querySelector('#exitModal .btn-success');
-            downloadBtn.innerHTML = '<i class="fas fa-check mr-2"></i> Downloaded!';
+            // Simulate sending data
             setTimeout(() => {
-                downloadBtn.innerHTML = '<i class="fas fa-download mr-2"></i> Download Summary';
-            }, 2000);
+                console.log('Data sent to BH₹ATHA server:', {
+                    timestamp: new Date().toISOString(),
+                    applicant: name,
+                    email: email,
+                    status: 'submitted'
+                });
+            }, 1000);
         }
-
-        // Generic function to download text file
-        function downloadTextFile(content, filename) {
-            const blob = new Blob([content], { type: 'text/plain' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = filename;
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-            URL.revokeObjectURL(url);
-        }
-
-        // Send via WhatsApp
-        function sendViaWhatsApp() {
-            // Create message content
-            let message = `BHRATHA Assessment Summary\n\n`;
-            message += `Primary Archetype: ${document.getElementById('result-archetype').textContent}\n`;
-            message += `BHRATHA Compatibility: ${document.getElementById('result-compatibility').textContent}\n\n`;
-            
-            if (assessmentState.application) {
-                message += `Name: ${assessmentState.application.name}\n`;
-                message += `Email: ${assessmentState.application.email}\n`;
-            }
-            
-            message += `\nAssessment completed on: ${new Date().toLocaleDateString()}`;
-            
-            // Encode message for URL
-            const encodedMessage = encodeURIComponent(message);
-            
-            // WhatsApp number
-            const phoneNumber = '916292306090';
-            
-            // Create WhatsApp URL
-            const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
-            
-            // Open WhatsApp in new tab
-            window.open(whatsappUrl, '_blank');
-        }
-
-        // Restart Assessment
+        
         function restartAssessment() {
             // Reset state
-            assessmentState.answers = {};
-            assessmentState.selectedCompromises = [];
-            assessmentState.application = null;
+            assessmentState = {
+                answers: {},
+                selectedCompromises: []
+            };
             
             // Reset UI
             document.querySelectorAll('.question-card').forEach(card => {
@@ -2405,42 +2053,145 @@
                 }
             });
             
+            // Reset select
+            document.getElementById('app-capital').value = '';
+            
             // Reset multi-select counter
             const counter = document.getElementById('compromise-counter');
             if (counter) {
                 counter.textContent = 'Selected: 0/3';
             }
             
-            // Reset select
-            document.getElementById('app-capital').value = '';
-            
             // Go to landing page
             showAssessmentSection('landing');
         }
-
-        // Initialize Assessment
+        
+        // ========== INITIALIZATION ==========
         document.addEventListener('DOMContentLoaded', function() {
+            // Initialize progress bar
+            updateProgressBar();
+            
+            // Add click handlers for all buttons
+            document.querySelectorAll('button').forEach(button => {
+                button.addEventListener('click', function() {
+                    // Add click feedback
+                    this.style.transform = 'scale(0.98)';
+                    setTimeout(() => {
+                        this.style.transform = '';
+                    }, 150);
+                });
+            });
+            
+            // Initialize bubble animations
+            setTimeout(() => {
+                const bubbleHeadings = document.querySelectorAll('.bubble-heading');
+                bubbleHeadings.forEach((heading, index) => {
+                    heading.style.animationDelay = `${index * 0.1}s`;
+                });
+            }, 500);
+            
             // Close modal when clicking outside
             document.getElementById('neverAllowedModal').addEventListener('click', function(e) {
                 if (e.target === this) {
-                    closeNeverAllowedModal();
+                    closeModal('neverAllowedModal');
                 }
             });
             
-            // Close exit modal when clicking outside
-            document.getElementById('exitModal').addEventListener('click', function(e) {
-                if (e.target === this) {
-                    closeExitModal();
+            // Add keyboard shortcuts
+            document.addEventListener('keydown', function(e) {
+                // Escape to close modal
+                if (e.key === 'Escape') {
+                    closeModal('neverAllowedModal');
+                }
+                
+                // Tab switching with Ctrl+1 and Ctrl+2
+                if (e.ctrlKey) {
+                    if (e.key === '1') {
+                        e.preventDefault();
+                        showTab('pitch-deck');
+                    } else if (e.key === '2') {
+                        e.preventDefault();
+                        showTab('assessment');
+                    }
                 }
             });
             
-            // Initialize brotherhood calculator
-            initCalculator();
+            // Add smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    const href = this.getAttribute('href');
+                    if (href !== '#') {
+                        e.preventDefault();
+                        const target = document.querySelector(href);
+                        if (target) {
+                            target.scrollIntoView({
+                                behavior: 'smooth',
+                                block: 'start'
+                            });
+                        }
+                    }
+                });
+            });
             
-            // Start with brotherhood calculator
-            document.getElementById('brotherhood-calculator').style.display = 'block';
-            document.getElementById('assessment').style.display = 'none';
+            // Initialize with pitch deck
+            showTab('pitch-deck');
         });
+        
+        // ========== FLOATING BUBBLES BACKGROUND ==========
+        function createFloatingBubbles() {
+            const colors = ['#9D00FF', '#4B00B2', '#0095ff', '#00ff88', '#FFD700', '#ff6900', '#ff0000'];
+            
+            for (let i = 0; i < 20; i++) {
+                const bubble = document.createElement('div');
+                const size = Math.random() * 60 + 20;
+                const color = colors[Math.floor(Math.random() * colors.length)];
+                const left = Math.random() * 100;
+                const top = Math.random() * 100;
+                const duration = Math.random() * 20 + 10;
+                const delay = Math.random() * 5;
+                
+                bubble.style.cssText = `
+                    position: fixed;
+                    width: ${size}px;
+                    height: ${size}px;
+                    background: ${color};
+                    left: ${left}%;
+                    top: ${top}%;
+                    opacity: ${Math.random() * 0.1 + 0.03};
+                    filter: blur(${Math.random() * 20 + 10}px);
+                    border-radius: 50%;
+                    pointer-events: none;
+                    z-index: 1;
+                    animation: floatBubble ${duration}s ease-in-out infinite;
+                    animation-delay: ${delay}s;
+                `;
+                
+                document.body.appendChild(bubble);
+            }
+            
+            // Add the animation keyframes
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes floatBubble {
+                    0%, 100% {
+                        transform: translate(0, 0) scale(1);
+                    }
+                    25% {
+                        transform: translate(${Math.random() * 100 - 50}px, ${Math.random() * 100 - 50}px) scale(${Math.random() * 0.5 + 0.75});
+                    }
+                    50% {
+                        transform: translate(${Math.random() * 100 - 50}px, ${Math.random() * 100 - 50}px) scale(${Math.random() * 0.5 + 0.5});
+                    }
+                    75% {
+                        transform: translate(${Math.random() * 100 - 50}px, ${Math.random() * 100 - 50}px) scale(${Math.random() * 0.5 + 0.75});
+                    }
+                }
+            `;
+            document.head.appendChild(style);
+        }
+        
+        // Create bubbles when page loads
+        window.addEventListener('load', createFloatingBubbles);
     </script>
 </body>
 </html>

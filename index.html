@@ -7,6 +7,8 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
     <style>
         /* ========== GLOBAL STYLES ========== */
         :root {
@@ -23,6 +25,11 @@
             --dark-bg: #0A0A0A;
             --violet: #9D00FF;
             --indigo: #4B00B2;
+            --b-orange: #ff6900;
+            --neon-green: #39FF14;
+            --electric-blue: #0070FF;
+            --white: #ffffff;
+            --black: #000000;
         }
         
         * {
@@ -40,6 +47,112 @@
             color: var(--secondary);
             font-family: 'Inter', sans-serif;
             overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+        
+        /* ========== NAVIGATION ========== */
+        .fixed-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            background-color: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+        }
+        
+        .brand-text {
+            font-size: 1.5rem;
+            font-weight: bold;
+            letter-spacing: -0.05em;
+            text-transform: uppercase;
+        }
+        
+        .brand-b { color: var(--b-orange); }
+        .brand-rupee { color: var(--neon-green); }
+        .brand-hatha { color: var(--white); }
+        
+        .stealth-text {
+            font-size: 0.625rem;
+            letter-spacing: 0.5em;
+            text-transform: uppercase;
+            color: var(--white);
+        }
+        
+        .nav-tab {
+            padding: 15px 30px;
+            border-bottom: 2px solid transparent;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+        
+        .nav-tab.active {
+            border-bottom-color: var(--accent-green);
+            color: var(--accent-green);
+        }
+        
+        .nav-tab:hover:not(.active) {
+            border-bottom-color: var(--muted);
+            color: var(--muted);
+        }
+        
+        /* ========== INTRO SECTION ========== */
+        .section {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 80px 20px;
+            position: relative;
+        }
+        
+        .section-divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--b-orange), transparent);
+            margin: 40px auto;
+            width: 80%;
+            max-width: 600px;
+        }
+        
+        .glass-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: border 0.5s ease;
+        }
+        
+        .glass-card:hover {
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .symbol-btc::before { 
+            content: "₿$"; 
+            color: #FFD700; 
+            opacity: 0.7; 
+            font-weight: bold;
+        }
+        
+        .symbol-bhr::before { 
+            content: "₹B"; 
+            color: var(--neon-green); 
+            opacity: 1; 
+            font-weight: bold;
+            text-shadow: 0 0 10px var(--neon-green), 0 0 20px var(--neon-green);
+            animation: glow 2s infinite alternate;
+        }
+        
+        @keyframes glow {
+            from {
+                text-shadow: 0 0 10px var(--neon-green), 0 0 20px var(--neon-green);
+            }
+            to {
+                text-shadow: 0 0 20px var(--neon-green), 0 0 30px var(--neon-green);
+            }
         }
         
         /* ========== PITCH DECK STYLES ========== */
@@ -63,42 +176,6 @@
                 radial-gradient(circle at 75% 75%, rgba(255,255,255,0.02) 0%, transparent 55%);
             background-color: var(--dark-bg);
             position: relative;
-        }
-        
-        /* Neon Effects */
-        .neon-violet {
-            color: var(--violet);
-            text-shadow: 0 0 10px var(--violet), 0 0 30px var(--violet), 0 0 40px var(--violet);
-        }
-        
-        .neon-indigo {
-            color: var(--indigo);
-            text-shadow: 0 0 10px var(--indigo), 0 0 30px var(--indigo), 0 0 40px var(--indigo);
-        }
-        
-        .neon-blue {
-            color: var(--accent-blue);
-            text-shadow: 0 0 10px var(--accent-blue), 0 0 30px var(--accent-blue), 0 0 40px var(--accent-blue);
-        }
-        
-        .neon-green {
-            color: var(--accent-green);
-            text-shadow: 0 0 10px var(--accent-green), 0 0 30px var(--accent-green), 0 0 40px var(--accent-green);
-        }
-        
-        .neon-yellow {
-            color: var(--accent-yellow);
-            text-shadow: 0 0 10px var(--accent-yellow), 0 0 30px var(--accent-yellow), 0 0 40px var(--accent-yellow);
-        }
-        
-        .neon-orange {
-            color: var(--accent-orange);
-            text-shadow: 0 0 10px var(--accent-orange), 0 0 30px var(--accent-orange), 0 0 40px var(--accent-orange);
-        }
-        
-        .neon-red {
-            color: var(--accent-red);
-            text-shadow: 0 0 10px var(--accent-red), 0 0 30px var(--accent-red), 0 0 40px var(--accent-red);
         }
         
         /* Typography */
@@ -137,43 +214,6 @@
             font-size: 1.25rem;
             line-height: 1.8;
             max-width: 800px;
-        }
-        
-        /* Bubble Animations */
-        .bubble-heading {
-            position: relative;
-            display: inline-block;
-        }
-        
-        .bubble-heading::after {
-            content: '';
-            position: absolute;
-            top: -15px;
-            right: -20px;
-            width: 12px;
-            height: 12px;
-            background: rgba(255, 255, 255, 0.8);
-            border-radius: 50%;
-            animation: bubbleFloat 3s infinite ease-in-out;
-            z-index: -1;
-        }
-        
-        .bubble-heading::before {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: -15px;
-            width: 8px;
-            height: 8px;
-            background: rgba(255, 255, 255, 0.6);
-            border-radius: 50%;
-            animation: bubbleFloat 4s infinite ease-in-out 0.5s;
-            z-index: -1;
-        }
-        
-        @keyframes bubbleFloat {
-            0%, 100% { transform: translateY(0) scale(0.8); opacity: 0.3; }
-            50% { transform: translateY(-25px) scale(1.2); opacity: 0.9; }
         }
         
         /* Cards */
@@ -303,41 +343,26 @@
             margin: 20px 0;
         }
         
-        /* ========== NAVIGATION ========== */
-        .nav-tab {
-            padding: 15px 30px;
-            border-bottom: 2px solid transparent;
-            cursor: pointer;
-            transition: all 0.3s ease;
+        /* ========== WHATSAPP BUTTON ========== */
+        .whatsapp-btn {
+            background: linear-gradient(135deg, #25D366, #128C7E);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 4px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
             font-weight: 500;
-            font-family: 'Space Grotesk', sans-serif;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            font-family: inherit;
         }
         
-        .nav-tab.active {
-            border-bottom-color: var(--accent-green);
-            color: var(--accent-green);
-        }
-        
-        .nav-tab:hover:not(.active) {
-            border-bottom-color: var(--muted);
-            color: var(--muted);
-        }
-        
-        /* ========== RESPONSIVE ========== */
-        @media (max-width: 768px) {
-            .display-1 { font-size: 3rem; }
-            .display-2 { font-size: 2.5rem; }
-            .display-3 { font-size: 2rem; }
-            .lead { font-size: 1.25rem; }
-            .body-text { font-size: 1.1rem; }
-            .pitch-section { padding: 60px 15px; }
-            .nav-tab { padding: 10px 15px; }
-        }
-        
-        @media (max-width: 480px) {
-            .display-1 { font-size: 2.5rem; }
-            .display-2 { font-size: 2rem; }
-            .nav-tab { padding: 10px 10px; font-size: 0.9rem; }
+        .whatsapp-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3);
         }
         
         /* ========== PROGRESS BAR ========== */
@@ -360,28 +385,6 @@
             transition: width 0.1s ease-out;
             filter: brightness(1.3);
             box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
-        }
-        
-        /* ========== WHATSAPP BUTTON ========== */
-        .whatsapp-btn {
-            background: linear-gradient(135deg, #25D366, #128C7E);
-            color: white;
-            padding: 12px 24px;
-            border-radius: 4px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            border: none;
-            font-family: inherit;
-        }
-        
-        .whatsapp-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3);
         }
         
         /* ========== SCROLLBAR ========== */
@@ -457,12 +460,143 @@
             margin-right: auto;
         }
         
-        .floating-element {
-            position: absolute;
-            border-radius: 50%;
-            opacity: 0.08;
-            filter: blur(25px);
-            z-index: 1;
+        /* Form Styles */
+        .form-input {
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 14px 16px;
+            color: white;
+            width: 100%;
+            transition: all 0.3s ease;
+            margin-bottom: 20px;
+        }
+        
+        .form-input:focus {
+            outline: none;
+            border-color: var(--neon-green);
+            box-shadow: 0 0 0 2px rgba(57, 255, 20, 0.1);
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        .section-label {
+            color: var(--b-orange);
+            letter-spacing: 0.3em;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+            display: block;
+            font-weight: 600;
+        }
+        
+        .question-item {
+            margin-bottom: 24px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .question-text {
+            font-size: 0.95rem;
+            margin-bottom: 12px;
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.5;
+        }
+        
+        /* Scrolling Ribbon */
+        .scrolling-ribbon {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(90deg, var(--b-orange), var(--neon-green), var(--electric-blue));
+            color: var(--black);
+            padding: 12px 0;
+            z-index: 9999;
+            overflow: hidden;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.9rem;
+        }
+        
+        .scrolling-ribbon-content {
+            display: flex;
+            white-space: nowrap;
+            animation: scrollRibbon 30s linear infinite;
+            width: max-content;
+        }
+        
+        .scrolling-ribbon:hover .scrolling-ribbon-content {
+            animation-play-state: paused;
+        }
+        
+        .scrolling-ribbon a {
+            color: var(--black);
+            text-decoration: none;
+            padding: 0 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .scrolling-ribbon a:hover {
+            color: var(--white);
+            text-shadow: 0 0 10px var(--white);
+        }
+        
+        @keyframes scrollRibbon {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+        
+        /* Ribbon separator */
+        .ribbon-separator {
+            display: inline-block;
+            margin: 0 40px;
+            color: rgba(0, 0, 0, 0.7);
+        }
+        
+        /* Final Section */
+        .final-section {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 80px 20px;
+            background: linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(10,10,20,1) 100%);
+        }
+        
+        /* ========== RESPONSIVE ========== */
+        @media (max-width: 768px) {
+            .display-1 { font-size: 3rem; }
+            .display-2 { font-size: 2.5rem; }
+            .display-3 { font-size: 2rem; }
+            .lead { font-size: 1.25rem; }
+            .body-text { font-size: 1.1rem; }
+            .pitch-section { padding: 60px 15px; }
+            .nav-tab { padding: 10px 15px; }
+            .section { padding: 60px 15px; }
+            .fixed-nav { padding: 1rem; }
+            .brand-text { font-size: 1.25rem; }
+            .stealth-text { font-size: 0.5rem; letter-spacing: 0.3em; }
+        }
+        
+        @media (max-width: 480px) {
+            .display-1 { font-size: 2.5rem; }
+            .display-2 { font-size: 2rem; }
+            .nav-tab { padding: 10px 10px; font-size: 0.9rem; }
         }
     </style>
 </head>
@@ -470,34 +604,123 @@
     <!-- Progress Bar -->
     <div class="progress-bar" id="progressBar"></div>
     
-    <!-- Navigation -->
-    <div class="flex justify-center border-b border-gray-900 bg-black sticky top-0 z-50">
-        <div class="flex space-x-1">
-            <div class="nav-tab active" data-tab="pitch-deck" onclick="showTab('pitch-deck')">
-                <i class="fas fa-presentation-screen mr-2"></i>
-                Pitch Deck
-            </div>
-            <div class="nav-tab" data-tab="assessment" onclick="showTab('assessment')">
-                <i class="fas fa-user-shield mr-2"></i>
-                Investor Assessment
-            </div>
+    <!-- Scrolling Ribbon -->
+    <div class="scrolling-ribbon">
+        <div class="scrolling-ribbon-content">
+            <a href="https://bhrathabrews-g.vercel.app" target="_blank">Let Build BHRATHABREWS</a>
+            <span class="ribbon-separator">✦</span>
+            <a href="https://bhrathabrews-g.vercel.app" target="_blank">Let Build BHRATHABREWS</a>
+            <span class="ribbon-separator">✦</span>
+            <a href="https://bhrathabrews-g.vercel.app" target="_blank">Let Build BHRATHABREWS</a>
+            <span class="ribbon-separator">✦</span>
+            <a href="https://bhrathabrews-g.vercel.app" target="_blank">Let Build BHRATHABREWS</a>
+            <span class="ribbon-separator">✦</span>
+            <a href="https://bhrathabrews-g.vercel.app" target="_blank">Let Build BHRATHABREWS</a>
+            <span class="ribbon-separator">✦</span>
+            <a href="https://bhrathabrews-g.vercel.app" target="_blank">Let Build BHRATHABREWS</a>
         </div>
     </div>
-    
+
+    <!-- Fixed Navigation -->
+    <nav class="fixed-nav">
+        <div class="brand-text">
+            <span class="brand-b">B</span><span class="brand-hatha">H</span><span class="brand-rupee">₹</span><span class="brand-hatha">ATHA</span>
+        </div>
+        <div id="stealthText" class="stealth-text">STEALTH</div>
+    </nav>
+
+    <!-- Introduction Section -->
+    <section id="intro" class="section">
+        <div class="max-w-6xl mx-auto w-full">
+            <div class="text-center mb-12 md:mb-24 mt-8">
+                <h1 class="text-5xl md:text-8xl font-bold tracking-tighter mb-8 uppercase">
+                    <span class="brand-b">B</span><span class="brand-hatha">H</span><span class="brand-rupee">₹</span><span class="brand-hatha">ATHA</span>
+                </h1>
+                <div class="space-y-2">
+                    <p class="text-xs md:text-sm tracking-[0.6em] uppercase font-light">Brotherhood-Led Global Lifestyle.</p>
+                    <p class="text-xs md:text-sm tracking-[0.6em] uppercase font-light">Restraint is Power.</p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-0 w-full max-w-6xl border-t border-b border-white/10 mx-auto">
+                <div class="glass-card p-8 md:p-12 space-y-4 md:space-y-6">
+                    <h2 class="text-[10px] tracking-[0.4em] text-gray-500 uppercase">Foundation</h2>
+                    <div class="text-sm md:text-base space-y-1 leading-relaxed">
+                        <p>GLOBAL architecture.</p>
+                        <p>BHARAT soul.</p>
+                        <p>INDEPENDENT by design.</p>
+                    </div>
+                </div>
+                <div class="glass-card p-8 md:p-12 space-y-4 md:space-y-6 md:border-l md:border-r border-white/10">
+                    <h2 class="text-[10px] tracking-[0.4em] text-gray-500 uppercase">Operations</h2>
+                    <div class="text-sm md:text-base space-y-1 leading-relaxed">
+                        <p>Brew / Café / Green Retail.</p>
+                        <p>Global cities.</p>
+                        <p>Select partners.</p>
+                    </div>
+                </div>
+                <div class="glass-card p-8 md:p-12 space-y-4 md:space-y-6">
+                    <h2 class="text-[10px] tracking-[0.4em] text-gray-500 uppercase">Status</h2>
+                    <div class="text-sm md:text-base space-y-1 leading-relaxed">
+                        <p>Private Access Only.</p>
+                        <p>Proof of Character required.</p>
+                        <p>Feel Bharat over Show Bharat.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-20 text-center">
+                <p class="text-gray-500 text-sm md:text-base max-w-2xl mx-auto mb-10">
+                    A global brotherhood-led || Built with restraint || Code over comfort
+                </p>
+                <div class="flex justify-center space-x-12 md:space-x-20">
+                    <div class="symbol-btc text-3xl md:text-4xl"></div>
+                    <div class="symbol-bhr text-3xl md:text-4xl"></div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="text-center mt-20">
+            <div class="text-xs text-gray-600 tracking-widest uppercase mb-4">Scroll to continue</div>
+            <div class="animate-bounce">
+                <i class="fas fa-chevron-down text-b-orange text-xl"></i>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Divider -->
+    <div class="section-divider"></div>
+
     <!-- Main Content Container -->
     <div id="content-container">
+        <!-- Tab Navigation -->
+        <div class="flex justify-center border-b border-gray-900 bg-black sticky top-0 z-50" style="margin-top: 60px;">
+            <div class="flex space-x-1">
+                <div class="nav-tab active" data-tab="pitch-deck" onclick="showTab('pitch-deck')">
+                    <i class="fas fa-presentation-screen mr-2"></i>
+                    Pitch Deck
+                </div>
+                <div class="nav-tab" data-tab="assessment" onclick="showTab('assessment')">
+                    <i class="fas fa-user-shield mr-2"></i>
+                    Investor Assessment
+                </div>
+            </div>
+        </div>
+
         <!-- ========== PITCH DECK ========== -->
         <div id="pitch-deck">
             <!-- Section 1: Cover -->
             <section id="section1" class="pitch-section">
                 <div class="content-container text-center">
                     <div class="mb-12">
-                        <h1 class="display-1 neon-blue mb-4 bubble-heading">BH<span class="neon-green">₹</span>ATHA</h1>
+                        <h1 class="display-1 mb-4">
+                            <span class="brand-b">B</span><span class="brand-hatha">H</span><span class="brand-rupee">₹</span><span class="brand-hatha">ATHA</span>
+                        </h1>
                         <div class="mb-6">
-                            <span class="neon-orange text-2xl">Cultural Infrastructure</span> 
-                            <span class="neon-green text-2xl">Company</span>
+                            <span class="text-2xl" style="color: var(--accent-orange);">Cultural Infrastructure</span> 
+                            <span class="text-2xl" style="color: var(--accent-green);">Company</span>
                         </div>
-                        <p class="lead text-gray-400 bubble-heading">
+                        <p class="lead text-gray-400">
                             Creating profitable urban third-spaces through digital networks, physical assets & narrative systems
                         </p>
                     </div>
@@ -523,14 +746,14 @@
             <section id="section2" class="pitch-section">
                 <div class="content-container">
                     <div class="mb-16 text-center">
-                        <h2 class="display-2 mb-8 bubble-heading">
-                            THE URBAN <span class="neon-red">PROBLEM</span>
+                        <h2 class="display-2 mb-8">
+                            THE URBAN <span style="color: var(--accent-red);">PROBLEM</span>
                         </h2>
                     </div>
                     
                     <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
                         <div class="portfolio-card">
-                            <h3 class="display-3 neon-red mb-6 bubble-heading">Fragmented City Experience</h3>
+                            <h3 class="display-3 mb-6" style="color: var(--accent-red);">Fragmented City Experience</h3>
                             <p class="body-text mb-6">
                                 Cities today are disconnected across:
                             </p>
@@ -553,14 +776,14 @@
                                 </li>
                             </ul>
                             <div class="mt-8 pt-6 border-t border-gray-800">
-                                <p class="body-text neon-red font-bold bubble-heading">
+                                <p class="body-text font-bold" style="color: var(--accent-red);">
                                     Urban life lacks integrated infrastructure.
                                 </p>
                             </div>
                         </div>
                         
                         <div class="portfolio-card">
-                            <h3 class="display-3 neon-green mb-6 bubble-heading">The BH₹ATHA Insight</h3>
+                            <h3 class="display-3 mb-6" style="color: var(--accent-green);">The BH₹ATHA Insight</h3>
                             <p class="body-text mb-6">
                                 The next empires will not be:
                             </p>
@@ -581,7 +804,7 @@
                             <p class="body-text mt-6">
                                 They will be city-level systems that control:
                             </p>
-                            <p class="body-text neon-yellow font-bold mt-4 bubble-heading">
+                            <p class="body-text font-bold mt-4" style="color: var(--accent-yellow);">
                                 People → Spaces → Data → Narrative → Capital
                             </p>
                             <div class="mt-8 pt-6 border-t border-gray-800">
@@ -598,7 +821,7 @@
             <section id="section3" class="pitch-section">
                 <div class="content-container">
                     <div class="mb-16 text-center">
-                        <h2 class="display-2 neon-violet mb-8 bubble-heading">THE BH₹ATHA STACK</h2>
+                        <h2 class="display-2 mb-8" style="color: var(--violet);">THE BH₹ATHA STACK</h2>
                         <p class="lead text-gray-400">Integrated Ecosystem Architecture</p>
                     </div>
                     
@@ -609,10 +832,10 @@
                                 <div class="w-12 h-12 rounded-full bg-blue-500 flex items-center justify-center mr-4">
                                     <i class="fas fa-microchip text-xl"></i>
                                 </div>
-                                <h3 class="text-2xl font-bold neon-blue bubble-heading">IPNOTEC</h3>
+                                <h3 class="text-2xl font-bold" style="color: var(--accent-blue);">IPNOTEC</h3>
                             </div>
                             <p class="body-text mb-4">
-                                <span class="neon-blue font-bold">Identity & Access Company</span><br>
+                                <span class="font-bold" style="color: var(--accent-blue);">Identity & Access Company</span><br>
                                 Private networking & infrastructure app with paid city chapters
                             </p>
                             <div class="mt-6 space-y-2">
@@ -630,7 +853,7 @@
                                 </div>
                             </div>
                             <div class="mt-6 p-3 bg-blue-900/20 rounded-lg">
-                                <p class="text-sm font-bold neon-blue">Equity Structure</p>
+                                <p class="text-sm font-bold" style="color: var(--accent-blue);">Equity Structure</p>
                                 <p class="text-sm">9% public dilution • 91% Bharath BholeY • 3-year lock-in</p>
                             </div>
                         </div>
@@ -641,10 +864,10 @@
                                 <div class="w-12 h-12 rounded-full bg-orange-500 flex items-center justify-center mr-4">
                                     <i class="fas fa-building text-xl"></i>
                                 </div>
-                                <h3 class="text-2xl font-bold neon-orange bubble-heading">CLUBICLES</h3>
+                                <h3 class="text-2xl font-bold" style="color: var(--accent-orange);">CLUBICLES</h3>
                             </div>
                             <p class="body-text mb-4">
-                                <span class="neon-orange font-bold">Real World Engine</span><br>
+                                <span class="font-bold" style="color: var(--accent-orange);">Real World Engine</span><br>
                                 Franchised urban asset & third-space network
                             </p>
                             <div class="mt-6 space-y-2">
@@ -662,7 +885,7 @@
                                 </div>
                             </div>
                             <div class="mt-6 p-3 bg-orange-900/20 rounded-lg">
-                                <p class="text-sm font-bold neon-orange">Equity Structure</p>
+                                <p class="text-sm font-bold" style="color: var(--accent-orange);">Equity Structure</p>
                                 <p class="text-sm">18% public dilution • 82% Bharath BholeY • 3-year lock-in</p>
                             </div>
                         </div>
@@ -673,10 +896,10 @@
                                 <div class="w-12 h-12 rounded-full bg-green-500 flex items-center justify-center mr-4">
                                     <i class="fas fa-om text-xl"></i>
                                 </div>
-                                <h3 class="text-2xl font-bold neon-green bubble-heading">RWAWE</h3>
+                                <h3 class="text-2xl font-bold" style="color: var(--accent-green);">RWAWE</h3>
                             </div>
                             <p class="body-text mb-4">
-                                <span class="neon-green font-bold">Data & Narrative Infrastructure</span><br>
+                                <span class="font-bold" style="color: var(--accent-green);">Data & Narrative Infrastructure</span><br>
                                 Cultural intelligence & spiritual-tech platform
                             </p>
                             <div class="mt-6 space-y-2">
@@ -690,14 +913,14 @@
                                 </div>
                             </div>
                             <div class="mt-6 p-3 bg-green-900/20 rounded-lg">
-                                <p class="text-sm font-bold neon-green">Equity Structure</p>
+                                <p class="text-sm font-bold" style="color: var(--accent-green);">Equity Structure</p>
                                 <p class="text-sm">27% public dilution • 73% Bharath BholeY • 3-year lock-in</p>
                             </div>
                         </div>
                     </div>
                     
                     <div class="mt-12 text-center">
-                        <p class="body-text neon-yellow font-bold max-w-3xl mx-auto bubble-heading">
+                        <p class="body-text font-bold max-w-3xl mx-auto" style="color: var(--accent-yellow);">
                             Technology powered by IPNOTEC. Real-world deployment through CLUBICLES. Cultural resonance through RWAWE.
                         </p>
                     </div>
@@ -708,28 +931,28 @@
             <section id="section4" class="pitch-section">
                 <div class="content-container">
                     <div class="mb-16 text-center">
-                        <h2 class="display-2 neon-yellow mb-8 bubble-heading">CAPITAL ARCHITECTURE</h2>
+                        <h2 class="display-2 mb-8" style="color: var(--accent-yellow);">CAPITAL ARCHITECTURE</h2>
                         <p class="lead text-gray-400">Private Investment System</p>
                     </div>
                     
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
                         <div class="portfolio-card">
-                            <h3 class="display-3 neon-green mb-6 bubble-heading">Access Economy</h3>
+                            <h3 class="display-3 mb-6" style="color: var(--accent-green);">Access Economy</h3>
                             <div class="mb-8">
-                                <div class="text-5xl font-bold neon-green mb-4">₹1.08 Cr</div>
+                                <div class="text-5xl font-bold mb-4" style="color: var(--accent-green);">₹1.08 Cr</div>
                                 <p class="body-text">Non-negotiable, non-refundable access deposit</p>
                                 <p class="text-gray-400 text-sm mt-2">Entry into BH₹ATHA capital ecosystem (Access ≠ automatic equity)</p>
                             </div>
                             
                             <div class="space-y-6">
                                 <div>
-                                    <h4 class="text-xl font-bold neon-blue mb-3 bubble-heading">Platform Fee</h4>
-                                    <div class="text-3xl font-bold neon-blue">1.08%</div>
+                                    <h4 class="text-xl font-bold mb-3" style="color: var(--accent-blue);">Platform Fee</h4>
+                                    <div class="text-3xl font-bold" style="color: var(--accent-blue);">1.08%</div>
                                     <p class="text-gray-400">Yearly fee on profits generated by ventures</p>
                                 </div>
                                 
                                 <div class="mt-8">
-                                    <h4 class="text-xl font-bold neon-orange mb-3 bubble-heading">BH₹ATHA Platform</h4>
+                                    <h4 class="text-xl font-bold mb-3" style="color: var(--accent-orange);">BH₹ATHA Platform</h4>
                                     <div class="flex space-x-4">
                                         <a href="https://bhratha.com" target="_blank" class="text-accent-gold hover:text-yellow-400">www.bhratha.com</a>
                                         <a href="https://www.bhratha.ltd" target="_blank" class="text-accent-gold hover:text-yellow-400">www.bhratha.ltd</a>
@@ -739,13 +962,13 @@
                         </div>
                         
                         <div class="portfolio-card">
-                            <h3 class="display-3 neon-blue mb-6 bubble-heading">Member Classes</h3>
+                            <h3 class="display-3 mb-6" style="color: var(--accent-blue);">Member Classes</h3>
                             
                             <div class="mb-8">
                                 <div class="flex items-center mb-4">
                                     <div class="w-8 h-8 rounded-full bg-yellow-500 flex items-center justify-center text-black font-bold mr-3">10</div>
                                     <div>
-                                        <h4 class="text-xl font-bold neon-yellow bubble-heading">Founding Capital Circle</h4>
+                                        <h4 class="text-xl font-bold" style="color: var(--accent-yellow);">Founding Capital Circle</h4>
                                         <p class="text-gray-400 text-sm">Equity across all three ventures • Governance-grade partners</p>
                                     </div>
                                 </div>
@@ -753,32 +976,32 @@
                                 <div class="flex items-center">
                                     <div class="w-8 h-8 rounded-full bg-green-500 flex items-center justify-center text-black font-bold mr-3">90</div>
                                     <div>
-                                        <h4 class="text-xl font-bold neon-green bubble-heading">Principle Capital Circle</h4>
+                                        <h4 class="text-xl font-bold" style="color: var(--accent-green);">Principle Capital Circle</h4>
                                         <p class="text-gray-400 text-sm">No equity • Returns-only capital participation</p>
                                     </div>
                                 </div>
                             </div>
                             
                             <div class="mt-8 p-4 bg-black/30 rounded-lg">
-                                <p class="text-sm font-bold neon-red bubble-heading">Total Capital Pool</p>
-                                <div class="text-2xl font-bold neon-green mt-2">₹108 Cr</div>
+                                <p class="text-sm font-bold" style="color: var(--accent-red);">Total Capital Pool</p>
+                                <div class="text-2xl font-bold mt-2" style="color: var(--accent-green);">₹108 Cr</div>
                                 <p class="text-gray-400 text-sm">100 members × ₹1.08 Cr each</p>
                             </div>
                             
                             <div class="mt-6">
-                                <h4 class="text-lg font-bold neon-purple mb-3 bubble-heading">Capital Allocation</h4>
+                                <h4 class="text-lg font-bold mb-3" style="color: var(--accent-purple);">Capital Allocation</h4>
                                 <ul class="space-y-2">
                                     <li class="flex justify-between">
                                         <span>IPNOTEC</span>
-                                        <span class="neon-blue">70% (₹75.6 Cr)</span>
+                                        <span style="color: var(--accent-blue);">70% (₹75.6 Cr)</span>
                                     </li>
                                     <li class="flex justify-between">
                                         <span>CLUBICLES</span>
-                                        <span class="neon-orange">30% (₹32.4 Cr)</span>
+                                        <span style="color: var(--accent-orange);">30% (₹32.4 Cr)</span>
                                     </li>
                                     <li class="flex justify-between">
                                         <span>RWAWE</span>
-                                        <span class="neon-green">30% (₹32.4 Cr)</span>
+                                        <span style="color: var(--accent-green);">30% (₹32.4 Cr)</span>
                                     </li>
                                 </ul>
                             </div>
@@ -791,16 +1014,16 @@
             <section id="section5" class="pitch-section">
                 <div class="content-container">
                     <div class="mb-16 text-center">
-                        <h2 class="display-2 neon-green mb-8 bubble-heading">FINANCIAL ENGINE</h2>
+                        <h2 class="display-2 mb-8" style="color: var(--accent-green);">FINANCIAL ENGINE</h2>
                         <p class="lead text-gray-400">Scalable Revenue Architecture</p>
                     </div>
                     
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                         <div class="portfolio-card">
-                            <h3 class="text-2xl font-bold neon-blue mb-4 bubble-heading">IPNOTEC</h3>
+                            <h3 class="text-2xl font-bold mb-4" style="color: var(--accent-blue);">IPNOTEC</h3>
                             <div class="mb-4">
                                 <p class="text-sm text-gray-400">Per City Model</p>
-                                <div class="text-3xl font-bold neon-blue">₹1 Cr</div>
+                                <div class="text-3xl font-bold" style="color: var(--accent-blue);">₹1 Cr</div>
                                 <p class="text-gray-400 text-sm">Annual Revenue</p>
                             </div>
                             <ul class="space-y-3">
@@ -818,16 +1041,16 @@
                                 </li>
                             </ul>
                             <div class="mt-6 p-3 bg-blue-900/20 rounded-lg">
-                                <p class="text-sm font-bold neon-blue">Target: 100 Cities</p>
+                                <p class="text-sm font-bold" style="color: var(--accent-blue);">Target: 100 Cities</p>
                                 <p class="text-sm">₹100 Cr annual revenue • ₹40 Cr profit</p>
                             </div>
                         </div>
                         
                         <div class="portfolio-card">
-                            <h3 class="text-2xl font-bold neon-orange mb-4 bubble-heading">CLUBICLES</h3>
+                            <h3 class="text-2xl font-bold mb-4" style="color: var(--accent-orange);">CLUBICLES</h3>
                             <div class="mb-4">
                                 <p class="text-sm text-gray-400">Per Unit Model</p>
-                                <div class="text-3xl font-bold neon-orange">₹2.16 Cr</div>
+                                <div class="text-3xl font-bold" style="color: var(--accent-orange);">₹2.16 Cr</div>
                                 <p class="text-gray-400 text-sm">Annual Revenue</p>
                             </div>
                             <ul class="space-y-3">
@@ -845,16 +1068,16 @@
                                 </li>
                             </ul>
                             <div class="mt-6 p-3 bg-orange-900/20 rounded-lg">
-                                <p class="text-sm font-bold neon-orange">Target: 30 Units</p>
+                                <p class="text-sm font-bold" style="color: var(--accent-orange);">Target: 30 Units</p>
                                 <p class="text-sm">₹64.8 Cr annual revenue • ₹19.44 Cr profit</p>
                             </div>
                         </div>
                         
                         <div class="portfolio-card">
-                            <h3 class="text-2xl font-bold neon-green mb-4 bubble-heading">RWAWE</h3>
+                            <h3 class="text-2xl font-bold mb-4" style="color: var(--accent-green);">RWAWE</h3>
                             <div class="mb-4">
                                 <p class="text-sm text-gray-400">User Model</p>
-                                <div class="text-3xl font-bold neon-green">₹1.2 Cr</div>
+                                <div class="text-3xl font-bold" style="color: var(--accent-green);">₹1.2 Cr</div>
                                 <p class="text-gray-400 text-sm">Annual Revenue</p>
                             </div>
                             <ul class="space-y-3">
@@ -872,30 +1095,30 @@
                                 </li>
                             </ul>
                             <div class="mt-6 p-3 bg-green-900/20 rounded-lg">
-                                <p class="text-sm font-bold neon-green">Target: Data Infrastructure</p>
+                                <p class="text-sm font-bold" style="color: var(--accent-green);">Target: Data Infrastructure</p>
                                 <p class="text-sm">Cultural intelligence & narrative layer</p>
                             </div>
                         </div>
                     </div>
                     
                     <div class="mt-12 portfolio-card">
-                        <h3 class="text-2xl font-bold neon-yellow mb-6 bubble-heading">BH₹ATHA Platform Economics</h3>
+                        <h3 class="text-2xl font-bold mb-6" style="color: var(--accent-yellow);">BH₹ATHA Platform Economics</h3>
                         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                             <div class="text-center">
-                                <div class="text-3xl font-bold neon-green">₹108 Cr</div>
+                                <div class="text-3xl font-bold" style="color: var(--accent-green);">₹108 Cr</div>
                                 <p class="text-gray-400 text-sm">Capital Pool</p>
                             </div>
                             <div class="text-center">
-                                <div class="text-3xl font-bold neon-blue">1.08%</div>
+                                <div class="text-3xl font-bold" style="color: var(--accent-blue);">1.08%</div>
                                 <p class="text-gray-400 text-sm">Platform Fee on Profits</p>
                             </div>
                             <div class="text-center">
-                                <div class="text-3xl font-bold neon-orange">3 Years</div>
+                                <div class="text-3xl font-bold" style="color: var(--accent-orange);">3 Years</div>
                                 <p class="text-gray-400 text-sm">Lock-in Period</p>
                             </div>
                         </div>
                         <div class="mt-6 pt-6 border-t border-gray-800">
-                            <p class="body-text text-center neon-green font-bold bubble-heading">
+                            <p class="body-text text-center font-bold" style="color: var(--accent-green);">
                                 BH₹ATHA is not a fund. It is a permanent capital machine.
                             </p>
                         </div>
@@ -907,13 +1130,13 @@
             <section id="section6" class="pitch-section">
                 <div class="content-container">
                     <div class="mb-16 text-center">
-                        <h2 class="display-2 neon-indigo mb-8 bubble-heading">FOUNDER & VISION</h2>
+                        <h2 class="display-2 mb-8" style="color: var(--indigo);">FOUNDER & VISION</h2>
                     </div>
                     
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
                         <div>
                             <div class="portfolio-card">
-                                <h3 class="text-2xl font-bold neon-blue mb-4 bubble-heading">Bharath BholeY</h3>
+                                <h3 class="text-2xl font-bold mb-4" style="color: var(--accent-blue);">Bharath BholeY</h3>
                                 <p class="body-text mb-4">
                                     Founder & CEO, IPNOTEC<br>
                                     <span class="text-gray-400">Future-Society Designer • Venture Architect</span>
@@ -942,7 +1165,7 @@
                         
                         <div>
                             <div class="portfolio-card">
-                                <h3 class="text-2xl font-bold neon-green mb-6 bubble-heading">The Grand Vision</h3>
+                                <h3 class="text-2xl font-bold mb-6" style="color: var(--accent-green);">The Grand Vision</h3>
                                 <p class="body-text mb-6">
                                     BH₹ATHA is building a future systems architecture — a convergence of:
                                 </p>
@@ -965,7 +1188,7 @@
                                     </li>
                                 </ul>
                                 <div class="mt-8 pt-6 border-t border-gray-800">
-                                    <p class="body-text neon-red font-bold bubble-heading">
+                                    <p class="body-text font-bold" style="color: var(--accent-red);">
                                         IPNOTEC is the first machine.<br>
                                         BHRATHA is the long-term institution.<br>
                                         The portfolio is the execution field.
@@ -981,9 +1204,9 @@
             <section id="section7" class="pitch-section">
                 <div class="content-container text-center">
                     <div class="mb-16">
-                        <h2 class="display-2 mb-8 bubble-heading">
-                            <span class="neon-green">THE</span> 
-                            <span class="neon-blue">INVITATION</span>
+                        <h2 class="display-2 mb-8">
+                            <span style="color: var(--accent-green);">THE</span> 
+                            <span style="color: var(--accent-blue);">INVITATION</span>
                         </h2>
                         <p class="lead text-gray-400">
                             This is not an investment. This is entry into a private urban system.
@@ -993,28 +1216,28 @@
                     <div class="portfolio-card mb-12 max-w-4xl mx-auto">
                         <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
                             <div>
-                                <div class="text-4xl neon-violet mb-4 bubble-heading">01</div>
-                                <h4 class="text-xl font-bold neon-violet mb-2 bubble-heading">Identity First</h4>
+                                <div class="text-4xl mb-4" style="color: var(--violet);">01</div>
+                                <h4 class="text-xl font-bold mb-2" style="color: var(--violet);">Identity First</h4>
                                 <p class="text-sm text-gray-400">Unified digital shadow</p>
                             </div>
                             <div>
-                                <div class="text-4xl neon-green mb-4 bubble-heading">02</div>
-                                <h4 class="text-xl font-bold neon-green mb-2 bubble-heading">Access as Power</h4>
+                                <div class="text-4xl mb-4" style="color: var(--accent-green);">02</div>
+                                <h4 class="text-xl font-bold mb-2" style="color: var(--accent-green);">Access as Power</h4>
                                 <p class="text-sm text-gray-400">Key-less, phone-less future</p>
                             </div>
                             <div>
-                                <div class="text-4xl neon-orange mb-4 bubble-heading">03</div>
-                                <h4 class="text-xl font-bold neon-orange mb-2 bubble-heading">Brotherhood by Design</h4>
+                                <div class="text-4xl mb-4" style="color: var(--accent-orange);">03</div>
+                                <h4 class="text-xl font-bold mb-2" style="color: var(--accent-orange);">Brotherhood by Design</h4>
                                 <p class="text-sm text-gray-400">Aligned capital, culture</p>
                             </div>
                         </div>
                         
-                        <p class="body-text neon-yellow font-bold mb-8 bubble-heading">
+                        <p class="body-text font-bold mb-8" style="color: var(--accent-yellow);">
                             BH₹ATHA builds cities. Not companies.
                         </p>
                         
                         <div class="flex flex-col md:flex-row gap-4 justify-center mt-8">
-                            <button onclick="showTab('assessment')" class="px-8 py-3 border border-accent-gold text-accent-gold hover:bg-accent-gold hover:text-black transition-all duration-300 bubble-heading">
+                            <button onclick="showTab('assessment')" class="px-8 py-3 border border-accent-gold text-accent-gold hover:bg-accent-gold hover:text-black transition-all duration-300">
                                 <i class="fas fa-user-check mr-2"></i>Begin Investor Assessment
                             </button>
                             <a href="https://wa.me/916292306090?text=BH%E2%82%B9ATHA%20Investment%20Inquiry" target="_blank" class="whatsapp-btn px-8 py-3">
@@ -1038,7 +1261,9 @@
             <!-- Section 0: Landing -->
             <div id="assessment-landing" class="assessment-section active">
                 <div class="text-center py-20">
-                    <h1 class="display-2 mb-6 tracking-tight">BH<span class="neon-green">₹</span>ATHA</h1>
+                    <h1 class="display-2 mb-6 tracking-tight">
+                        <span class="brand-b">B</span><span class="brand-hatha">H</span><span class="brand-rupee">₹</span><span class="brand-hatha">ATHA</span>
+                    </h1>
                     <div class="text-xl text-gray-400 mb-10">Brotherhood for Institutional Builders</div>
                     
                     <div class="dark-card p-10 mb-12 max-w-2xl mx-auto">
@@ -1572,23 +1797,23 @@
                 <div class="dark-card p-8">
                     <div class="space-y-6">
                         <div>
-                            <label class="block mb-2">Legal Full Name</label>
-                            <input type="text" class="text-input" id="app-name">
+                            <label class="form-label">Legal Full Name</label>
+                            <input type="text" class="form-input" id="app-name">
                         </div>
                         
                         <div>
-                            <label class="block mb-2">Primary Contact Email</label>
-                            <input type="email" class="text-input" id="app-email">
+                            <label class="form-label">Primary Contact Email</label>
+                            <input type="email" class="form-input" id="app-email">
                         </div>
                         
                         <div>
-                            <label class="block mb-2">Background Summary</label>
-                            <textarea class="text-input h-32" id="app-background"></textarea>
+                            <label class="form-label">Background Summary</label>
+                            <textarea class="form-input h-32" id="app-background"></textarea>
                         </div>
                         
                         <div>
-                            <label class="block mb-2">Capital Declaration (Approximate)</label>
-                            <select class="text-input" id="app-capital">
+                            <label class="form-label">Capital Declaration (Approximate)</label>
+                            <select class="form-input" id="app-capital">
                                 <option value="">Select range</option>
                                 <option value="<50L">&lt; ₹50L</option>
                                 <option value="50L-2Cr">₹50L – ₹2 Cr</option>
@@ -1599,8 +1824,8 @@
                         </div>
                         
                         <div>
-                            <label class="block mb-2">References (Names & Context)</label>
-                            <textarea class="text-input h-24" id="app-references"></textarea>
+                            <label class="form-label">References (Names & Context)</label>
+                            <textarea class="form-input h-24" id="app-references"></textarea>
                         </div>
                         
                         <div class="flex items-center mt-6">
@@ -1780,11 +2005,11 @@
             if (tabId === 'pitch-deck') {
                 document.getElementById('pitch-deck').style.display = 'block';
                 document.getElementById('assessment').style.display = 'none';
-                window.scrollTo({ top: 0, behavior: 'smooth' });
+                window.scrollTo({ top: document.getElementById('intro').offsetHeight, behavior: 'smooth' });
             } else {
                 document.getElementById('pitch-deck').style.display = 'none';
                 document.getElementById('assessment').style.display = 'block';
-                window.scrollTo({ top: 0, behavior: 'smooth' });
+                window.scrollTo({ top: document.getElementById('intro').offsetHeight, behavior: 'smooth' });
             }
         }
         
@@ -1811,7 +2036,7 @@
             if (targetSection) {
                 targetSection.classList.add('active');
                 currentAssessmentSection = sectionId;
-                window.scrollTo({ top: 0, behavior: 'smooth' });
+                window.scrollTo({ top: document.getElementById('intro').offsetHeight, behavior: 'smooth' });
             }
         }
         
@@ -1996,6 +2221,67 @@
                 return;
             }
             
+            // Create text file content
+            let fileContent = `BH₹ATHA ASSESSMENT APPLICATION\n`;
+            fileContent += `===============================\n\n`;
+            fileContent += `Date: ${new Date().toLocaleString()}\n`;
+            fileContent += `Name: ${name}\n`;
+            fileContent += `Email: ${email}\n`;
+            fileContent += `Capital Range: ${capital}\n\n`;
+            fileContent += `Background Summary:\n${background}\n\n`;
+            fileContent += `References:\n${references}\n\n`;
+            fileContent += `Assessment Results:\n`;
+            fileContent += `Archetype: ${document.getElementById('result-archetype').textContent}\n`;
+            fileContent += `Compatibility: ${document.getElementById('result-compatibility').textContent}\n`;
+            fileContent += `Strength: ${document.getElementById('result-strength').textContent}\n`;
+            fileContent += `Risk: ${document.getElementById('result-risk').textContent}\n\n`;
+            fileContent += `Assessment Answers:\n`;
+            
+            // Add all assessment answers
+            Object.keys(assessmentState.answers).forEach(key => {
+                const value = assessmentState.answers[key];
+                if (Array.isArray(value)) {
+                    fileContent += `${key}: ${value.join(', ')}\n`;
+                } else {
+                    fileContent += `${key}: ${value}\n`;
+                }
+            });
+            
+            // Add text responses
+            const q13 = document.getElementById('q-brotherhood').value;
+            const q14 = document.getElementById('q-influence').value;
+            const q15 = document.getElementById('q-institutions').value;
+            fileContent += `\nText Responses:\n`;
+            fileContent += `Why brotherhood: ${q13}\n`;
+            fileContent += `Why unseen influence: ${q14}\n`;
+            fileContent += `Why institutions over assets: ${q15}\n`;
+            
+            // Create and download text file
+            const blob = new Blob([fileContent], { type: 'text/plain' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `bhratha-assessment-${name.replace(/\s+/g, '-').toLowerCase()}.txt`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(url);
+            
+            // Create WhatsApp message
+            let whatsappMessage = `BH₹ATHA Assessment Application\n\n`;
+            whatsappMessage += `Name: ${name}\n`;
+            whatsappMessage += `Email: ${email}\n`;
+            whatsappMessage += `Capital Range: ${capital}\n\n`;
+            whatsappMessage += `Assessment Results:\n`;
+            whatsappMessage += `Archetype: ${document.getElementById('result-archetype').textContent}\n`;
+            whatsappMessage += `Compatibility: ${document.getElementById('result-compatibility').textContent}\n\n`;
+            whatsappMessage += `Full assessment data has been saved to a text file and downloaded.\n`;
+            whatsappMessage += `I accept the ₹1.08 Cr joining fee and 1.08% platform fee structure.`;
+            
+            // Open WhatsApp
+            const whatsappUrl = `https://wa.me/916292306090?text=${encodeURIComponent(whatsappMessage)}`;
+            window.open(whatsappUrl, '_blank');
+            
             // Store application data
             assessmentState.application = {
                 name,
@@ -2013,8 +2299,9 @@
             // Show completion section
             showAssessmentSection('thankyou');
             
-            // Log to console (in real implementation, send to server)
+            // Log to console
             console.log('Assessment application submitted:', assessmentState.application);
+            console.log('Text file content:', fileContent);
             
             // Simulate sending data
             setTimeout(() => {
@@ -2082,14 +2369,6 @@
                 });
             });
             
-            // Initialize bubble animations
-            setTimeout(() => {
-                const bubbleHeadings = document.querySelectorAll('.bubble-heading');
-                bubbleHeadings.forEach((heading, index) => {
-                    heading.style.animationDelay = `${index * 0.1}s`;
-                });
-            }, 500);
-            
             // Close modal when clicking outside
             document.getElementById('neverAllowedModal').addEventListener('click', function(e) {
                 if (e.target === this) {
@@ -2135,63 +2414,21 @@
             
             // Initialize with pitch deck
             showTab('pitch-deck');
-        });
-        
-        // ========== FLOATING BUBBLES BACKGROUND ==========
-        function createFloatingBubbles() {
-            const colors = ['#9D00FF', '#4B00B2', '#0095ff', '#00ff88', '#FFD700', '#ff6900', '#ff0000'];
             
-            for (let i = 0; i < 20; i++) {
-                const bubble = document.createElement('div');
-                const size = Math.random() * 60 + 20;
-                const color = colors[Math.floor(Math.random() * colors.length)];
-                const left = Math.random() * 100;
-                const top = Math.random() * 100;
-                const duration = Math.random() * 20 + 10;
-                const delay = Math.random() * 5;
+            // Update STEALTH text on scroll
+            window.addEventListener('scroll', function() {
+                const stealthText = document.getElementById('stealthText');
+                const scrollPosition = window.scrollY;
                 
-                bubble.style.cssText = `
-                    position: fixed;
-                    width: ${size}px;
-                    height: ${size}px;
-                    background: ${color};
-                    left: ${left}%;
-                    top: ${top}%;
-                    opacity: ${Math.random() * 0.1 + 0.03};
-                    filter: blur(${Math.random() * 20 + 10}px);
-                    border-radius: 50%;
-                    pointer-events: none;
-                    z-index: 1;
-                    animation: floatBubble ${duration}s ease-in-out infinite;
-                    animation-delay: ${delay}s;
-                `;
-                
-                document.body.appendChild(bubble);
-            }
-            
-            // Add the animation keyframes
-            const style = document.createElement('style');
-            style.textContent = `
-                @keyframes floatBubble {
-                    0%, 100% {
-                        transform: translate(0, 0) scale(1);
-                    }
-                    25% {
-                        transform: translate(${Math.random() * 100 - 50}px, ${Math.random() * 100 - 50}px) scale(${Math.random() * 0.5 + 0.75});
-                    }
-                    50% {
-                        transform: translate(${Math.random() * 100 - 50}px, ${Math.random() * 100 - 50}px) scale(${Math.random() * 0.5 + 0.5});
-                    }
-                    75% {
-                        transform: translate(${Math.random() * 100 - 50}px, ${Math.random() * 100 - 50}px) scale(${Math.random() * 0.5 + 0.75});
-                    }
+                if (scrollPosition > 500) {
+                    stealthText.style.color = '#999999';
+                } else if (scrollPosition > 200) {
+                    stealthText.style.color = '#cccccc';
+                } else {
+                    stealthText.style.color = 'white';
                 }
-            `;
-            document.head.appendChild(style);
-        }
-        
-        // Create bubbles when page loads
-        window.addEventListener('load', createFloatingBubbles);
+            });
+        });
     </script>
 </body>
 </html>
